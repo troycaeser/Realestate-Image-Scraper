@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Awesome App</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.js" data-main="app/main.js"></script>
+</head>
+<body class="ng-cloak">
+	<div ng-controller="mainController">
+		<input type="text" ng-change="change()" ng-model="inputBro">
+		<pre>{{ message }}</pre>
+		<pre>{{ message2 }}</pre>
+	</div>
+</body>
+</html>
