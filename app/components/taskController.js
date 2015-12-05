@@ -8,8 +8,7 @@ define(['angular'], function(angular){
 
 			function sendShit($name){
 				$dataObj = {
-					WHATSUP: $name,
-					pew_pew: $name
+					url: $name
 				};
 
 				$http
@@ -23,6 +22,4 @@ define(['angular'], function(angular){
 				sendShit($scope.inputBro);
 			}
 		});
-
-	// return stuff;
 });
