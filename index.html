@@ -3,13 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Awesome App</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.js" data-main="app/main.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+	<script src="app/app.module.js"></script>
+	<script src="app/components/adItem/adItemController.js"></script>
 </head>
-<body class="ng-cloak">
-	<div ng-controller="mainController">
-		<input type="text" ng-change="change()" ng-model="inputBro">
-		<pre>{{ message }}</pre>
-		<pre>{{ message2 }}</pre>
+<body ng-app="app">
+	<div>
+		<!-- <input type="text" ng-model="inputUrl">
+		<button ng-click="crawl()">
+			Search
+		</button> -->
+		<div ui-view></div>
 	</div>
 </body>
 </html>

@@ -1,26 +1,12 @@
-define(function(require){
-	'user strict';
+var app = angular.module('app', ['ui.router']);
 
-	var angular = require('angular');
-	var uiRouter = require('angularUIRoute');
-	var taskController = require('components/taskController');
+app.config(function($stateProvider, $urlRouterProvider){
+	$urlRouterProvider.otherwise('/adItem');
 
-	// var app = angular.module('app', ['ngRoute', 'taskController']);
-	var app = angular.module('app', ['ui.router', 'taskController']);
-
-	app.init = function(){
-		angular.bootstrap(document, ['app']);
-	};
-
-	app.config(function($stateProvider, $urlRouterProvider){
-		$urlRouterProvider.otherwise('/home');
-
-		$stateProvider
-			.state('home', {
-				url: '/home',
-				templateUrl : 'index.html'
-			});
-	});
-
-	return app;
+	$stateProvider
+		.state('adItem', {
+			url: '/adItem',
+			templateUrl : 'app/components/adItem/adItem.html',
+			controller: 'adItemController'
+		});
 });

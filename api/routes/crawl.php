@@ -27,11 +27,6 @@
 				$finalLinks = $matched[$matched_key];
 				break;
 			case "milesre.com.au":
-				$imgLinks = getImgLinks($url);
-				$matched[] = preg_grep('~(width=61)~i', $imgLinks);
-				$matched_key = key($matched);
-				$finalLinks = $matched[$matched_key];
-				break;
 			case "portplus.com":
 				$imgLinks = getImgLinks($url);
 				$matched[] = preg_grep('~(width=61)~i', $imgLinks);
