@@ -7,6 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 		.state('adItem', {
 			url: '/adItem',
 			templateUrl : 'app/components/adItem/adItem.html',
-			controller: 'adItemController'
+			controller: 'adItemController',
+			controllerAs: 'adItemCtrl'
 		});
 });
