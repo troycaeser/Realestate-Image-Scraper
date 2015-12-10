@@ -12,9 +12,13 @@ var AdItemDirective = function(){
 				});
 			});
 
-			elem.bind('mouseover', function(){
-				elem.children().css('background-color', 'yellow');
+			elem.find('img').bind('mouseenter', function(){
+				elem.find('img').css('opacity', '0.5');
 			});
+
+			elem.find('img').bind('mouseleave', function(){
+				elem.find('img').css('opacity', '1');
+			})
 		}
 	}
 };
