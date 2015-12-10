@@ -1,3 +1,7 @@
 <div ng-controller="adItemController as adItemCtrl">
-	{{adItemCtrl.links}}
+	<input type="text" ng-model="url">
+	<button ng-click="adItemCtrl.display(url)">Crawl</button>
+	<div ng-repeat="src in adItemCtrl.links">
+		<img ng-src="{{src}}">
+	</div>
 </div>

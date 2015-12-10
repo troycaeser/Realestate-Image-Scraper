@@ -20,27 +20,34 @@
 		//figureout which site we're searching
 		switch($site){
 			case "realestate.com.au":
-				$carouselLink = resolvePageLinks($url);
-				$imgLinks = getImgLinks($url);
-				$matched[] = preg_grep('~(65x48)~i', $imgLinks);
-				$matched_key = key($matched);
-				$finalLinks = $matched[$matched_key];
+				$pageLinks = resolvePageLinks($url);
+				$carouselLink = cleanLinks('~(photogal)~i', $pageLinks);
+				$imgLinks = getImgLinks($carouselLink[0]);
+				$cleanedImgLinks = cleanLinks ('~(65x48)~i', $imgLinks);
 				break;
 			case "milesre.com.au":
 			case "portplus.com":
 				$imgLinks = getImgLinks($url);
-				$matched[] = preg_grep('~(width=61)~i', $imgLinks);
-				$matched_key = key($matched);
-				$finalLinks = $matched[$matched_key];
+				$cleanedImgLinks = cleanLinks('~(width=61)~i', $imgLinks);
 				break;
 		}
 
-		print_r($finalLinks);
+		header("Content-Type: application/json");
+		echo json_encode($cleanedImgLinks);
 	});
 
 	$app->get('/crawl', function(){
 		echo "get crawl works";
 	});
+
+	function cleanLinks($matchCriteria, $links){
+		$matched[] = preg_grep($matchCriteria, $links);
+		$matched_key = key($matched);
+		$matchedArray = $matched[$matched_key];
+		$matchedArray = array_values($matchedArray);
+
+		return $matchedArray;
+	}
 
 	//Returns a single link to the required images
 	function resolvePageLinks($url){

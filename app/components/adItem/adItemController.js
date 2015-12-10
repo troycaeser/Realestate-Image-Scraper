@@ -1,11 +1,16 @@
-angular.module('app')
-	.controller('adItemController', ['adItemService', main]);
+var app = angular.module('app');
 
-function main(adItemService){
+var AdItemController = function(adItemService){
 	// this.links = "this should be a bunch of links";
-
-	adItemService.getCrawl()
-		.success(function(data){
-			this.links = data;
-		});
+	this.adItemService = adItemService;
 };
+
+AdItemController.prototype.display = function(url){
+	var _this = this;
+	_this.adItemService.Crawl(url)
+		.then(function(response){
+			_this.links = response.data;
+		});
+}
+
+app.controller('adItemController', ['adItemService', AdItemController]);

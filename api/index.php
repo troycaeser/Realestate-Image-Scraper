@@ -12,7 +12,8 @@
 	});
 
 	$app->get('/', function() use ($app){
-		echo "API home page";
+		echo phpinfo();
 	});
+
 	$app->run();
 ?>

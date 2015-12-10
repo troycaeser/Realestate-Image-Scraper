@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router']);
+var app = angular.module('app', ['angular-loading-bar', 'ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/adItem');
