@@ -23,22 +23,35 @@
 				$pageLinks = resolvePageLinks($url);
 				$carouselLink = cleanLinks('~(photogal)~i', $pageLinks);
 				$imgLinks = getImgLinks($carouselLink[0]);
-				$cleanedImgLinks = cleanLinks ('~(65x48)~i', $imgLinks);
+				$cleanedImgLinks = cleanLinks('~(65x48)~i', $imgLinks);
+				$resizedImgLinks = resizeLinks($cleanedImgLinks, '65x48', '400x300');
 				break;
 			case "milesre.com.au":
 			case "portplus.com":
 				$imgLinks = getImgLinks($url);
 				$cleanedImgLinks = cleanLinks('~(width=61)~i', $imgLinks);
+				$resizedImgLinks = resizeLinks($cleanedImgLinks, 'width=61', 'width=400');
 				break;
 		}
 
 		header("Content-Type: application/json");
-		echo json_encode($cleanedImgLinks);
+		echo json_encode($resizedImgLinks);
+		// print_r($cleanedImgLinks);
+		// print_r($resizedImgLinks);
 	});
 
 	$app->get('/crawl', function(){
 		echo "get crawl works";
 	});
+
+	//need the link, the replacement, matches, the offset
+	function resizeLinks($links, $haystack, $needle){
+		foreach($links as $key => $value){
+			$pos = strpos($value, $haystack);
+			$links[$key] = substr_replace($value, $needle, $pos, strlen($haystack));
+		}
+		return $links;
+	}
 
 	function cleanLinks($matchCriteria, $links){
 		$matched[] = preg_grep($matchCriteria, $links);
