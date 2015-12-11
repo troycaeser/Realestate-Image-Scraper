@@ -1,8 +1,8 @@
 <div ng-controller="adItemController as adItemCtrl">
 	<input type="text" ng-model="url">
 	<button ng-click="adItemCtrl.display(url)">Crawl</button>
-	<div ng-repeat="src in adItemCtrl.links">
+	<!-- <div ng-repeat="src in adItemCtrl.links">
 		<ad-item remove="adItemCtrl.links.splice($index, 1)"></ad-item>
-	</div>
-	<!-- <pre>{{adItemCtrl.links}}</pre> -->
+	</div> -->
+	<pre>{{adItemCtrl.links}}</pre>
 </div>

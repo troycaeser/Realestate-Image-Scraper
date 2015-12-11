@@ -12,7 +12,7 @@
 	});
 
 	$app->get('/', function() use ($app){
-		echo 'this is the home for apiasdf';
+		echo 'this is the home for apiasdasdfasdff';
 	});
 
 	$app->run();
