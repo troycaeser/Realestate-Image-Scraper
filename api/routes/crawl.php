@@ -34,10 +34,10 @@
 				break;
 		}
 
-		header("Content-Type: application/json");
-		echo json_encode($resizedImgLinks);
+		// header("Content-Type: application/json");
+		// echo json_encode($resizedImgLinks);
 		// print_r($cleanedImgLinks);
-		// print_r($resizedImgLinks);
+		print_r($resizedImgLinks);
 	});
 
 	$app->get('/crawl', function(){

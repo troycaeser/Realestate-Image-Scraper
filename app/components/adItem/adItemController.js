@@ -9,7 +9,7 @@ AdItemController.prototype.display = function(url){
 	var _this = this;
 	_this.adItemService.Crawl(url)
 		.then(function(response){
-			_this.links = response.data;
+			_this.links = response;
 		});
 }
 
