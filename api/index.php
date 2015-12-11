@@ -12,7 +12,7 @@
 	});
 
 	$app->get('/', function() use ($app){
-		echo phpinfo();
+		echo 'this is the home for apiasdf';
 	});
 
 	$app->run();

@@ -1,6 +1,8 @@
 var app = angular.module('app', ['angular-loading-bar', 'ui.router']);
 
-app.config(function($stateProvider, $urlRouterProvider){
+//testing
+
+app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/adItem');
 
 	$stateProvider
@@ -10,4 +12,4 @@ app.config(function($stateProvider, $urlRouterProvider){
 			controller: 'adItemController',
 			controllerAs: 'adItemCtrl'
 		});
-});
+}]);
