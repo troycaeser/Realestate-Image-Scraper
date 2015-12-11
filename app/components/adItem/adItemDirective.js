@@ -4,7 +4,10 @@ var AdItemDirective = function(){
 	return {
 		restrict: 'AE',
 		templateUrl: 'app/components/adItem/adItemDirective.html',
-		link: Controls
+		link: Controls,
+		scope:{
+			imgsrc: "@"
+		}
 	}
 };
 
@@ -22,19 +25,17 @@ var Controls = function(scope, elem, attrs){
 		elem.parent().remove();
 	});
 
-	console.log(attrs.imgsrc);
+	// console.log(angular.elem(elem[0]));
+	var canvas = elem.find('canvas')[0];
+	var context = canvas.getContext('2d');
 
-	//draw image onto canvas
-	var canvas = elem.find('canvas');
-	console.log(elem);
-	// var context = canvas.getContext('2d');
-	// var imageObj = new Image();
+	var imageObj = new Image();
 
-	// imageObj.onload = function(){
-	// 	context.drawImage(imageObj, 0, 0);
-	// }
+	imageObj.onload = function(){
+		context.drawImage(imageObj, 0, 0);		
+	}
 
-	// imageObj.src = attrs.flavor;
+	imageObj.src = scope.imgsrc;
 };
 
 app.directive('adItem', AdItemDirective);
