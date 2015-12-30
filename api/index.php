@@ -12,7 +12,7 @@
 	});
 
 	$app->get('/', function() use ($app){
-		echo ' is the home for apiasdasdfasdff';
+		echo 'Troy is the home for apiasdasdfasdff';
 	});
 
 	$app->run();
