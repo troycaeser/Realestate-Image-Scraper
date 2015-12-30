@@ -1,5 +1,6 @@
 <?php
-	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/writeJson.php");
+//	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/writeJson.php");
+	include("../lib/writeJson.php");
 
 	$app->post('/crawl', function() use ($app){
 		//get parameter via json_decode()->name
@@ -161,24 +162,26 @@
 		 * the only thing that hardcoded is the url
 		 * everything else is reusable
 		 */
-		
+
 		writeJson ($url, $propertyInfo);
 	//	writeJson ($url);
 
 		$propertyInfo['day'] = "what is this";
 		print_r ($propertyInfo);
 
-		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
+	//	$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
+		$propertyDir = "../assets/agentAssets/";
+		
 		$propertyDir .= $propertyInfo['agent_identifier'];
 
 		$templateDir = array (
-			'banner' = $propertyDir . "banner.png";
-			'bath' = $propertyDir . "bath.png";
-			'bed' = $propertyDir . "bed.png";
-			'bottom' = $propertyDir . "bottom.png";
-			'car' = $propertyDir . "car.png";
-			'font' = $propertyDir . "font.ttf";
-			'logo' = $propertyDir . "logo.png";
+			'banner' = $propertyDir . "banner.png",
+			'bath' = $propertyDir . "bath.png",
+			'bed' = $propertyDir . "bed.png",
+			'bottom' = $propertyDir . "bottom.png",
+			'car' = $propertyDir . "car.png",
+			'font' = $propertyDir . "font.ttf",
+			'logo' = $propertyDir . "logo.png"
 		);
 	});
 
