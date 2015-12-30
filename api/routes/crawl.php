@@ -1,4 +1,6 @@
 <?php
+	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/writeJson.php");
+
 	$app->post('/crawl', function() use ($app){
 		//get parameter via json_decode()->name
 		$request = $app->request();
@@ -47,13 +49,7 @@
 		echo json_encode($resizedImgLinks);
 	});
 
-	$app->get('/test', function() use ($app){
-		$url = "http://i4.au.reastatic.net/400x300/78651cb950e45e09922d5e23ff291082023eebe0482bd35c20d3c4283c43a673/main.jpg";
-		$getInfo = getimagesize($url);
-		// $page = file_get_contents($url);
-		$app->response->headers->set('Content-Type', 'image/jpeg');
-		echo file_get_contents($url);
-	});
+	
 
 	$app->get('/crawl', function(){
 		echo "get crawl works";
@@ -152,4 +148,38 @@
 
 		return $arrLink;
 	}
+
+	$app->get('/test', function() use ($app){
+		echo "test";
+		$propertyInfo = array();
+
+
+		$url = "http://www.realestate.com.au/property-apartment-vic-elwood-121533362";
+	
+
+		/*
+		 * the only thing that hardcoded is the url
+		 * everything else is reusable
+		 */
+		
+		writeJson ($url, $propertyInfo);
+	//	writeJson ($url);
+
+		$propertyInfo['day'] = "what is this";
+		print_r ($propertyInfo);
+
+		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
+		$propertyDir .= $propertyInfo['agent_identifier'];
+
+		$templateDir = array (
+			'banner' = $propertyDir . "banner.png";
+			'bath' = $propertyDir . "bath.png";
+			'bed' = $propertyDir . "bed.png";
+			'bottom' = $propertyDir . "bottom.png";
+			'car' = $propertyDir . "car.png";
+			'font' = $propertyDir . "font.ttf";
+			'logo' = $propertyDir . "logo.png";
+		);
+	});
+
 ?>
