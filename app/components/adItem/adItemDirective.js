@@ -26,6 +26,11 @@ var Controls = function(scope, elem, attrs){
         console.log('mouseentered the canvas dawg!');
 	});
 
+    elem.find('button').bind('click', function(){
+        elem.find('canvas').remove(); 
+        this.remove();
+    });
+
 	var canvas = elem.find('canvas')[0];
 	var context = canvas.getContext('2d');
 

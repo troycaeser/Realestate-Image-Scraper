@@ -32,7 +32,7 @@ gulp.task('rimraf', function(){
 });
 
 gulp.task('watch', ['minify', 'browserSync'], function(){
-	gulp.watch(['dist/app.js', 'api/**/*.php', paths.app], ['minify']).on('change', browserSync.reload);
+	gulp.watch(['dist/app.js', 'api/**/*.php', 'app/**/*.html', paths.app], ['minify']).on('change', browserSync.reload);
 });
 
 //concatenate and minify
