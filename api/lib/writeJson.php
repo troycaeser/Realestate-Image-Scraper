@@ -1,6 +1,6 @@
 <?php
-//	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
-	include("../vendor/dom_parser.php");
+	include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
+//	include("../vendor/dom_parser.php");
 
 	function writeJson ($url, &$arr) {
 

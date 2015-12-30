@@ -1,6 +1,6 @@
 <?php
-//	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/writeJson.php");
-	include("../lib/writeJson.php");
+	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/writeJson.php");
+	//include "../lib/writeJson.php";
 
 	$app->post('/crawl', function() use ($app){
 		//get parameter via json_decode()->name
@@ -151,7 +151,6 @@
 	}
 
 	$app->get('/test', function() use ($app){
-		echo "test";
 		$propertyInfo = array();
 
 
@@ -167,10 +166,10 @@
 	//	writeJson ($url);
 
 		$propertyInfo['day'] = "what is this";
-		print_r ($propertyInfo);
+		//print_r ($propertyInfo);
 
-	//	$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
-		$propertyDir = "../assets/agentAssets/";
+		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
+		//$propertyDir = "../assets/agentAssets/";
 		
 		$propertyDir .= $propertyInfo['agent_identifier'];
 		$propertyDir .= '/';
@@ -185,7 +184,8 @@
 			'logo' => $propertyDir . "logo.png"
 		);
 
-		echo $templateDir['banner'];
+		echo json_encode($templateDir);
+
 	});
 
 ?>
