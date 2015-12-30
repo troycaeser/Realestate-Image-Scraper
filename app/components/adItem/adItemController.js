@@ -11,6 +11,11 @@ AdItemController.prototype.display = function(url){
 		.then(function(response){
 			_this.links = response.data;
 		});
+
+    _this.adItemService.Templates()
+        .then(function(response){
+            _this.banner = response.data;
+        });
 }
 
 app.controller('adItemController', ['adItemService', AdItemController]);
