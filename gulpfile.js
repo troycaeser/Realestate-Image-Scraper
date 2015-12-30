@@ -21,7 +21,7 @@ gulp.task('php', function(){
 	php.server({
 		base: './',
 		port: 8888,
-		keepalive: true
+		keepalive: false
 	});
 });
 

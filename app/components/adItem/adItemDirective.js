@@ -21,18 +21,19 @@ var Controls = function(scope, elem, attrs){
 		elem.find('canvas').css('opacity', '1');
 	});
 
-	elem.find('button').bind('click', function(){
-		elem.parent().remove();
+	elem.find('canvas').bind('mouseenter', function(){
+		//console.log(canvas.toDataURL("image/png"));
+        console.log('mouseentered the canvas dawg!');
 	});
 
-	// console.log(angular.elem(elem[0]));
 	var canvas = elem.find('canvas')[0];
 	var context = canvas.getContext('2d');
 
 	var imageObj = new Image();
+	// imageObj.setAttribute('crossOrigin', '*');
 
 	imageObj.onload = function(){
-		context.drawImage(imageObj, 0, 0);		
+		context.drawImage(imageObj, 0, 0);
 	}
 
 	imageObj.src = scope.imgsrc;

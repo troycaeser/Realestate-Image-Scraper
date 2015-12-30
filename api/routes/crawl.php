@@ -34,10 +34,25 @@
 				break;
 		}
 
-		header("Content-Type: application/json");
-		echo json_encode($resizedImgLinks);
 		// print_r($cleanedImgLinks);
 		// print_r($resizedImgLinks);
+
+		//test section
+		$stuff = array(
+			"http://i4.au.reastatic.net/400x300/78651cb950e45e09922d5e23ff291082023eebe0482bd35c20d3c4283c43a673/main.jpg"
+		);
+
+		header("Content-Type: application/json");
+		//echo json_encode($stuff);
+		echo json_encode($resizedImgLinks);
+	});
+
+	$app->get('/test', function() use ($app){
+		$url = "http://i4.au.reastatic.net/400x300/78651cb950e45e09922d5e23ff291082023eebe0482bd35c20d3c4283c43a673/main.jpg";
+		$getInfo = getimagesize($url);
+		// $page = file_get_contents($url);
+		$app->response->headers->set('Content-Type', 'image/jpeg');
+		echo file_get_contents($url);
 	});
 
 	$app->get('/crawl', function(){
