@@ -173,16 +173,19 @@
 		$propertyDir = "../assets/agentAssets/";
 		
 		$propertyDir .= $propertyInfo['agent_identifier'];
+		$propertyDir .= '/';
 
 		$templateDir = array (
-			'banner' = $propertyDir . "banner.png",
-			'bath' = $propertyDir . "bath.png",
-			'bed' = $propertyDir . "bed.png",
-			'bottom' = $propertyDir . "bottom.png",
-			'car' = $propertyDir . "car.png",
-			'font' = $propertyDir . "font.ttf",
-			'logo' = $propertyDir . "logo.png"
+			'banner' => $propertyDir . "banner.png",
+			'bath' => $propertyDir . "bath.png",
+			'bed' => $propertyDir . "bed.png",
+			'bottom' => $propertyDir . "bottom.png",
+			'car' => $propertyDir . "car.png",
+			'font' => $propertyDir . "font.ttf",
+			'logo' => $propertyDir . "logo.png"
 		);
+
+		echo $templateDir['banner'];
 	});
 
 ?>
