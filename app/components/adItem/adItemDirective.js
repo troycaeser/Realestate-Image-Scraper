@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-var AdItemDirective = function(){
+var AdItemDirective = function(adItemService){
 	return {
 		restrict: 'AE',
 		templateUrl: 'app/components/adItem/adItemDirective.html',
@@ -41,7 +41,14 @@ var Controls = function(scope, elem, attrs){
 		context.drawImage(imageObj, 0, 0);
 	}
 
-	imageObj.src = scope.imgsrc;
+    imageObj.src = scope.imgsrc;
+	//imageObj.src = adItemService.Templates;
+
+    console.log(adItemService.Templates());
+       // .then(function(response){
+           //imageObj.src = response.data;
+        /*   console.log(response.data);
+        });*/
 };
 
-app.directive('adItem', AdItemDirective);
+app.directive('adItem', ['adItemService', AdItemDirective]);

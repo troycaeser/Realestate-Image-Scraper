@@ -5,13 +5,6 @@ var AdItemService = function($http, $q){
 	this.$q = $q;
 };
 
-AdItemService.prototype.getCrawl = function(){
-	return this.$http.get('api/crawl')
-		.then(function(response){
-			return response;
-		});
-}
-
 AdItemService.prototype.Crawl = function(url){
 	var request = {
 		url: url
@@ -19,5 +12,10 @@ AdItemService.prototype.Crawl = function(url){
 
 	return this.$http.post('api/crawl', request);
 }
+
+AdItemService.prototype.Templates = function(){
+   // return this.$http.get('api/test');
+      return "hello";
+};
 
 app.service('adItemService', ['$http', AdItemService]);
