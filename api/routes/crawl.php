@@ -1,5 +1,6 @@
 <?php
-	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/getHTMLContents.php");
+
+	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/writeJson.php");
 	//include "../lib/writeJson.php";
 
 	$app->post('/crawl', function() use ($app){
@@ -177,8 +178,7 @@
 		$templateDir = array();
 		$propertyInfo = array();
 		makeTemplateDir ($url, $propertyInfo, $templateDir);
-		//echo json_encode($templateDir);
 
-		print_r ($propertyInfo);
+		echo json_encode($templateDir);
 	});
 ?>
