@@ -1,6 +1,6 @@
 <?php
+	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/getHTMLContents.php");
 
-	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/writeJson.php");
 	//include "../lib/writeJson.php";
 
 	$app->post('/crawl', function() use ($app){
