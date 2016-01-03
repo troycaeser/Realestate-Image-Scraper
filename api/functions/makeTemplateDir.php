@@ -1,8 +1,5 @@
 <?php
-	function makeTemplateDir ($url, &$templateDir) {
-		$propertyInfo = array();
-		getHTML ($url, $propertyInfo);
-
+	function makeTemplateDir ($url, $propertyInfo, &$templateDir) {
 		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
 		//$propertyDir = "../assets/agentAssets/";
 		

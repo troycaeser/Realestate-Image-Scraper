@@ -9,13 +9,13 @@ AdItemController.prototype.display = function(url){
     var _this = this;
     _this.adItemService.Crawl(url)
         .then(function(response){
-            _this.links = response.data;
+            _this.links = response.data.links;
 
             //displays input fields
             _this.show = true;
-            _this.bedRoom = "number of bedrooms";
-            _this.bathRoom = "number of bathrooms";
-            _this.carport = "number of carport";
+            _this.bedRoom = response.data.propertyInfo.no_bed;
+            _this.bathRoom = response.data.propertyInfo.no_bath;
+            _this.carport = response.data.propertyInfo.no_car;
         });
 
     /*_this.adItemService.Templates()
