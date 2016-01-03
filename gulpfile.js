@@ -2,13 +2,13 @@
 
 // grab our gulp packages
 var gulp  = require('gulp'),
-	util = require('gulp-util'),
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	rimraf = require('gulp-rimraf'),
-	watch = require('gulp-watch'),
-	php = require('gulp-connect-php'),
-	browserSync = require('browser-sync').create();
+    util = require('gulp-util'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    rimraf = require('gulp-rimraf'),
+    watch = require('gulp-watch'),
+    php = require('gulp-connect-php'),
+    browserSync = require('browser-sync').create();
 
 var reload = browserSync.reload;
 

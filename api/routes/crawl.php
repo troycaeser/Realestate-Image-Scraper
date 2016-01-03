@@ -1,17 +1,17 @@
 <?php
-	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/writeJson.php");
-	//include "../lib/writeJson.php";
+    include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/writeJson.php");
+    //include "../lib/writeJson.php";
 
-	$app->post('/crawl', function() use ($app){
-		//get parameter via json_decode()->name
-		$request = $app->request();
-		$body = $request->getBody();
-		$result = json_decode($body);
-		$site;
+    $app->post('/crawl', function() use ($app){
+        //get parameter via json_decode()->name
+        $request = $app->request();
+        $body = $request->getBody();
+        $result = json_decode($body);
+        $site;
 
-		$url = $result->url;
+        $url = $result->url;
 
-		$targets = array('realestate.com.au', 'milesre.com.au', 'portplus.com');
+        $targets = array('realestate.com.au', 'milesre.com.au', 'portplus.com');
 
 		foreach($targets as $t)
 		{
