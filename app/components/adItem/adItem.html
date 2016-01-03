@@ -1,10 +1,17 @@
+<!-- image blocks -->
 <div ng-controller="adItemController as adItemCtrl">
     <div class="searchContainer">
         <input type="text" ng-model="url">
         <button ng-click="adItemCtrl.display(url)">Crawl</button>
     </div>
     <div class="adItemContainer">
-        <ad-item ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" imgsrc="{{src | trusted}}"></ad-item>
+        <div ng-show="adItemCtrl.show" class="adItemInputs">
+            <input type="text" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
+            <input type="text" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
+            <input type="text" name="carport" value="{{adItemCtrl.carport}}">
+        </div>
+        <div class="adItemImage">
+            <ad-item ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" imgsrc="{{src | trusted}}"></ad-item>
+        </div>
     </div>
-    <!-- <pre>{{adItemCtrl.links}}</pre> -->
 </div>
