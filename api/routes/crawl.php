@@ -1,5 +1,5 @@
 <?php
-	include("{$_SERVER['DOCUMENT_ROOT']}/api/lib/writeJson.php");
+	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/writeJson.php");
 	//include "../lib/writeJson.php";
 
 	$app->post('/crawl', function() use ($app){
@@ -150,25 +150,11 @@
 		return $arrLink;
 	}
 
-	$app->get('/test', function() use ($app){
+	function makeTemplateDir ($url, &$propertyInfo, &$templateDir) {
 		$propertyInfo = array();
-
-
-		$url = "http://www.realestate.com.au/property-apartment-vic-elwood-121533362";
-	
-
-		/*
-		 * the only thing that hardcoded is the url
-		 * everything else is reusable
-		 */
-
 		writeJson ($url, $propertyInfo);
-	//	writeJson ($url);
 
-		$propertyInfo['day'] = "what is this";
-		//print_r ($propertyInfo);
-
-		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
+		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
 		//$propertyDir = "../assets/agentAssets/";
 		
 		$propertyDir .= $propertyInfo['agent_identifier'];
@@ -183,9 +169,14 @@
 			'font' => $propertyDir . "font.ttf",
 			'logo' => $propertyDir . "logo.png"
 		);
+	}
 
+	$app->get('/test', function() use ($app){
+		$url = "http://www.realestate.com.au/property-apartment-vic-elwood-121533362";
+		
+		$templateDir = array();
+		$propertyInfo = array();
+		makeTemplateDir ($url, $propertyInfo, $templateDir);
 		echo json_encode($templateDir);
-
 	});
-
 ?>
