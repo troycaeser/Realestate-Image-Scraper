@@ -31,4 +31,39 @@ body {
   outline: none; }
 
 .adItemContainer {
-  display: inline-block; }
+  /*display: inline-block;*/ }
+
+.adItemImageContainer {
+  position: relative;
+  display: block;
+  clear: both;
+  width: 320px;
+  height: 240px;
+  z-index: 1; }
+  .adItemImageContainer .close {
+    padding: 0;
+    margin: 0;
+    line-height: 35px;
+    right: 8px;
+    z-index: 1;
+    font-size: 35px;
+    opacity: 1;
+    position: absolute; }
+  .adItemImageContainer .close:hover {
+    opacity: .5; }
+
+.adItemImageContainer:before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 0;
+  width: 4px;
+  height: 100%;
+  opacity: 0;
+  background-color: #609fba;
+  -webkit-transition: all .1s;
+  transition: all .1s; }
+
+.adItemImageContainer:hover:before {
+  opacity: 1;
+  margin-left: -4px; }

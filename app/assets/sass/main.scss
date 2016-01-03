@@ -1,5 +1,7 @@
+@import "colors";
+
 body{
-    background-color: #d5d8da;
+    background-color: $bg;
 }
 
 .searchContainer{
@@ -36,5 +38,45 @@ body{
 }
 
 .adItemContainer{
-    display: inline-block;
+    /*display: inline-block;*/
+}
+
+.adItemImageContainer{
+    position: relative;
+    display: block;
+    clear: both;
+    width: 320px;
+    height: 240px;
+    z-index: 1;
+    .close{
+        padding: 0;
+        margin: 0;
+        line-height: 35px;
+        right: 8px;
+        z-index: 1;
+        font-size: 35px;
+        opacity: 1;
+        position: absolute;
+    }
+    .close:hover{
+        opacity: .5;
+    }
+}
+
+.adItemImageContainer:before{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 0;
+    width: 4px;
+    height: 100%;
+    opacity: 0;
+    background-color: $adItemImageBorder;
+    -webkit-transition: all .1s;
+    transition: all .1s;
+}
+
+.adItemImageContainer:hover:before{
+    opacity: 1;
+    margin-left: -4px;
 }
