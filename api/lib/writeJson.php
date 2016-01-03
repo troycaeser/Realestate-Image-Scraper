@@ -1,5 +1,5 @@
 <?php
-    include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
+//  include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
 //	include("../vendor/dom_parser.php");
 
     function writeJson ($url, &$arr) {
@@ -18,18 +18,20 @@
         //****************************************************************************
         //Get related data into an array and prepare them into Json
 
-        $bed_no = $bath_no 
-                = $car_no 
-                = $street
-                = $suburb
-                = $agency
-                = $agent_name
-                = $auction_string
-                = $price
-                = $auction_time
-                = $day_long
-                = $day_short
-                = "";
+        $bed_no =
+        $bath_no =
+        $car_no =
+        $street =
+        $suburb =
+        $agency =
+        $agent_name =
+        $agent_no =
+        $auction_string =
+        $price =
+        $auction_time =
+        $day_long =
+        $day_short =
+        "";
 
         $html = file_get_html($reqURL_local);
         $bed_no = $html->find('.rui-icon-bed', 0);
@@ -55,6 +57,8 @@
         $agency_identifier = sanitiseAgent($agency);
 
         $agent_name = $html->find('#agentContactInfo', 0)->first_child()->plaintext;
+        $agent_no = $html->find('#agentContactInfo', 0)->first_child()->next_sibling()->first_child()->plaintext;
+
         $price = $html->find('.price', 0)->first_child();
             if (strlen($price) != 0)				//Check if the price is shown
             {
@@ -114,6 +118,7 @@
             'agency'			=> $agency,
             'agent_identifier'	=> $agency_identifier,
             'agent_name'		=> $agent_name,
+            'agent_no'			=> $agent_no,
             'auction_day'		=> $auction_day,
             'auction_month'		=> $auction_month,
             'auction_year'		=> $auction_year,

@@ -15,5 +15,13 @@
         echo 'Troy is the home for apiasdasdfasdff';
     });
 
+/*
+    include "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/getHTMLContents.php";
+    $app->get ('/testHTML', function() use ($app) {
+    	$url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
+    	$arr = array();
+    	getHTML ($url, $arr);
+    });
+*/
     $app->run();
 ?>
