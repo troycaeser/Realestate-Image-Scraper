@@ -15,5 +15,5 @@
         echo 'Troy is the home for apiasdasdfasdff';
     });
 
-$app->run();
+    $app->run();
 ?>
