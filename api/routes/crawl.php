@@ -146,9 +146,7 @@
     $app->get('/test', function() use ($app){
         $propertyInfo = array();
 
-
         $url = "http://www.realestate.com.au/property-apartment-vic-elwood-121533362";
-
 
         /*
          * the only thing that hardcoded is the url
