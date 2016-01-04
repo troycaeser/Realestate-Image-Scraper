@@ -4,7 +4,8 @@ var AdItemDirective = function(adItemService){
         templateUrl: 'app/components/adItem/adItemDirective.html',
         link: Controls,
         scope:{
-            imgsrc: "@"
+			//imgsrc: "@"
+            out: "@"
         }
     };
 
@@ -46,7 +47,8 @@ var AdItemDirective = function(adItemService){
 			context.drawImage(imageBanner, 0, 0)
 		}
 
-		imageObj.src = scope.imgsrc;
+		imageObj.src = adItemService.Crawl().getData().links[scope.out];
+		//imageObj.src = scope.imgsrc;
 		//imageObj.src = adItemService.Templates;
 	};
 };

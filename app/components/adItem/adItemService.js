@@ -7,7 +7,6 @@ AdItemService.prototype.Crawl = function(){
 	var _this = this;
 
 	var get = {
-		data: false,
 		sendData: function(url){
 			var request = {
 				url: url
@@ -18,7 +17,10 @@ AdItemService.prototype.Crawl = function(){
 			var promise = _this.$http.post('api/crawl', request);
 
 				promise.success(function(response){
-					_this.data = response.links;
+					_this.links = response.links;
+					_this.propertyInfo = response.propertyInfo;
+					_this.templateDir = response.templateDir;
+
 					deferred.resolve({
 						links: response.links,
 						propertyInfo: response.propertyInfo,
@@ -28,7 +30,12 @@ AdItemService.prototype.Crawl = function(){
 			return deferred.promise;
 		},
 		getData: function(){
-			return _this.data;
+			var data = {
+				links: _this.links,
+				propertyInfo: _this.propertyInfo,
+				templateDir: _this.templateDir
+			}
+			return data;
 		}
 	};
 

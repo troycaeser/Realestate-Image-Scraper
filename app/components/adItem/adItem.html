@@ -5,8 +5,12 @@
 		<button ng-click="adItemCtrl.display(url)">Crawl</button>
 	</div>
 	<div class="adItemContainer container">
-		<div class="adItemImage col-md-8">
-			<ad-item ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" imgsrc="{{src | trusted}}"></ad-item>
+		<div ui-sortable ng-model="adItemCtrl.links" class="adItemImage col-md-8">
+			<!--<div ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" outIndex="{{$index}}" ad-item></div>-->
+			<div ng-repeat="src in adItemCtrl.links"
+				remove="adItemCtrl.links.splice($index, 1)" out="{{$index}}" ad-item>
+				{{src}}
+			</div>
 		</div>
 
 		<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
