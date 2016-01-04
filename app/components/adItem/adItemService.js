@@ -3,6 +3,8 @@ var app = angular.module('app');
 var AdItemService = function($http, $q){
 	this.$http = $http;
 	this.$q = $q;
+
+	// get/ set
 };
 
 AdItemService.prototype.Crawl = function(url){
@@ -10,7 +12,17 @@ AdItemService.prototype.Crawl = function(url){
 		url: url
 	};
 
-	return this.$http.post('api/crawl', request);
+	return {
+		getResource: function(){
+			var promise = this.$http.post('api/crawl', request)
+				.then(function(response){
+					return response.data;	
+				});
+			return promise;
+		}
+	};
+
+	//return this.$http.post('api/crawl', request);
 }
 
 AdItemService.prototype.Templates = function(){

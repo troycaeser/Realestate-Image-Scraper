@@ -35,14 +35,20 @@ var Controls = function(scope, elem, attrs){
     var context = canvas.getContext('2d');
 
     var imageObj = new Image();
+	var imageBanner = new Image();
     // imageObj.setAttribute('crossOrigin', '*');
 
     imageObj.onload = function(){
         context.drawImage(imageObj, 0, 0);
     }
 
+	imageBanner.onload = function(){
+		context.drawImage(imageBanner, 0, 0)
+	}
+
     imageObj.src = scope.imgsrc;
     //imageObj.src = adItemService.Templates;
+	adItemService
 
     console.log(adItemService.Templates());
        // .then(function(response){

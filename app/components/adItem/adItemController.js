@@ -7,16 +7,23 @@ var AdItemController = function(adItemService){
 
 AdItemController.prototype.display = function(url){
     var _this = this;
-    _this.adItemService.Crawl(url)
+	var address = _this.adItemService.Crawl(url).getResource();
+	console.log(address);
+    /*_this.adItemService.Crawl(url)
         .then(function(response){
+			var links = response.data.links;
+			var propertyInfo = response.data.propertyInfo;
+			var templateDir = response.data.templateDir;
+
             _this.links = response.data.links;
 
             //displays input fields
             _this.show = true;
-            _this.bedRoom = response.data.propertyInfo.no_bed;
-            _this.bathRoom = response.data.propertyInfo.no_bath;
-            _this.carport = response.data.propertyInfo.no_car;
-        });
+			_this.address = rtyInfo.address;
+            _this.bedRoom = propertyInfo.no_bed;
+            _this.bathRoom = propertyInfo.no_bath;
+            _this.carport = propertyInfo.no_car;
+        });*/
 
     /*_this.adItemService.Templates()
         .then(function(response){

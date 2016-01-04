@@ -23,6 +23,7 @@
 		// $inspect_hour = get_inspect_hour ($m_html);
 		$auction_time = get_auction_time ($m_html);
 		$auction_date = get_auction_date ($m_html);
+		$auction_day = get_day ($auction_date);
 		$auction_hour = get_auction_hour ($m_html);
 		$auction_inspect_hour = get_auction_inspect_hour ($m_html);
 
@@ -43,6 +44,7 @@
 			// 'inspect_hour' => $inspect_hour,
 			'auction_time' => $auction_time,
 			'auction_date' => $auction_date,
+			'auction_day' => $auction_day,
 			'auction_hour' => $auction_hour,
 			'auction_inspect_hour' => $auction_inspect_hour
 		);
@@ -88,7 +90,7 @@
 	}
 
 	function get_agency_localDir (&$html) {
-		$agency_localDir = strtok(get_agency ($html), " ");
+		$agency_localDir = strtok (get_agency ($html), " ");
 		
 		return $agency_localDir;
 	}
@@ -107,7 +109,7 @@
 
 	function get_first_agent_contact (&$html) {
 		$contact = get_first_agent ($html)->next_sibling()->first_child()->plaintext;
-		$contact = preg_replace('/\s+/', '', $contact);
+		$contact = preg_replace ('/\s+/', '', $contact);
 		
 		return $contact;
 	}
@@ -119,7 +121,7 @@
 
 		$price = $price->plaintext;
 		//$price = "Contact Agent";
-		$price = preg_replace('/\s+/', '', $price);
+		$price = preg_replace ('/\s+/', '', $price);
 
 		if ($price[0] != '$')
 			$price = '$' . $price;
@@ -164,7 +166,8 @@
 			$ins_hour = get_inspect_hour ($current);
 			$ins_time[$i] = array (
 				'inspect_date' => $ins_date,
-				'inspect_hour' => $ins_hour
+				'inspect_hour' => $ins_hour,
+				'inspect_day' => get_day ($ins_date)
 			);
 			
 			$current = $current->next_sibling();
@@ -222,6 +225,11 @@
 		return $date;
 	}
 
+	function get_day ($date) {
+		$day = strtok ($date, " ");
+		return day_of_the_week ($day);
+	}
+
 	function get_auction_hour (&$html) {
 		$time = get_auction_time ($html);
 		if ($time == "N/A")
@@ -259,5 +267,34 @@
 		}
 
 		return $auction_inspect_hour;
+	}
+
+	function day_of_the_week ($day) {
+		$result = "";
+
+		switch ($day) {
+			case "Mon":
+				$result = "Monday";
+				break;
+			case "Tue":
+				$result = "Tuesday";
+				break;
+			case "Wed":
+				$result = "Wednesday";
+				break;
+			case "Thu":
+				$result = "Thursday";
+				break;
+			case "Fri":
+				$result = "Friday";
+				break;
+			case "Sat":
+				$result = "Saturday";
+				break;
+			case "Sun":
+				$result = "Sunday";
+				break;
+		}
+		return $result;
 	}
 ?>

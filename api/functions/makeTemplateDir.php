@@ -1,19 +1,22 @@
 <?php
 	function makeTemplateDir ($url, $propertyInfo, &$templateDir) {
+		// $propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
 		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
+		
 		//$propertyDir = "../assets/agentAssets/";
 		
 		$propertyDir .= $propertyInfo['agency_localDir'];
 		$propertyDir .= '/';
 
 		$templateDir = array (
-			'banner' => $propertyDir . "banner.png",
-			'bath' => $propertyDir . "bath.png",
-			'bed' => $propertyDir . "bed.png",
-			'bottom' => $propertyDir . "bottom.png",
-			'car' => $propertyDir . "car.png",
-			'font' => $propertyDir . "font.ttf",
-			'logo' => $propertyDir . "logo.png"
+			'root' => $propertyDir,
+			'Banner' => $propertyDir . "banner.png",
+			'Bath' => $propertyDir . "bath.png",
+			'Bed' => $propertyDir . "bed.png",
+			'Bottom' => $propertyDir . "bottom.png",
+			'Car' => $propertyDir . "car.png",
+			'Font' => $propertyDir . "font.ttf",
+			'Logo' => $propertyDir . "logo.png"
 		);
 	}
 ?>
