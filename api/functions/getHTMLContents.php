@@ -1,4 +1,5 @@
 <?php
+	// include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
 	include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
 
 	function getHTML ($url, &$arr) {
@@ -18,8 +19,8 @@
 		$listing_type = "";
 		$price = get_price ($m_html);
 		$inspect_time = get_inspect_time ($m_html);
-		$inspect_date = get_inspect_date ($m_html);
-		$inspect_hour = get_inspect_hour ($m_html);
+		// $inspect_date = get_inspect_date ($m_html);
+		// $inspect_hour = get_inspect_hour ($m_html);
 		$auction_time = get_auction_time ($m_html);
 		$auction_date = get_auction_date ($m_html);
 		$auction_hour = get_auction_hour ($m_html);
@@ -38,8 +39,8 @@
 			'listing_type' => $listing_type,
 			'price' => $price,
 			'inspect_time' => $inspect_time,
-			'inspect_date' => $inspect_date,
-			'inspect_hour' => $inspect_hour,
+			// 'inspect_date' => $inspect_date,
+			// 'inspect_hour' => $inspect_hour,
 			'auction_time' => $auction_time,
 			'auction_date' => $auction_date,
 			'auction_hour' => $auction_hour,
@@ -151,14 +152,30 @@
 		if (is_null ($time))
 			return "N/A";
 
-		$time = $time->plaintext;
-		$time = str_replace (" Save to Calendar", "", $time);
+		/*$time = $time->plaintext;
+		$time = str_replace (" Save to Calendar", "", $time);*/
 
-		return $time;
+		$ins_time = array();
+		$i=0;
+		$current = $time->first_child();
+		
+		do {			
+			$ins_date = get_inspect_date ($current);
+			$ins_hour = get_inspect_hour ($current);
+			$ins_time[$i] = array (
+				'inspect_date' => $ins_date,
+				'inspect_hour' => $ins_hour
+			);
+			
+			$current = $current->next_sibling();
+			$i++;
+		} while (!is_null ($current));
+
+		return $ins_time;
 	}
 
 	function get_inspect_date (&$html) {
-		$date = $html->find ('.inspectionTimesWrapper strong[itemprop="name"]', 0);
+		$date = $html->find ('strong[itemprop="name"]', 0);
 		if (is_null ($date))
 			return "N/A";
 
@@ -168,7 +185,7 @@
 	}
 
 	function get_inspect_hour (&$html) {
-		$hour = $html->find ('.inspectionTimesWrapper span[class="time"]', 0);
+		$hour = $html->find ('span[class="time"]', 0);	
 		if (is_null ($hour))
 			return "N/A";
 
