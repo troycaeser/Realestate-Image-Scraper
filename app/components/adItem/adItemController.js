@@ -7,8 +7,16 @@ var AdItemController = function(adItemService){
 
 AdItemController.prototype.display = function(url){
     var _this = this;
-	var address = _this.adItemService.Crawl(url).getResource();
-	console.log(address);
+	_this.adItemService.Crawl().sendData(url)
+		.then(function(response){
+			_this.show = true;
+			_this.links = response.links;
+			_this.address = response.propertyInfo.address;
+			_this.bedRoom = response.propertyInfo.no_bed;
+			_this.bathRoom = response.propertyInfo.no_bath;
+			_this.carport = response.propertyInfo.no_car;
+		});
+
     /*_this.adItemService.Crawl(url)
         .then(function(response){
 			var links = response.data.links;

@@ -46,7 +46,7 @@ gulp.task('watch', ['sass', 'minify', 'browserSync'], function(){
 //concatenate and minify
 gulp.task('minify', ['rimraf'], function() {
     return gulp.src(paths.app)
-        .pipe(uglify())
+		.pipe(uglify())
         .pipe(concat('app.min.js'))
         .pipe(gulp.dest(paths.dist))
 });

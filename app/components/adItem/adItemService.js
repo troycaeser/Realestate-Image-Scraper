@@ -1,5 +1,3 @@
-var app = angular.module('app');
-
 var AdItemService = function($http, $q){
 	this.$http = $http;
 	this.$q = $q;
@@ -7,27 +5,44 @@ var AdItemService = function($http, $q){
 	// get/ set
 };
 
-AdItemService.prototype.Crawl = function(url){
-	var request = {
-		url: url
-	};
+AdItemService.prototype.Crawl = function(){
+	var _this = this;
 
-	return {
-		getResource: function(){
-			var promise = this.$http.post('api/crawl', request)
-				.then(function(response){
-					return response.data;	
+	var get = {
+		sendData: function(url){
+			var request = {
+				url: url
+			}
+
+			var deferred = _this.$q.defer();
+
+			var promise = _this.$http.post('api/crawl', request);
+
+				promise.success(function(response){
+					_this.links = response.links;
+					_this.propertyInfo = response.propertyInfo;
+					_this.templateDir = response.templateDir;
+
+					deferred.resolve({
+						links: response.links,
+						propertyInfo: response.propertyInfo,
+						templateDir: response.templateDir
+					});
 				});
-			return promise;
+			return deferred.promise;
+		},
+		getData: function(){
+			var data = {
+				links: _this.links,
+				propertyInfo: _this.propertyInfo,
+				templateDir: _this.templateDir
+			}
+			return data;
 		}
 	};
 
-	//return this.$http.post('api/crawl', request);
+	return get;
 }
 
-AdItemService.prototype.Templates = function(){
-   // return this.$http.get('api/test');
-      return "hello";
-};
-
-app.service('adItemService', ['$http', AdItemService]);
+angular.module('app')
+	.service('adItemService', ['$http', '$q', AdItemService]);

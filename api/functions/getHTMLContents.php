@@ -60,7 +60,7 @@
 
 	function get_no_bath (&$html) {
 		$no_bath = $html->find ('.rui-icon-bath', 0)->next_sibling()->plaintext;
-		
+
 		return $no_bath;
 	}
 
@@ -70,7 +70,7 @@
 			return "N/A";
 
 		$no_car = $no_car->next_sibling()->plaintext;
-		
+
 		return $no_car;
 	}
 
@@ -79,13 +79,13 @@
 		$suburb = $addressElement->next_sibling()->plaintext;
 
 		$address = substr ($addressElement->plaintext, 0, -1) . ', ' . strtoupper ($suburb);
-		
+
 		return $address;
 	}
 
 	function get_agency (&$html) {
 		$agency = $html->find ('.agencyName', 0)->plaintext;
-		
+
 		return $agency;
 	}
 
@@ -97,13 +97,13 @@
 
 	function get_first_agent (&$html) {
 		$first_agent = $html->find ('.agentContactInfo', 0)->first_child();
-		
+
 		return $first_agent;
 	}
 
 	function get_first_agent_name (&$html) {
 		$name = get_first_agent ($html)->plaintext;
-		
+
 		return $name;
 	}
 
@@ -183,7 +183,7 @@
 			return "N/A";
 
 		$date = $date->plaintext;
-		
+
 		return $date;
 	}
 
@@ -204,12 +204,12 @@
 		$time = $html->find ('.auctionDetails span', 0);
 		if (is_null ($time))
 			return "N/A";
-		
+
 		$time = $time->plaintext;
 		$time = str_replace ("Auction: ", "", $time);
 		$time = substr ($time, 0, -1);
 		//$time = "Sat 21-Feb-15 2:00PM";
-		
+
 		return $time;
 	}
 
@@ -232,7 +232,7 @@
 
 	function get_auction_hour (&$html) {
 		$time = get_auction_time ($html);
-		if ($time == "N/A")
+
 			return $time;
 
 		$hour = substr ($time, 14);
@@ -250,7 +250,7 @@
 		$auction_inspect_hour = "";
 		$am_pm = substr ($auction_hour, -2, 2);
 		$actual_hour = substr ($auction_hour, 0, -2);
-		
+
 		if (strpos ($auction_hour, ":30")) {
 			$auction_inspect_hour = substr ($auction_hour, 0, -5);
 			$auction_inspect_hour .= $am_pm;
