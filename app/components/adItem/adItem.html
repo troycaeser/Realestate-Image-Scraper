@@ -1,18 +1,21 @@
 <!-- image blocks -->
 <div ng-controller="adItemController as adItemCtrl">
-    <div class="searchContainer">
-        <input type="text" ng-model="url">
-        <button ng-click="adItemCtrl.display(url)">Crawl</button>
-    </div>
-    <div class="adItemContainer container">
-        <div ui-sortable="{'ui-floating': true}" ng-Model="adItem" class="adItemImage col-md-8">
-            <ad-item ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" imgsrc="{{src | trusted}}"></ad-item>
-        </div>
+	<div class="searchContainer">
+		<input type="text" ng-model="url">
+		<button ng-click="adItemCtrl.display(url)">Crawl</button>
+	</div>
+	<div class="adItemContainer container">
+		<div class="adItemImage col-md-8">
+			<ad-item ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" imgsrc="{{src | trusted}}"></ad-item>
+		</div>
 
-        <div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
-            <input type="text" class="form-control" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
-            <input type="text" class="form-control" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
-            <input type="text" class="form-control" name="carport" value="{{adItemCtrl.carport}}">
-        </div>
-    </div>
+		<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
+			<input type="text" class="form-control" name="address"
+			value="{{adItemCtrl.address}}">
+			<input type="text" class="form-control" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
+			<input type="text" class="form-control" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
+			<input type="text" class="form-control" name="carport" value="{{adItemCtrl.carport}}">
+		</div>
+		</div>
+	</div>
 </div>
