@@ -21,6 +21,7 @@
 				break;
 			}
 		}
+		
 		//figureout which site we're searching
 		switch($site){
 			case "realestate.com.au":
