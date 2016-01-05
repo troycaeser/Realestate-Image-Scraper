@@ -5,13 +5,15 @@ var AdItemDirective = function(adItemService){
 		link: Controls,
 		scope:{
 			//imgsrc: "@"
-			out: "@"
+			out: "@",
+			model: "=",
+			remove: "&"
 		}
 	};
 
 	return myDirective;
 
-	function Controls(scope, elem, attrs){
+	function Controls(scope, elem, attrs, adItemCtrl){
 		console.log(adItemService.Crawl().getData());
 		//define controls
 		elem.find('canvas').bind('mouseenter', function(){
@@ -20,16 +22,6 @@ var AdItemDirective = function(adItemService){
 
 		elem.find('canvas').bind('mouseleave', function(){
 			elem.find('canvas').css('opacity', '1');
-		});
-
-		elem.find('canvas').bind('mouseenter', function(){
-			//console.log(canvas.toDataURL("image/png"));
-			console.log('mouseentered the canvas dawg!');
-		});
-
-		elem.find('button').bind('click', function(){
-			elem.find('canvas').remove(); 
-			elem.remove();
 		});
 
 		var canvas = elem.find('canvas')[0];
@@ -48,8 +40,6 @@ var AdItemDirective = function(adItemService){
 		}
 
 		imageObj.src = adItemService.Crawl().getData().links[scope.out];
-		//imageObj.src = scope.imgsrc;
-		//imageObj.src = adItemService.Templates;
 	};
 };
 

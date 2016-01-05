@@ -17,26 +17,28 @@ AdItemController.prototype.display = function(url){
 			_this.carport = response.propertyInfo.no_car;
 		});
 
-	/*_this.adItemService.Crawl(url)
-		.then(function(response){
-			var links = response.data.links;
-			var propertyInfo = response.data.propertyInfo;
-			var templateDir = response.data.templateDir;
+	_this.sortableOptions = {
+		//update: function(e, ui){
+			//var logEntry = _this.links.map(function(i){
+				//return i;
+			//}).join(',\n');
+			//console.log("Update: " + logEntry);
+		//},
+		stop: function(e, ui){
+			console.log(_this.links);
+			var logEntry = _this.links.map(function(i){
+				return i;
+			}).join(',\n');
+			//console.log("Stop: " + logEntry);
+		}
+	}
+}
 
-			_this.links = response.data.links;
-
-			//displays input fields
-			_this.show = true;
-			_this.address = rtyInfo.address;
-			_this.bedRoom = propertyInfo.no_bed;
-			_this.bathRoom = propertyInfo.no_bath;
-			_this.carport = propertyInfo.no_car;
-		});*/
-
-	/*_this.adItemService.Templates()
-		.then(function(response){
-			_this.banner = response.data;
-		});*/
+AdItemController.prototype.remove = function(item, items){
+	//var _this = this;
+	//var index = items.indexOf(item)
+	//this.links.splice(index,1);
+	console.log(items);
 }
 
 app.controller('adItemController', ['adItemService', AdItemController]);
