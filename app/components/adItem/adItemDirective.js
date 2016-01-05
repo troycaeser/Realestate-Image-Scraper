@@ -34,9 +34,9 @@ var AdItemDirective = function(adItemService){
 		var imageBanner = new Image();
 
 		imageObj.onload = function(){
-			context.drawImage(imageObj, 0, 0);
+			context.drawImage(imageObj, 0, 0, 80, 60);
 			if(scope.out == 0){
-				context.drawImage(imageBanner, 0, 0);
+				context.drawImage(imageBanner, 0, 0, 40.4, 37.4);
 			}
 		}
 
