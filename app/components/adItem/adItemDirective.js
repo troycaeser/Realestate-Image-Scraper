@@ -28,6 +28,7 @@ var AdItemDirective = function(adItemService){
 
 		var canvas = elem.find('canvas')[0];
 		var context = canvas.getContext('2d');
+		context.globalCompositeOperation = "source-over";
 
 		var imageObj = new Image();
 		var imageBanner = new Image();
