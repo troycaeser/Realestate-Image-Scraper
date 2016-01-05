@@ -34,14 +34,18 @@ var AdItemDirective = function(adItemService){
 
 		imageObj.onload = function(){
 			context.drawImage(imageObj, 0, 0);
+			if(scope.out == 0){
+				context.drawImage(imageBanner, 0, 0);
+			}
 		}
 
-		imageBanner.onload = function(){
+		/*imageBanner.onload = function(){
 			context.drawImage(imageBanner, 0, 0)
-		}
+		}*/
 
 		//get image source from adItemService
 		imageObj.src = adItemService.Crawl().getData().links[scope.out];
+		imageBanner.src = adItemService.Crawl().getData().templateDir.Banner;
 	};
 };
 
