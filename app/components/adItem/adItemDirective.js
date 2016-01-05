@@ -1,13 +1,13 @@
 var AdItemDirective = function(adItemService){
-    var myDirective = {
-        restrict: 'AE',
-        templateUrl: 'app/components/adItem/adItemDirective.html',
-        link: Controls,
-        scope:{
+	var myDirective = {
+		restrict: 'AE',
+		templateUrl: 'app/components/adItem/adItemDirective.html',
+		link: Controls,
+		scope:{
 			//imgsrc: "@"
-            out: "@"
-        }
-    };
+			out: "@"
+		}
+	};
 
 	return myDirective;
 

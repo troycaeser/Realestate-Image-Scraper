@@ -3,13 +3,13 @@ var app = angular.module('app', ['angular-loading-bar', 'ui.router', 'ui.bootstr
 //testing
 
 app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/adItem');
+	$urlRouterProvider.otherwise('/adItem');
 
-    $stateProvider
-        .state('adItem', {
-            url: '/adItem',
-            templateUrl : 'app/components/adItem/adItem.html',
-            controller: 'adItemController',
-            controllerAs: 'adItemCtrl'
-        });
+	$stateProvider
+		.state('adItem', {
+			url: '/adItem',
+			templateUrl : 'app/components/adItem/adItem.html',
+			controller: 'adItemController',
+			controllerAs: 'adItemCtrl'
+		});
 }]);

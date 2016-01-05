@@ -1,82 +1,82 @@
 @import "colors";
 
 body{
-    background-color: $bg;
+	background-color: $bg;
 }
 
 .searchContainer{
-    text-align: center;
-    display: block;
-    margin: 30px 0 30px 0;
+	text-align: center;
+	display: block;
+	margin: 30px 0 30px 0;
 }
 
 .searchContainer button{
-    display: inline-block;
-    width: 100px;
-    height: 35px;
-    background-color: #3a9dc6;
-    color: #fff;
-    outline: none;
-    border: none;
+	display: inline-block;
+	width: 100px;
+	height: 35px;
+	background-color: #3a9dc6;
+	color: #fff;
+	outline: none;
+	border: none;
 }
 
 .searchContainer button:selected{
-    background-color: #376280;
+	background-color: #376280;
 }
 
 .searchContainer input{
-    font-size: 20px;
-    display: inline-block;
-    text-align: center;
-    margin: 0 auto;
-    width: 70%;
-    padding: 15px;
-    border-radius: 35px;
-    background-color: #fff;
-    border: none;
-    outline: none;
+	font-size: 20px;
+	display: inline-block;
+	text-align: center;
+	margin: 0 auto;
+	width: 70%;
+	padding: 15px;
+	border-radius: 35px;
+	background-color: #fff;
+	border: none;
+	outline: none;
 }
 
 .adItemContainer{
-    /*display: inline-block;*/
+	/*display: inline-block;*/
 }
 
 .adItemImageContainer{
-    position: relative;
-    display: block;
-    clear: both;
-    width: 320px;
-    height: 240px;
-    z-index: 1;
-    .close{
-        padding: 0;
-        margin: 0;
-        line-height: 35px;
-        right: 8px;
-        z-index: 1;
-        font-size: 35px;
-        opacity: 1;
-        position: absolute;
-    }
-    .close:hover{
-        opacity: .5;
-    }
+	position: relative;
+	display: block;
+	clear: both;
+	width: 320px;
+	height: 240px;
+	z-index: 1;
+	.close{
+		padding: 0;
+		margin: 0;
+		line-height: 35px;
+		right: 8px;
+		z-index: 1;
+		font-size: 35px;
+		opacity: 1;
+		position: absolute;
+	}
+	.close:hover{
+		opacity: .5;
+	}
 }
 
 .adItemImageContainer:before{
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: 0;
-    width: 4px;
-    height: 100%;
-    opacity: 0;
-    background-color: $adItemImageBorder;
-    -webkit-transition: all .1s;
-    transition: all .1s;
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: 0;
+	width: 4px;
+	height: 100%;
+	opacity: 0;
+	background-color: $adItemImageBorder;
+	-webkit-transition: all .1s;
+	transition: all .1s;
 }
 
 .adItemImageContainer:hover:before{
-    opacity: 1;
-    margin-left: -4px;
+	opacity: 1;
+	margin-left: -4px;
 }
