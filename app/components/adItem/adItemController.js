@@ -23,11 +23,10 @@ AdItemController.prototype.display = function(url){
 			//console.log("Update: " + logEntry);
 		//},
 		stop: function(e, ui){
-			console.log(_this.links);
 			var logEntry = _this.links.map(function(i){
 				return i;
-			}).join(',\n');
-			console.log("Stop: " + logEntry);
+			}).join(",\n");
+			console.log("Stop: \n" + logEntry);
 		}
 	}
 }
