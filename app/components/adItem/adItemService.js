@@ -1,8 +1,6 @@
 var AdItemService = function($http, $q){
 	this.$http = $http;
 	this.$q = $q;
-
-	// get/ set
 };
 
 AdItemService.prototype.Crawl = function(){

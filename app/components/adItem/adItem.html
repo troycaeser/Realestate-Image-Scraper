@@ -7,7 +7,6 @@
 	<div class="adItemContainer container">
 
 		<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage col-md-8">
-			<!--<div ng-repeat="src in adItemCtrl.links" remove="adItemCtrl.links.splice($index, 1)" outIndex="{{$index}}" ad-item></div>-->
 			<div ng-repeat="src in adItemCtrl.links">
 				<div model="src" remove="adItemCtrl.links.splice($index, 1)" out="{{$index}}"ad-item></div>
 			</div>

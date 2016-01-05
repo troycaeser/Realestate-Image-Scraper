@@ -3,8 +3,10 @@ var AdItemDirective = function(adItemService){
 		restrict: 'AE',
 		templateUrl: 'app/components/adItem/adItemDirective.html',
 		link: Controls,
+		//binds "out" with parent scope
+		//binds "model" with current scope
+		//binds "remove" as a method
 		scope:{
-			//imgsrc: "@"
 			out: "@",
 			model: "=",
 			remove: "&"
@@ -13,7 +15,7 @@ var AdItemDirective = function(adItemService){
 
 	return myDirective;
 
-	function Controls(scope, elem, attrs, adItemCtrl){
+	function Controls(scope, elem, attrs){
 		console.log(adItemService.Crawl().getData());
 		//define controls
 		elem.find('canvas').bind('mouseenter', function(){
@@ -29,7 +31,6 @@ var AdItemDirective = function(adItemService){
 
 		var imageObj = new Image();
 		var imageBanner = new Image();
-		// imageObj.setAttribute('crossOrigin', '*');
 
 		imageObj.onload = function(){
 			context.drawImage(imageObj, 0, 0);
@@ -39,6 +40,7 @@ var AdItemDirective = function(adItemService){
 			context.drawImage(imageBanner, 0, 0)
 		}
 
+		//get image source from adItemService
 		imageObj.src = adItemService.Crawl().getData().links[scope.out];
 	};
 };

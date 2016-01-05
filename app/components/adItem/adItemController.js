@@ -1,5 +1,3 @@
-var app = angular.module('app');
-
 var AdItemController = function(adItemService){
 	// this.links = "this should be a bunch of links";
 	this.adItemService = adItemService;
@@ -29,16 +27,10 @@ AdItemController.prototype.display = function(url){
 			var logEntry = _this.links.map(function(i){
 				return i;
 			}).join(',\n');
-			//console.log("Stop: " + logEntry);
+			console.log("Stop: " + logEntry);
 		}
 	}
 }
 
-AdItemController.prototype.remove = function(item, items){
-	//var _this = this;
-	//var index = items.indexOf(item)
-	//this.links.splice(index,1);
-	console.log(items);
-}
-
-app.controller('adItemController', ['adItemService', AdItemController]);
+angular.module('app')
+	.controller('adItemController', ['adItemService', AdItemController]);
