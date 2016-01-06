@@ -57,8 +57,8 @@
 
 		$jsonObject = get_json_object ($agency_localDir);
 
-		$resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
-		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testResize/";
+		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
+		$resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testResize/";
 
 		// resize main
 		resizeSingleMain ($imgUrls[0], $jsonObject, $resizedDir, $resizedUrls[0]);

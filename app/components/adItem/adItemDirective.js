@@ -46,7 +46,7 @@ var AdItemDirective = function(adItemService){
 
 		//get image source from adItemService
 		imageObj.src = adItemService.Crawl().getData().links[scope.out];
-		imageBanner.src = adItemService.Crawl().getData().templateDir.Banner;
+		imageBanner.src = adItemService.Crawl().getData().templateDirWeb.Banner;
 	};
 };
 

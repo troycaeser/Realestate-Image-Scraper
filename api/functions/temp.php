@@ -2,7 +2,6 @@
 	function auction($jsonFile, $photo_dir, $cacheJ){
 		$im = imagecreatefromjpeg($photo_dir);
 
-
 		imagejpeg($im, $photo_dir, 100);
 		imagedestroy($im);
 	}

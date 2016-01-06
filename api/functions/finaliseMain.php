@@ -3,12 +3,10 @@
 	include_once ("makeTemplateDir.php");
 	include_once ("loadJsonObject.php");
 
-	function finaliseMainAdItem ($url, $imgUrl) {
-		$propertyInfo = array();
-		getHTML ($url, $propertyInfo);
-
+	function finaliseMainAdItem ($propertyInfo, $imgUrl) {
 		$templateDir = array();
-		makeTemplateDir ($url, $propertyInfo, $templateDir);
+		$templateDirWeb = array();
+		makeTemplateDir ($propertyInfo, $templateDir, $templateDirWeb);
 
 		$jsonObject = get_json_object ($propertyInfo['agency_localDir']);
 
@@ -21,8 +19,8 @@
 		allocateTemplates ($mainImg, $jsonObject, $templateDir, $no_features);
 		fillText ($mainImg, $jsonObject, $propertyInfo, $templateDir, "auction", $no_features);
 
-		$dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testDraw/";
-		// $dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/";
+		// $dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testDraw/";
+		$dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/";
 		
 		imagejpeg ($mainImg, $dest."img0.jpg", 100);
 		imagedestroy ($mainImg);
@@ -182,7 +180,9 @@
 		$dst_y = $jsonObject['main']['Logo']['pos_y'];
 
 		$no_imgs = count ($imgUrls);
-		$dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
+		// $dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
+		$dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testResize/";
+		
 		for ($i=1; $i<$no_imgs; $i++) {
 			$img_path = $imgUrls[$i];
 			$dstImg = imagecreatefromjpeg ($img_path);

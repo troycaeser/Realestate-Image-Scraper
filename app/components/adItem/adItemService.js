@@ -19,12 +19,12 @@ AdItemService.prototype.Crawl = function(){
 				promise.success(function(response){
 					_this.links = response.links;
 					_this.propertyInfo = response.propertyInfo;
-					_this.templateDir = response.templateDir;
+					_this.templateDirWeb = response.templateDirWeb;
 
 					deferred.resolve({
 						links: response.links,
 						propertyInfo: response.propertyInfo,
-						templateDir: response.templateDir
+						templateDirWeb: response.templateDirWeb
 					});
 				});
 			return deferred.promise;
@@ -33,7 +33,7 @@ AdItemService.prototype.Crawl = function(){
 			var data = {
 				links: _this.links,
 				propertyInfo: _this.propertyInfo,
-				templateDir: _this.templateDir
+				templateDirWeb: _this.templateDirWeb
 			}
 			return data;
 		}

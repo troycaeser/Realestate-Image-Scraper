@@ -1,6 +1,6 @@
 <?php
-	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
-	// include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
+	// include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
+	include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
 
 	function getHTML ($url, &$arr) {
 		$m_url = $url;
