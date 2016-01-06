@@ -1,7 +1,7 @@
 <?php
 	function makeTemplateDir ($url, $propertyInfo, &$templateDir) {
-		// $propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
-		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
+		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
+		// $propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
 		
 		//$propertyDir = "../assets/agentAssets/";
 		

@@ -1,7 +1,40 @@
 <?php
-	include 'resize-class.php';
+	include_once 'resize-class.php';
+	include_once 'loadJsonObject.php';
 	function resolveImgUrls ($fileDir) {
 
+	}
+
+	function resizeSingleMain ($imgUrl, $jsonObject, $resizedDir, &$resizedUrl) {
+		/*
+		 * function takes url of 1 single image, resize, save and
+		 * load the resized url into the second parameter
+		 */
+
+
+		$width = $jsonObject['main']['size']['width'];
+		$height = $jsonObject['main']['size']['height'];
+		
+		$resizeObject = new resize ($imgUrl);
+		$resizeObject->resizeImage ($width, $height, 'exact', "main-resized");
+		$resizeObject->saveImage ($resizedDir."main-resized.jpg", 100);
+		
+		$resizedUrl = $resizedDir."main-resized.jpg";
+	}
+
+	function resizeSingleOther ($imgUrl, $jsonObject, $resizedDir, $id, &$resizedUrl) {
+		/*
+		 * similar to resizeSingleMain()
+		 */
+
+		$width = $jsonObject['other']['size']['width'];
+		$height = $jsonObject['other']['size']['height'];
+
+		$resizeObject = new resize ($imgUrl);
+		$resizeObject->resizeImage ($width, $height, 'exact', $id."-resized");
+		$resizeObject->saveImage ($resizedDir.$id."-resized.jpg", 100);
+		
+		$resizedUrl = $resizedDir.$id."-resized.jpg";
 	}
 
 	function resizeAll ($imgUrls, $agency_localDir, &$resizedUrls) {
@@ -22,43 +55,23 @@
 		 * - notice difference between main and other in m.json
 		 */
 
-		// $jsonDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentJson/";
-		$jsonDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentJson/";
-		
-		$jsonDir .= $agency_localDir;
-		$jsonDir .= "/m.json";
+		$jsonObject = get_json_object ($agency_localDir);
 
-		$jsonString = file_get_contents ($jsonDir);
-		$jsonObject = json_decode ($jsonString, true);
-
-		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
-		$resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testResize/";
+		$resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
+		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testResize/";
 
 		// resize main
-		$width = $jsonObject['main']['size']['width'];
-		$height = $jsonObject['main']['size']['height'];
-		
-		$resizeObject = new resize ($imgUrls[0]);
-		$resizeObject->resizeImage ($width, $height, 'exact', "main-resized");
-		$resizeObject->saveImage ($resizedDir."main-resized.jpg", 100);
-		
-		$resizedUrls[0] = $resizedDir."main-resized.jpg";
+		resizeSingleMain ($imgUrls[0], $jsonObject, $resizedDir, $resizedUrls[0]);
 
 		// resize others
-		$width = $jsonObject['other']['size']['width'];
-		$height = $jsonObject['other']['size']['height'];
 
 		$no_imgs = count ($imgUrls);
 		for ($i=1; $i<$no_imgs; $i++) {
-			$resizeObject = new resize ($imgUrls[$i]);
-			$resizeObject->resizeImage ($width, $height, 'exact', $i."-resized");
-			$resizeObject->saveImage ($resizedDir.$i."-resized.jpg", 100);
-			
-			$resizedUrls[$i] = $resizedDir.$i."-resized.jpg";
+			resizeSingleOther ($imgUrls[$i], $jsonObject, $resizedDir, $i, $resizedUrls[$i]);
 		}
 
-		// print_arr ($imgUrls);
-		// print_arr ($resizedUrls);
+		print_arr ($imgUrls);
+		print_arr ($resizedUrls);
 	}
 
 	function print_arr ($arr) {

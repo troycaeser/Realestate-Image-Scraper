@@ -1,15 +1,16 @@
 <?php
-	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/getHTMLContents.php");
-	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/linkProcessing.php");
-	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/makeTemplateDir.php");
-	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/resize.php");
-	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/finaliseMain.php");
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/getHTMLContents.php");
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/linkProcessing.php");
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/makeTemplateDir.php");
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/resize.php");
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/finaliseMain.php");
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/loadJsonObject.php");
 	
-	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/getHTMLContents.php");
-	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/linkProcessing.php");
-	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/makeTemplateDir.php");
-	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/resize.php");
-	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/finaliseMain.php");
+	// include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/getHTMLContents.php");
+	// include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/linkProcessing.php");
+	// include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/makeTemplateDir.php");
+	// include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/resize.php");
+	// include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/finaliseMain.php");
 
 	$app->post('/crawl', function() use ($app){
 		//get parameter via json_decode()->name
@@ -41,8 +42,8 @@
 	});
 
 	$app->get('/test', function() use ($app){
-		$url = "http://www.realestate.com.au/property-apartment-vic-elwood-121478162";
-		
+		$url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
+
 		$propertyInfo = array();
 		getHTML ($url, $propertyInfo);
 		
@@ -52,10 +53,27 @@
 		echo "<pre>";
 			print_r ($propertyInfo);
 		echo "</pre>";
-		
+
+		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testDraw/";
 		// $imgUrl = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testDraw/main.jpg";
-		$imgUrl = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/main.jpg";
+		// $resizedUrl = "";
 		
-		finaliseMainAdItem ($url, $imgUrl);
+		// $jsonObject = get_json_object ($propertyInfo['agency_localDir']);
+		// resizeSingleMain ($imgUrl, $jsonObject, $resizedDir, $resizedUrl);
+
+		// finaliseMainAdItem ($url, $resizedUrl);
+
+		// $imgUrls = array (
+		// 	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/main-resized.jpg",
+		// 	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/1-resized.jpg",
+		// 	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/2-resized.jpg"
+		// );
+
+		// allocateLogo ($imgUrls, $jsonObject, $templateDir);
+
+		$imgs = array();
+		finaliseLinks ($url, $imgs);
+
+		$imgUrls = array();
 	});
 ?>

@@ -1,6 +1,6 @@
 <?php
-	// include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
-	include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
+	include("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/vendor/dom_parser.php");
+	// include("{$_SERVER['DOCUMENT_ROOT']}/api/vendor/dom_parser.php");
 
 	function getHTML ($url, &$arr) {
 		$m_url = $url;
@@ -232,7 +232,7 @@
 
 	function get_auction_hour (&$html) {
 		$time = get_auction_time ($html);
-
+		if ($time == "N/A")
 			return $time;
 
 		$hour = substr ($time, 14);
