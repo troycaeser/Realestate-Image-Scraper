@@ -79,8 +79,9 @@
 		// $url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
 		// $url = "http://www.realestate.com.au/property-house-vic-chadstone-121600894";
 		// $url = "http://www.realestate.com.au/property-townhouse-vic-ascot+vale-121583178";
-		$url = "http://www.realestate.com.au/property-townhouse-vic-safety+beach-121600318";
+		// $url = "http://www.realestate.com.au/property-townhouse-vic-safety+beach-121600318";
 		// $url = "http://www.realestate.com.au/property-other-vic-safety+beach-7794642";
+		$url = "http://www.realestate.com.au/property-house-vic-sorrento-121574710";
 
 		// get property info
 		$propertyInfo = array();
@@ -90,6 +91,12 @@
 		$imgs = array();
 		finaliseLinks ($url, $imgs);
 
+		/*---------------------------------*/
+		$finalised = array();
+		createAd ($propertyInfo, $imgs, $finalised);
+	});
+
+	function createAd ($propertyInfo, $imgs, &$finalised) {
 		// download imgs
 		$dir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDownload/";
 		$imgUrls = array();
@@ -106,7 +113,6 @@
 		makeTemplateDir ($propertyInfo, $templateDir, $templateDirWeb);
 		
 		// put templates into imgs
-		$finalised = array();
 
 		$jsonObject = get_json_object ($propertyInfo['agency_localDir']);
 		$dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testFinal/";
@@ -120,7 +126,8 @@
 		foreach ($finalised as $oup) {
 			echo "<img src='".$oup."' />"."<br />"."<br />";
 		}
-	});
+	}
+
 	function print_arr ($arr) {
 		echo "<pre>";
 			print_r ($arr);
