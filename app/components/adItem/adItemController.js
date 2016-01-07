@@ -27,7 +27,8 @@ AdItemController.prototype.display = function(url){
 				return i;
 			}).join(",\n");
 			console.log("Stop: \n" + logEntry);
-		}
+		},
+        items: ".adItemRow:not(.not-sortable)"
 	}
 }
 

@@ -30,23 +30,47 @@ var AdItemDirective = function(adItemService){
 		var context = canvas.getContext('2d');
 		context.globalCompositeOperation = "source-over";
 
-		var imageObj = new Image();
-		var imageBanner = new Image();
+        var files = [
+            adItemService.Crawl().getData().links[scope.out]
+        ];
 
-		imageObj.onload = function(){
-			context.drawImage(imageObj, 0, 0, 80, 60);
-			if(scope.out == 0){
-				context.drawImage(imageBanner, 0, 0, 40.4, 37.4);
-			}
-		}
+        //if current directive is the first directive, push in the banner
+        if(scope.out ==  0){
+            files.push(adItemService.Crawl().getData().templateDirWeb.Banner);
+        }
 
-		/*imageBanner.onload = function(){
-			context.drawImage(imageBanner, 0, 0)
-		}*/
+        var images = [];
+        var counter = 0;
 
-		//get image source from adItemService
-		imageObj.src = adItemService.Crawl().getData().links[scope.out];
-		imageBanner.src = adItemService.Crawl().getData().templateDirWeb.Banner;
+        //loop and load in all images
+        for(var i = 0; i < files.length; i++){
+            var imageObj = new Image();
+            imageObj.src = files[i];
+            images.push(imageObj);
+            //once loaded, draw images
+            imageObj.onload = function(){
+                if(++counter == files.length){
+                    context.drawImage(images[0], 0, 0, 80, 60);
+                    //if there are more than 1 image in the image array
+                    //draw rest of the images
+                    if(files.length > 1){
+                        context.drawImage(images[1], 0, 0, 40.4, 37.4)
+                    }
+                }
+            };
+        }
+
+		//imageObj.onload = function(){
+			//context.drawImage(imageObj, 0, 0, 80, 60);
+            //context.drawImage(imageBanner, 0, 0, 40.4, 37.4)
+            //if(scope.out == 0){
+                //context.drawImage(imageBanner, 0, 0, 40.4, 37.4);
+            //}
+		//}
+
+        //get image source from adItemService
+		//imageObj.src = adItemService.Crawl().getData().links[scope.out];
+		//imageBanner.src = adItemService.Crawl().getData().templateDirWeb.Banner;
 	};
 };
 
