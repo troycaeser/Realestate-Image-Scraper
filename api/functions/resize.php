@@ -70,13 +70,7 @@
 			resizeSingleOther ($imgUrls[$i], $jsonObject, $resizedDir, $i, $resizedUrls[$i]);
 		}
 
-		print_arr ($imgUrls);
-		print_arr ($resizedUrls);
-	}
-
-	function print_arr ($arr) {
-		echo "<pre>";
-		print_r ($arr);
-		echo "</pre>";
+		// print_arr ($imgUrls);
+		// print_arr ($resizedUrls);
 	}
 ?>

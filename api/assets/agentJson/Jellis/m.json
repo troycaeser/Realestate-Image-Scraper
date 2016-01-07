@@ -106,5 +106,12 @@
 			"colour_b": 46,
 			"angle": 0
 		}
+	},
+	"other":{
+		"size":{
+			"width":400,
+			"height":269,
+			"padding":70
+		}
 	}
 }
