@@ -1,9 +1,15 @@
 @import "colors";
+@import "fonts";
 
 @font-face{
 	font-family: 'Jellis';
 	src: url('http://localhost:3000/api/assets/agentAssets/Jellis/font.ttf')
 	format('truetype');
+}
+
+@font-face{
+	font-family: 'Chisholm';
+	src: url('http://localhost:3000/api/assets/agentAssets/Chisholm/font.ttf') format('truetype');
 }
 
 body{

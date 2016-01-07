@@ -1,6 +1,7 @@
 var AdItemController = function(adItemService){
 	// this.links = "this should be a bunch of links";
 	this.adItemService = adItemService;
+    this.test = true;
 };
 
 AdItemController.prototype.display = function(url){
