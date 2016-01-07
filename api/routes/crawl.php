@@ -76,7 +76,9 @@
 
 		// $url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
 		// $url = "http://www.realestate.com.au/property-house-vic-chadstone-121600894";
-		$url = "http://www.realestate.com.au/property-townhouse-vic-ascot+vale-121583178";
+		// $url = "http://www.realestate.com.au/property-townhouse-vic-ascot+vale-121583178";
+		$url = "http://www.realestate.com.au/property-townhouse-vic-safety+beach-121600318";
+		// $url = "http://www.realestate.com.au/property-other-vic-safety+beach-7794642";
 
 		// get property info
 		$propertyInfo = array();

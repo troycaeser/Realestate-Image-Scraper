@@ -81,7 +81,10 @@
 		// 3 1 2 or 3 1
 
 		// general style
-		$banner_colour = imagecolorallocate ($mainImg, 255, 255, 255);
+		$banner_r = $jsonObject['main']['Text']['colour_banner_r'];
+		$banner_g = $jsonObject['main']['Text']['colour_banner_g'];
+		$banner_b = $jsonObject['main']['Text']['colour_banner_b'];
+		$banner_colour = imagecolorallocate ($mainImg, $banner_r, $banner_g, $banner_b);
 		$font = $templateDir['Font'];
 
 		// banner text

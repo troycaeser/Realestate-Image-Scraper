@@ -106,6 +106,9 @@
 			"colour_r": 28,
 			"colour_g": 37,
 			"colour_b": 46,
+			"colour_banner_r": 255,
+			"colour_banner_b": 255,
+			"colour_banner_g": 255,
 			"angle": 0
 		}
 	},

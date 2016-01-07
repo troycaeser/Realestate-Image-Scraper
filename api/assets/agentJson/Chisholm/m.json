@@ -1,1 +1,121 @@
-{"main":{"size":{"width":400,"height":300},"Banner":{"pos_x":0,"pos_y":0},"Logo":{"pos_x":202,"pos_y":5,"stamp_w":193,"stamp_y":24},"Bottom":{"pos_x":0,"pos_y":268},"Bed":{"pos_x":50,"pos_y":268,"t_pos_x":117,"t_pos_y":297},"Bath":{"pos_x":150,"pos_y":268,"t_pos_x":217,"t_pos_y":297},"Car":{"pos_x":250,"pos_y":268,"t_pos_x":317,"t_pos_y":297},"Text":{"font_size":20,"color_r":255,"color_g":255,"color_b":255}},"other":{"size":{"width":400,"height":269,"padding":70}},"special":false}
+{
+	"main": {
+		"size": {
+			"width": 400,
+			"height": 300
+		},
+		"Banner": {
+			"pos_x": 0,
+			"pos_y": 0,
+			"pos_x_jl": -25,
+			"pos_y_jl": -25,
+			"angle": 43.5,
+			"A": {
+				"top": {
+					"font_size": 22,
+					"t_pos_x": 18,
+					"t_pos_y": 126
+				},
+				"bottom": {
+					"Saturday": {
+						"3": {
+							"font_size": 21,
+							"t_pos_x": 30,
+							"t_pos_y": 149
+						},
+						"4": {
+							"font_size": 21,
+							"t_pos_x": 25,
+							"t_pos_y": 154
+						},
+						"6": {
+							"font_size": 20.5,
+							"t_pos_x": 13,
+							"t_pos_y": 159
+						},
+						"7": {
+							"font_size": 20.5,
+							"t_pos_x": 13,
+							"t_pos_y": 165
+						}
+					}
+				}
+			},
+			"J": {
+				"font_size": 24,
+				"top": {
+					"t_pos_x": 18,
+					"t_pos_y": 77
+				},
+				"bottom": {
+					"t_pos_x": 29,
+					"t_pos_y": 104
+				}
+			},
+			"S": {
+				"font_size": 20,
+				"angle": 45,
+				"pos_x": 0,
+				"pos_y": 0
+			}
+		},
+		"Logo": {
+			"pos_x": 202,
+			"pos_y": 5,
+			"stamp_w": 193,
+			"stamp_y": 24
+		},
+		"Bottom": {
+			"pos_x": 0,
+			"pos_y": 268
+		},
+		"Bed": {
+			"pos_x": 30,
+			"pos_y": 268,
+			"t_pos_x": 100,
+			"t_pos_y": 297,
+			"pos_x_2": 93,
+			"pos_y_2": 268,
+			"t_pos_x_2": 160,
+			"t_pos_y_2": 297
+		},
+		"Bath": {
+			"pos_x": 150,
+			"pos_y": 268,
+			"t_pos_x": 223,
+			"t_pos_y": 297,
+			"pos_x_2": 224,
+			"pos_y_2": 268,
+			"t_pos_x_2": 290,
+			"t_pos_y_2": 297
+		},
+		"Car": {
+			"pos_x": 270,
+			"pos_y": 268,
+			"t_pos_x": 357,
+			"t_pos_y": 297
+		},
+		"Text": {
+			"font_size": 23,
+			"colour_r": 255,
+			"colour_g": 255,
+			"colour_b": 255,
+			"colour_banner_r": 255,
+			"colour_banner_b": 255,
+			"colour_banner_g": 255,
+			"angle": 0
+		}
+	},
+	"other": {
+		"size": {
+			"width": 400,
+			"height": 269,
+			"padding": 70
+		},
+		"Logo":{
+			"pos_x": 202,
+			"pos_y": 240
+		}
+	},
+	"special": false
+}
