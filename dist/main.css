@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'Jellis';
+  src: url("http://localhost:3000/api/assets/agentAssets/Jellis/font.ttf") format("truetype"); }
+
 body {
-  background-color: #d5d8da; }
+  background-color: #d5d8da;
+  /*background-color: black;*/ }
 
 .searchContainer {
   text-align: center;
@@ -37,8 +42,8 @@ body {
   position: relative;
   display: block;
   clear: both;
-  width: 80px;
-  height: 60px;
+  width: 400px;
+  height: 300px;
   z-index: 1; }
   .adItemImageContainer .close {
     padding: 0;
