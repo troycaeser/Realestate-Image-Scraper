@@ -3,32 +3,35 @@
 	include_once ("makeTemplateDir.php");
 	include_once ("loadJsonObject.php");
 
-	function finaliseMainAdItem ($propertyInfo, $imgUrl) {
+	function finaliseMainAdItem ($propertyInfo, $jsonObject, $dest, $imgUrl) {
 		$templateDir = array();
 		$templateDirWeb = array();
 		makeTemplateDir ($propertyInfo, $templateDir, $templateDirWeb);
 
-		$jsonObject = get_json_object ($propertyInfo['agency_localDir']);
-
 		$mainImg = imagecreatefromjpeg ($imgUrl);
+		$mainImg2 = imagecreatefromjpeg ($imgUrl);
 		$no_features = 3;
 		if ($propertyInfo['no_car'] == "N/A")
 			$no_features = 2;
 
-		$no_features = 2;
-		allocateTemplates ($mainImg, $jsonObject, $templateDir, $no_features);
+		// $no_features = 2;
+		allocateTemplates ($mainImg, $jsonObject, $templateDir, "auction", $no_features);
+		allocateTemplates ($mainImg2, $jsonObject, $templateDir, "justlisted", $no_features);
 		fillText ($mainImg, $jsonObject, $propertyInfo, $templateDir, "auction", $no_features);
+		fillText ($mainImg2, $jsonObject, $propertyInfo, $templateDir, "justlisted", $no_features);
 
 		// $dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testDraw/";
-		$dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/";
 		
-		imagejpeg ($mainImg, $dest."img0.jpg", 100);
+		imagejpeg ($mainImg, $dest."0.jpg", 100);
+		imagejpeg ($mainImg2, $dest."00.jpg", 100);
+
 		imagedestroy ($mainImg);
+		imagedestroy ($mainImg2);
 
 		// allocateLogo (imgUrls, $jsonObject, $templateDir);
 	}
 
-	function allocateTemplates (&$mainImg, $jsonObject, $templateDir, $no_features) {
+	function allocateTemplates (&$mainImg, $jsonObject, $templateDir, $listingType, $no_features) {
 		$templateItems = array (
 			 "Bottom", "Bed", "Bath", "Car", "Banner", "Logo"
 		);
@@ -51,6 +54,13 @@
 				if ($itemName == "Bed" || $itemName == "Bath") {
 					$i_dst_x = $jsonObject['main'][$itemName]['pos_x_2'];
 					$i_dst_y = $jsonObject['main'][$itemName]['pos_y_2'];
+				}
+			}
+
+			if ($listingType == "justlisted") {
+				if ($itemName == "Banner") {
+					$i_dst_x = $jsonObject['main'][$itemName]['pos_x_jl'];
+					$i_dst_y = $jsonObject['main'][$itemName]['pos_y_jl'];
 				}
 			}
 
@@ -96,7 +106,7 @@
 
 			// bottom
 			$hourType = strlen ($propertyInfo['auction_hour']);
-			print_r ($propertyInfo);
+			// print_r ($propertyInfo);
 			$tmp = $bannerJson['A']['bottom'][$propertyInfo['auction_day']][$hourType];
 			$bottom_size = $tmp['font_size'];
 			$bottom_x = $tmp['t_pos_x'];
@@ -161,7 +171,7 @@
 		// $no_bath = $propertyInfo['no_bath'];
 	}
 
-	function allocateLogo ($imgUrls, $jsonObject, $templateDir) {
+	function allocateLogo ($imgUrls, $jsonObject, $dest, $templateDir, &$finalised) {
 		// imagecopy (dst_im, src_im, dst_x, dst_y, src_x, src_y, src_w, src_h)
 		// src = templateDir[logo]
 		// loop
@@ -176,19 +186,20 @@
 		$src_y = 0;
 		$src_w = imagesx ($srcImg);
 		$src_h = imagesy ($srcImg);
-		$dst_x = $jsonObject['main']['Logo']['pos_x'];
-		$dst_y = $jsonObject['main']['Logo']['pos_y'];
+		$dst_x = $jsonObject['other']['Logo']['pos_x'];
+		$dst_y = $jsonObject['other']['Logo']['pos_y'];
 
 		$no_imgs = count ($imgUrls);
 		// $dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
-		$dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testResize/";
 		
 		for ($i=1; $i<$no_imgs; $i++) {
 			$img_path = $imgUrls[$i];
 			$dstImg = imagecreatefromjpeg ($img_path);
-			echo "CALL";
 			imagecopy ($dstImg, $srcImg, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h);
 			imagejpeg ($dstImg, $dest.$i.".jpg", 100);
+
+			$finalised[$i+1] = "/api/assets/testFinal/".$i.".jpg";
+			imagedestroy ($dstImg);
 		}
 
 		imagedestroy ($srcImg);
