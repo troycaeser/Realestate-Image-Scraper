@@ -15,8 +15,8 @@
 			$no_features = 2;
 
 		// $no_features = 2;
-		allocateTemplates ($mainImg, $jsonObject, $templateDir, $no_features);
-		allocateTemplates ($mainImg2, $jsonObject, $templateDir, $no_features);
+		allocateTemplates ($mainImg, $jsonObject, $templateDir, "auction", $no_features);
+		allocateTemplates ($mainImg2, $jsonObject, $templateDir, "justlisted", $no_features);
 		fillText ($mainImg, $jsonObject, $propertyInfo, $templateDir, "auction", $no_features);
 		fillText ($mainImg2, $jsonObject, $propertyInfo, $templateDir, "justlisted", $no_features);
 
@@ -31,7 +31,7 @@
 		// allocateLogo (imgUrls, $jsonObject, $templateDir);
 	}
 
-	function allocateTemplates (&$mainImg, $jsonObject, $templateDir, $no_features) {
+	function allocateTemplates (&$mainImg, $jsonObject, $templateDir, $listingType, $no_features) {
 		$templateItems = array (
 			 "Bottom", "Bed", "Bath", "Car", "Banner", "Logo"
 		);
@@ -54,6 +54,13 @@
 				if ($itemName == "Bed" || $itemName == "Bath") {
 					$i_dst_x = $jsonObject['main'][$itemName]['pos_x_2'];
 					$i_dst_y = $jsonObject['main'][$itemName]['pos_y_2'];
+				}
+			}
+
+			if ($listingType == "justlisted") {
+				if ($itemName == "Banner") {
+					$i_dst_x = $jsonObject['main'][$itemName]['pos_x_jl'];
+					$i_dst_y = $jsonObject['main'][$itemName]['pos_y_jl'];
 				}
 			}
 
@@ -164,7 +171,7 @@
 		// $no_bath = $propertyInfo['no_bath'];
 	}
 
-	function allocateLogo ($imgUrls, $jsonObject, $dest, $templateDir) {
+	function allocateLogo ($imgUrls, $jsonObject, $dest, $templateDir, &$finalised) {
 		// imagecopy (dst_im, src_im, dst_x, dst_y, src_x, src_y, src_w, src_h)
 		// src = templateDir[logo]
 		// loop
@@ -179,8 +186,8 @@
 		$src_y = 0;
 		$src_w = imagesx ($srcImg);
 		$src_h = imagesy ($srcImg);
-		$dst_x = $jsonObject['main']['Logo']['pos_x'];
-		$dst_y = $jsonObject['main']['Logo']['pos_y'];
+		$dst_x = $jsonObject['other']['Logo']['pos_x'];
+		$dst_y = $jsonObject['other']['Logo']['pos_y'];
 
 		$no_imgs = count ($imgUrls);
 		// $dest = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/";
@@ -190,6 +197,9 @@
 			$dstImg = imagecreatefromjpeg ($img_path);
 			imagecopy ($dstImg, $srcImg, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h);
 			imagejpeg ($dstImg, $dest.$i.".jpg", 100);
+
+			$finalised[$i+1] = "/api/assets/testFinal/".$i.".jpg";
+			imagedestroy ($dstImg);
 		}
 
 		imagedestroy ($srcImg);

@@ -74,7 +74,9 @@
 		// $imgs = array();
 		// finaliseLinks ($url, $imgs);
 
-		$url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
+		// $url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
+		// $url = "http://www.realestate.com.au/property-house-vic-chadstone-121600894";
+		$url = "http://www.realestate.com.au/property-townhouse-vic-ascot+vale-121583178";
 
 		// get property info
 		$propertyInfo = array();
@@ -100,10 +102,20 @@
 		makeTemplateDir ($propertyInfo, $templateDir, $templateDirWeb);
 		
 		// put templates into imgs
+		$finalised = array();
+
 		$jsonObject = get_json_object ($propertyInfo['agency_localDir']);
 		$dest = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testFinal/";
+		$finalised[0] = "/api/assets/testFinal/"."0.jpg";
+		$finalised[1] = "/api/assets/testFinal/"."00.jpg";
+
 		finaliseMainAdItem ($propertyInfo, $jsonObject, $dest, $resizedUrls[0]);
-		allocateLogo ($resizedUrls, $jsonObject, $dest, $templateDir);
+		allocateLogo ($resizedUrls, $jsonObject, $dest, $templateDir, $finalised);
+
+		print_arr ($finalised);
+		foreach ($finalised as $oup) {
+			echo "<img src='".$oup."' />"."<br />"."<br />";
+		}
 	});
 	function print_arr ($arr) {
 		echo "<pre>";
