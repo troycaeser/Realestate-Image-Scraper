@@ -39,7 +39,18 @@ AdItemService.prototype.Crawl = function(){
                 myWallet: _this.myWallet
 			}
 			return data;
-		}
+		},
+        sendLinks: function(input){
+             _this.newlinks = input;
+            return _this.newLinks;
+        },
+        getLinks: function(){
+            var newlinks = _this.newlinks;
+            return newlinks;
+        },
+        sendFinal: function(data){
+            var promise = _this.$http.post('api/sendFinal', data);
+        }
 	};
 
 	return get;

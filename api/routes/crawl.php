@@ -5,7 +5,7 @@
 	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/resize.php");
 	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/finaliseMain.php");
 	// include_once("{$_SERVER['DOCUMENT_ROOT']}/myApp/api/functions/loadJsonObject.php");
-	
+
 	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/getHTMLContents.php");
 	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/linkProcessing.php");
 	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/makeTemplateDir.php");
@@ -49,9 +49,23 @@
 		echo json_encode($result);
 	});
 
+    $app->post('/sendFinal', function() use ($app){
+		$request = $app->request();
+		$body = $request->getBody();
+		$result = json_decode($body);
+        $propertyInfo = json_decode(json_encode($result->propertyInfo), true);
+        $imgs = $result->links;
+        print_arr($propertyInfo);
+
+		/*---------------------------------*/
+        $finalised = array();
+        createAd ($propertyInfo, $imgs, $finalised);
+        print_arr($finalised);
+    });
+
 	$app->get('/test', function() use ($app){
 		// phpinfo();
-		
+
 		// echo "<pre>";
 		// 	print_r ($propertyInfo);
 		// echo "</pre>";
@@ -59,7 +73,7 @@
 		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/";
 		// $imgUrl = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/main.jpg";
 		// $resizedUrl = "";
-		
+
 		// $jsonObject = get_json_object ($propertyInfo['agency_localDir']);
 		// resizeSingleMain ($imgUrl, $jsonObject, $resizedDir, $resizedUrl);
 
@@ -87,6 +101,8 @@
 		$propertyInfo = array();
 		getHTML ($url, $propertyInfo);
 
+        print_arr($propertyInfo);
+
 		// get img links
 		$imgs = array();
 		finaliseLinks ($url, $imgs);
@@ -111,7 +127,6 @@
 		$templateDir = array();
 		$templateDirWeb = array();
 		makeTemplateDir ($propertyInfo, $templateDir, $templateDirWeb);
-		
 		// put templates into imgs
 
 		$jsonObject = get_json_object ($propertyInfo['agency_localDir']);
