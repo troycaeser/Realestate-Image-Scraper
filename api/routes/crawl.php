@@ -31,6 +31,7 @@
 		$propertyInfo = array();
 		getHTML($url, $propertyInfo);
 
+		$mJsonObj = get_json_object($propertyInfo['agency_localDir']);
 
 		$templateDir = array();
 		$templateDirWeb = array();
@@ -40,7 +41,8 @@
 			'links' => $links,
 			'propertyInfo' => $propertyInfo,
 			'templateDir' => $templateDir,
-			'templateDirWeb' => $templateDirWeb
+			'templateDirWeb' => $templateDirWeb,
+			'myWallet' => $mJsonObj
 		);
 
 		header("Content-Type: application/json");

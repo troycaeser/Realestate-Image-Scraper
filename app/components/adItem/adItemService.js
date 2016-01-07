@@ -20,11 +20,13 @@ AdItemService.prototype.Crawl = function(){
 					_this.links = response.links;
 					_this.propertyInfo = response.propertyInfo;
 					_this.templateDirWeb = response.templateDirWeb;
+					_this.myWallet = response.myWallet;
 
 					deferred.resolve({
 						links: response.links,
 						propertyInfo: response.propertyInfo,
-						templateDirWeb: response.templateDirWeb
+						templateDirWeb: response.templateDirWeb,
+                        myWallet: response.myWallet
 					});
 				});
 			return deferred.promise;
@@ -33,7 +35,8 @@ AdItemService.prototype.Crawl = function(){
 			var data = {
 				links: _this.links,
 				propertyInfo: _this.propertyInfo,
-				templateDirWeb: _this.templateDirWeb
+				templateDirWeb: _this.templateDirWeb,
+                myWallet: _this.myWallet
 			}
 			return data;
 		}
