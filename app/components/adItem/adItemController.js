@@ -24,6 +24,7 @@ AdItemController.prototype.display = function(url){
 			});
 			//set the list of links through service if dragged
 			_this.adItemService.Crawl().sendLinks(logEntry);
+			console.info('Reordered list of image links:\n' + logEntry.join('\n'));
 		},
 		items: ".adItemRow:not(.not-sortable)"
 	}
@@ -46,6 +47,8 @@ AdItemController.prototype.display = function(url){
 
 		//send all values to backend
 		_this.adItemService.Crawl().sendFinal(data);
+		console.info('final data sent:\n');
+		console.info(data);
 	}
 }
 
