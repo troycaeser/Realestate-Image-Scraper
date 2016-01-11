@@ -11,7 +11,6 @@
 
 	function downloadSingle ($img, $id, $dir) {
 		$theImage = file_get_contents ($img);
-	//	echo $id;
 
 		$imgFile = fopen ($dir.$id.".jpg", 'wb');
 		fwrite ($imgFile, $theImage);

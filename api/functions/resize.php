@@ -6,26 +6,25 @@
 	}
 
 	function resizeSingleMain ($imgUrl, $jsonObject, $resizedDir, &$resizedUrl) {
-		/*
-		 * function takes url of 1 single image, resize, save and
-		 * load the resized url into the second parameter
-		 */
-
+		 /*
+		  *function takes url of 1 single image, resize, save and
+		  *load the resized url into the second parameter
+		  */
 
 		$width = $jsonObject['main']['size']['width'];
 		$height = $jsonObject['main']['size']['height'];
-		
+
 		$resizeObject = new resize ($imgUrl);
 		$resizeObject->resizeImage ($width, $height, 'exact', "main-resized");
 		$resizeObject->saveImage ($resizedDir."main-resized.jpg", 100);
-		
+
 		$resizedUrl = $resizedDir."main-resized.jpg";
 	}
 
 	function resizeSingleOther ($imgUrl, $jsonObject, $resizedDir, $id, &$resizedUrl) {
-		/*
-		 * similar to resizeSingleMain()
-		 */
+		 /*
+		  *similar to resizeSingleMain()
+		  */
 
 		$width = $jsonObject['other']['size']['width'];
 		$height = $jsonObject['other']['size']['height'];
@@ -33,7 +32,7 @@
 		$resizeObject = new resize ($imgUrl);
 		$resizeObject->resizeImage ($width, $height, 'exact', $id."-resized");
 		$resizeObject->saveImage ($resizedDir.$id."-resized.jpg", 100);
-		
+
 		$resizedUrl = $resizedDir.$id."-resized.jpg";
 	}
 
@@ -42,12 +41,12 @@
 		 * function takes an array of img urls, resize, save in the same dir and
 		 * load the resized urls into the second parameter
 		 * ----------
-		 * 
+
 		 * hardcode directories of json files
-		 * 
+
 		 * get json data from m.json
 		 * load the data into a new object
-		 * 
+
 		 * foreach image in imgUrls
 		 * - create a resizeObject
 		 * - get width/ height from json object (retrieved earlier)

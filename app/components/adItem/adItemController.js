@@ -1,12 +1,11 @@
 var AdItemController = function(adItemService){
-	// this.links = "this should be a bunch of links";
 	this.adItemService = adItemService;
-    this.test = true;
-    this.newLinks;
 };
 
 AdItemController.prototype.display = function(url){
 	var _this = this;
+
+	//get data from Service
 	_this.adItemService.Crawl().sendData(url)
 		.then(function(response){
 			_this.show = true;
@@ -17,52 +16,38 @@ AdItemController.prototype.display = function(url){
 			_this.carport = response.propertyInfo.no_car;
 		});
 
-    var logEntry;
+	//track ui.sortable object
 	_this.sortableOptions = {
-		//update: function(e, ui){
-			//var logEntry = _this.links.map(function(i){
-				//return i;
-			//}).join(',\n');
-			//console.log("Update: " + logEntry);
-		//},
 		stop: function(e, ui){
-			logEntry = _this.links.map(function(i){
+			var logEntry = _this.links.map(function(i){
 				return i;
 			});
-            _this.adItemService.Crawl().sendLinks(logEntry);
-			//console.log("Stop: \n" + logEntry);
+			//set the list of links through service if dragged
+			_this.adItemService.Crawl().sendLinks(logEntry);
 		},
-        items: ".adItemRow:not(.not-sortable)"
+		items: ".adItemRow:not(.not-sortable)"
 	}
 
-    _this.submit = function(){
-        var gotData = _this.adItemService.Crawl().getData();
-        var data = {
-            links: this.links,
-            propertyInfo: gotData.propertyInfo,
-            templateDirWeb: gotData.templateDirWeb,
-            myWallet: gotData.myWallet
-        }
+	//submit form
+	_this.submit = function(){
+		//get data and prepare them for new assignment
+		var gotData = _this.adItemService.Crawl().getData();
+		var data = {
+			links: this.links,
+			propertyInfo: gotData.propertyInfo,
+			templateDirWeb: gotData.templateDirWeb,
+			templateInfo: gotData.templateInfo
+		}
 
-        data.propertyInfo.no_bed = _this.bedRoom;
-        data.propertyInfo.no_bath = _this.bathRoom;
-        data.propertyInfo.no_car = _this.carport;
-        console.log(data);
-        _this.adItemService.Crawl().sendFinal(data);
-        //console.log(_this.adItemService.Crawl().getLinks());
-    }
-    
-    function set(links){
-        this.newLinks = links;
-    }
+		//assign new values for backend
+		data.propertyInfo.no_bed = _this.bedRoom;
+		data.propertyInfo.no_bath = _this.bathRoom;
+		data.propertyInfo.no_car = _this.carport;
+
+		//send all values to backend
+		_this.adItemService.Crawl().sendFinal(data);
+	}
 }
-
-//AdItemController.prototype.submit = function(){
-    //var _this = this;
-	//_this.adItemService.Crawl().sendData(url)
-    //_this.adItemService.Crawl().getData().propertyInfo.no_bed = this.bedRoom;
-    //console.log(adItemService.Crawl().getData());
-//}
 
 angular.module('app')
 	.controller('adItemController', ['adItemService', AdItemController]);

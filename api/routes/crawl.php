@@ -14,14 +14,11 @@
 	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/loadJsonObject.php");
 	include_once("{$_SERVER['DOCUMENT_ROOT']}/api/functions/downloadImgs.php");
 
-
-
 	$app->post('/crawl', function() use ($app){
 		//get parameter via json_decode()->name
 		$request = $app->request();
 		$body = $request->getBody();
 		$result = json_decode($body);
-		$site;
 
 		$url = $result->url;
 
@@ -42,33 +39,29 @@
 			'propertyInfo' => $propertyInfo,
 			'templateDir' => $templateDir,
 			'templateDirWeb' => $templateDirWeb,
-			'myWallet' => $mJsonObj
+			'templateInfo' => $mJsonObj
 		);
 
 		header("Content-Type: application/json");
 		echo json_encode($result);
 	});
 
-    $app->post('/sendFinal', function() use ($app){
+	$app->post('/sendFinal', function() use ($app){
 		$request = $app->request();
 		$body = $request->getBody();
 		$result = json_decode($body);
-        $propertyInfo = json_decode(json_encode($result->propertyInfo), true);
-        $imgs = $result->links;
-        print_arr($propertyInfo);
+		$propertyInfo = json_decode(json_encode($result->propertyInfo), true);
+		$imgs = $result->links;
+		print_arr($propertyInfo);
 
 		/*---------------------------------*/
-        $finalised = array();
-        createAd ($propertyInfo, $imgs, $finalised);
-        print_arr($finalised);
-    });
+		$finalised = array();
+		createAd ($propertyInfo, $imgs, $finalised);
+		print_arr($finalised);
+	});
 
 	$app->get('/test', function() use ($app){
 		// phpinfo();
-
-		// echo "<pre>";
-		// 	print_r ($propertyInfo);
-		// echo "</pre>";
 
 		// $resizedDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/";
 		// $imgUrl = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/testDraw/main.jpg";
@@ -80,9 +73,9 @@
 		// finaliseMainAdItem ($propertyInfo, $resizedUrl);
 
 		// $imgUrls = array (
-		// 	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/main-resized.jpg",
-		// 	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/1-resized.jpg",
-		// 	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/2-resized.jpg"
+		//	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/main-resized.jpg",
+		//	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/1-resized.jpg",
+		//	"{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/testResize/2-resized.jpg"
 		// );
 
 		// allocateLogo ($imgUrls, $jsonObject, $templateDir);
@@ -101,7 +94,7 @@
 		$propertyInfo = array();
 		getHTML ($url, $propertyInfo);
 
-        print_arr($propertyInfo);
+		print_arr($propertyInfo);
 
 		// get img links
 		$imgs = array();
