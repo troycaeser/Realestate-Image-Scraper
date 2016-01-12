@@ -1,3 +1,4 @@
+
 <?php
 	include_once 'resize-class.php';
 	include_once 'loadJsonObject.php';

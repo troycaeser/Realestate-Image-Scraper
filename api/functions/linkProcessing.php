@@ -1,3 +1,4 @@
+
 <?php
 	//need the link, the replacement, matches, the offset
 	function resizeLinks($links, $haystack, $needle){
