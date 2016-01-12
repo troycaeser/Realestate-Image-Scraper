@@ -1,4 +1,3 @@
-
 <?php
 	include_once ("getHTMLContents.php");
 	include_once ("makeTemplateDir.php");

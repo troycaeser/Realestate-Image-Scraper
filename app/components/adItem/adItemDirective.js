@@ -33,7 +33,7 @@ var AdItemDirective = function(adItemService){
 
 		var auctionHour = propertyInfo.auction_hour;
 		var auctionDay = propertyInfo.auction_day;
-		console.log(data);
+		//console.log(data);
 
 		//full array of values
 		_this.values = [];

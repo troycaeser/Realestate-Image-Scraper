@@ -1,4 +1,3 @@
-
 <?php
 	function auction($jsonFile, $photo_dir, $cacheJ){
 		$im = imagecreatefromjpeg($photo_dir);

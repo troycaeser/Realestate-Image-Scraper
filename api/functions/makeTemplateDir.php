@@ -1,4 +1,3 @@
-
 <?php
 	function makeTemplateDir ($propertyInfo, &$templateDir, &$templateDirWeb) {
 		// $propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
