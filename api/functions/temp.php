@@ -46,8 +46,6 @@
 		$angle = $mJson['main']['Text']['angle'];
 		$color = imagecolorallocate($im, $font_color_r, $font_color_g, $font_color_b);
 
-		// $color = imagecolorallocate($im,255,255,255);
-
 		if($string == "Banner"){
 			$font_size = $mJson['main'][$string]['A']['text']['font_size'];
 			$font_pos_x = $mJson['main'][$string]['A']['text']['t_pos_x'];

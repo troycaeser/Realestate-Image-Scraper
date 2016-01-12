@@ -1,5 +1,11 @@
 <div class="adItemImageContainer">
 	<button ng-click="remove()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-    <canvas width="400px" height="300px"></canvas>
+	<div class="adItemImages" ng-repeat="val in adItem.values">
+		<img ng-style="{{val.style}}" ng-if="val.src.length" class="{{val.class}}" ng-src="{{val.src}}">
+		<p ng-style="{{val.firstLine.style}}"
+		ng-if="val.firstLine.text.length">{{val.firstLine.text}}</p>
+		<p ng-style="{{val.secondLine.style}}" ng-if="val.secondLine.text.length">{{val.secondLine.text}}</p>
+		<p ng-style="{{val.text.style}}" ng-if="val.text.text.length">{{val.text.text}}</p>
+	</div>
 </div>

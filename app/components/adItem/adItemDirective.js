@@ -1,164 +1,231 @@
 var AdItemDirective = function(adItemService){
-	var myDirective = {
+	var adItemDirective = {
 		restrict: 'AE',
 		templateUrl: 'app/components/adItem/adItemDirective.html',
-        compile: function(){
-            return {
-                pre: postLink,
-                post: preLink
-            }
-        },
+		compile: function(){
+			return {
+				pre: preLink,
+				post: postLink
+			}
+		},
+		controller: Controls,
+		controllerAs: 'adItem',
 		//binds "out" with parent scope
 		//binds "model" with current scope
 		//binds "remove" as a method
 		scope:{
-			out: "@",
+			index: "@",
 			model: "=",
 			remove: "&",
-            logo: "@",
-            stuff: "="
 		}
 	};
 
-	return myDirective;
+	return adItemDirective;
 
-    function postLink(scope, elem, attrs){
-        var canvas = elem.find('canvas')[0];
-        var context = canvas.getContext('2d');
-        scope.$watch('logo', function(lies, truth, scope){
-            toggles(lies, truth);
-        }, false);
+	function Controls($scope, $element){
+		var _this = this;
+		var data = adItemService.Crawl().getData();
 
-        function toggles(lies, truth){
-            console.log(scope.out);
-            if(scope.out == 0){
-                var service = adItemService.Crawl().getData();
-                var image = new Image();
-                image.onload = function(){
-                    context.drawImage(image, 300, service.myWallet.main.Logo.pos_y);
-                }
+		var links = data.links;
+		var propertyInfo = data.propertyInfo;
+		var templateDirWeb = data.templateDirWeb;
+		var templateInfo = data.templateInfo;
 
-                context.save();
+		var auctionHour = propertyInfo.auction_hour;
+		var auctionDay = propertyInfo.auction_day;
+		//console.log(data);
 
-                if(lies == "true"){
-                    image.src = service.templateDirWeb.Logo;
-                    context.translate(-100, 0);
-                    context.restore();
-                }else if(truth == "true"){
-                    context.translate(100, 0);
-                }
-            }
-        }
-    }
+		//full array of values
+		_this.values = [];
+
+		//draw images
+		//_this.source = links[$scope.index];
+		_this.photo = {
+			"src": links[$scope.index],
+			"class": 'adItemPhotos'
+		};
+
+		//add in the sources
+		_this.values.push(_this.photo);
+
+		//add in templates
+		_this.banner = {
+			'src': templateDirWeb.Banner,
+			'class': 'adItemBanner'
+		};
+
+		_this.bottom = {
+			'src': templateDirWeb.Bottom,
+			'class': 'adItemBottom'
+		};
+
+		_this.logo = {
+			'src': templateDirWeb.Logo,
+			'class': 'adItemLogo',
+		};
+
+		_this.bed = {
+			'src': templateDirWeb.Bed,
+			'class': 'adItemBed',
+			'text': {
+				text: propertyInfo.no_bed
+			}
+		};
+
+		_this.bath = {
+			'src': templateDirWeb.Bath,
+			'class': 'adItemBath',
+			'text': {
+				text: propertyInfo.no_bath
+			}
+		};
+
+		_this.car = {
+			'src': templateDirWeb.Car,
+			'class': 'adItemCar',
+			'text': {
+				text: propertyInfo.no_car
+			}
+		};
+
+		_this.bannerText = {
+			'firstLine': {
+				text: 'Auction this'
+			},
+			'secondLine': {
+				text: propertyInfo.auction_day + " " + propertyInfo.auction_hour
+			}
+		};
+
+		//add in other elements
+		if($scope.index == 0){
+			//add in positioning
+			_this.bannerText.firstLine.style = {
+				'font-family': propertyInfo.agency_localDir,
+				'font-size': templateInfo.main.Banner.A.top.font_size + "pt",
+				'left': templateInfo.main.Banner.A.top.t_pos_x,
+				'top': templateInfo.main.Banner.A.top.t_pos_y,
+				'margin-left': -templateInfo.main.Banner.A.top.font_size,
+				'margin-top': -templateInfo.main.Banner.A.top.font_size,
+				'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				'webkit-transform-origin': 'left top',
+				'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+			};
+
+			_this.bannerText.secondLine.style = {
+				'font-family': propertyInfo.agency_localDir,
+				'font-size': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size + "pt",
+				'left': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_x,
+				'top': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_y,
+				'margin-left': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
+				'margin-top': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
+				'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				'webkit-transform-origin': 'left top',
+				'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+			};
+
+			_this.logo.style = {
+				'left': templateInfo.main.Logo.pos_x,
+				'top': templateInfo.main.Logo.pos_y,
+			};
+
+			_this.bed.style = {
+				'left': templateInfo.main.Bed.pos_x,
+				'top': templateInfo.main.Bed.pos_y
+			};
+
+			_this.bath.style = {
+				'left': templateInfo.main.Bath.pos_x,
+				'top': templateInfo.main.Bath.pos_y
+			};
+
+			_this.car.style = {
+				'left': templateInfo.main.Car.pos_x,
+				'top': templateInfo.main.Car.pos_y
+			};
+
+			//add in looped elements
+			_this.values.push(_this.banner);
+			_this.values.push(_this.bottom);
+			_this.values.push(_this.logo);
+			_this.values.push(_this.bannerText);
+			_this.values.push(_this.bed);
+			_this.values.push(_this.bath);
+
+			if(propertyInfo.no_car != "N/A"){
+				_this.bed.text.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Text.font_size + "pt",
+					'left': templateInfo.main.Bed.t_pos_x,
+					'top': templateInfo.main.Bed.t_pos_y - templateInfo.main.Text.font_size+"px",
+					'line-height': templateInfo.main.Text.font_size + "px",
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				};
+
+				_this.bath.text.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Text.font_size + "pt",
+					'left': templateInfo.main.Bath.t_pos_x,
+					'top': templateInfo.main.Bath.t_pos_y - templateInfo.main.Text.font_size+"px",
+					'line-height': templateInfo.main.Text.font_size + "px",
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				};
+
+				_this.car.text.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Text.font_size + "pt",
+					'left': templateInfo.main.Car.t_pos_x,
+					'top': templateInfo.main.Car.t_pos_y - templateInfo.main.Text.font_size+"px",
+					'line-height': templateInfo.main.Text.font_size + "px",
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				};
+				_this.values.push(_this.car);
+			}else if(propertyInfo.no_car == "N/A"){
+				_this.bed.text.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Text.font_size + "pt",
+					'left': templateInfo.main.Bed.t_pos_x_2,
+					'top': templateInfo.main.Bed.t_pos_y_2 - templateInfo.main.Text.font_size+"px",
+					'line-height': templateInfo.main.Text.font_size + "px",
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				};
+
+				_this.bath.text.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Text.font_size + "pt",
+					'left': templateInfo.main.Bath.t_pos_x_2,
+					'top': templateInfo.main.Bath.t_pos_y_2 - templateInfo.main.Text.font_size+"px",
+					'line-height': templateInfo.main.Text.font_size + "px",
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				};
+
+				_this.car.text.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Text.font_size + "pt",
+					'left': templateInfo.main.Car.t_pos_x_2,
+					'top': templateInfo.main.Car.t_pos_y_2 - templateInfo.main.Text.font_size+"px",
+					'line-height': templateInfo.main.Text.font_size + "px",
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+				};
+			}
+		}else{
+			//add in positioning
+			_this.logo.style = {
+				'left': templateInfo.other.Logo.pos_x,
+				'top': templateInfo.other.Logo.pos_y,
+			};
+
+			_this.values.push(_this.logo);
+		}
+	}
+
+	function postLink(scope, elem, attrs){
+		//postlinks functions here
+		elem.find('img.adItemLogo').css({'background-color': 'red'});
+	}
 
 	function preLink(scope, elem, attrs){
-        console.log(attrs);
-		//define controls
-		elem.find('canvas').bind('mouseenter', function(){
-			/*elem.find('canvas')jcss('opacity', '0.5');*/
-		});
-
-		elem.find('canvas').bind('mouseleave', function(){
-			elem.find('canvas').css('opacity', '1');
-		});
-
-		var canvas = elem.find('canvas')[0];
-		var context = canvas.getContext('2d');
-		//context.globalCompositeOperation = "source-over";
-
-		var service = adItemService.Crawl().getData();
-		console.log(service);
-
-		var files = [
-			service.links[scope.out],
-			//service.templateDirWeb.Logo
-		];
-
-		if(scope.out ==  0){
-			files.push(service.templateDirWeb.Banner);
-			files.push(service.templateDirWeb.Bottom);
-			files.push(service.templateDirWeb.Bed);
-			files.push(service.templateDirWeb.Bath);
-			files.push(service.templateDirWeb.Car);
-		}
-
-		var images = [];
-		var counter = 0;
-
-		for(var i = 0; i < files.length; i++){
-			var imageObj = new Image();
-			imageObj.src = files[i];
-			images.push(imageObj);
-			imageObj.onload = function(){
-				if(scope.out > 0){
-					drawCanvas(images[0], 0, 0, images[0].naturalWidth, images[0].naturalHeight);
-					//drawOther();
-				}else{
-					drawCanvas(images[0], 0, 0, images[0].naturalWidth, images[0].naturalHeight - 30);
-					drawMain();
-				}
-			};
-		}
-
-		function drawCanvas(image, x, y, w, h){
-			context.drawImage(image, x, y, w, h);
-		}
-
-		function drawMain(){
-			//drawCanvas(images[1], service.myWallet.main.Logo.pos_x, service.myWallet.main.Logo.pos_y, images[1].naturalWidth, images[1].naturalHeight);
-			drawCanvas(images[1], 0, 0, images[1].naturalWidth, images[1].naturalHeight);
-			drawCanvas(images[2], 0, 267, images[2].naturalWidth, images[2].naturalHeight + 2);
-			drawCanvas(images[3], service.myWallet.main.Bed.pos_x, service.myWallet.main.Bed.pos_y, images[3].naturalWidth, images[3].naturalHeight);
-			drawCanvas(images[4], service.myWallet.main.Bath.pos_x, service.myWallet.main.Bath.pos_y, images[4].naturalWidth, images[4].naturalHeight);
-			drawCanvas(images[5], service.myWallet.main.Car.pos_x, service.myWallet.main.Car.pos_y, images[5].naturalWidth, images[5].naturalHeight);
-			context.save();
-
-			var fontSize = service.myWallet.main.Text.font_size + "pt ";
-			var fonts = service.propertyInfo.agency_localDir;
-			context.font = fontSize + fonts;
-			context.textBaseline = 'alphabetic';
-			var text = service.myWallet.main.Text;
-			context.fillStyle = "rgb(" + text.colour_r + "," + text.colour_g + "," + text.colour_b + ")";
-			context.fillText(service.propertyInfo.no_bed, service.myWallet.main.Bed.t_pos_x, service.myWallet.main.Bed.t_pos_y);
-			context.fillText(service.propertyInfo.no_bath, service.myWallet.main.Bath.t_pos_x, service.myWallet.main.Bath.t_pos_y);
-			context.fillText(service.propertyInfo.no_car, service.myWallet.main.Car.t_pos_x, service.myWallet.main.Car.t_pos_y);
-			//context.translate(200, 150);
-			var x = service.myWallet.main.Banner.A.top.t_pos_x;
-			var y = service.myWallet.main.Banner.A.top.t_pos_y;
-			var t = Math.sqrt(x*x+y*y);
-			var a = Math.acos(y/t);
-			var b = 0.76 - a;
-			var resultX = -t*Math.cos(b);
-			var resultY = t*Math.sin(b);
-
-			context.translate(x, y);
-			context.rotate(-0.76);
-			context.translate(-x, -y);
-			context.fillStyle = "rgb(" + text.colour_banner_r + "," + text.colour_banner_g + "," + text.colour_banner_b + ")";
-			fontSize = service.myWallet.main.Banner.A.top.font_size + "pt ";
-			context.font = fontSize + fonts;
-			context.fillText("Auction this", x, y);
-			context.restore();
-			context.save();
-			context.fillStyle = "rgb(" + text.colour_banner_r + "," + text.colour_banner_g + "," + text.colour_banner_b + ")";
-
-			var hour = service.propertyInfo.auction_hour.length;
-			var text_x = service.myWallet.main.Banner.A.bottom.Saturday[hour].t_pos_x;
-			var text_y = service.myWallet.main.Banner.A.bottom.Saturday[hour].t_pos_y;
-
-			context.translate(text_x, text_y);
-			context.rotate(-0.76);
-			context.translate(-text_x, -text_y);
-			fontSize = service.myWallet.main.Banner.A.bottom.Saturday[hour].font_size + "pt ";
-			context.font = fontSize + fonts;
-			context.fillText(service.propertyInfo.auction_day + " " + service.propertyInfo.auction_hour, text_x, text_y);
-			context.restore();
-		}
-
-		function drawOther(){
-					drawCanvas(images[1], service.myWallet.other.Logo.pos_x, service.myWallet.other.Logo.pos_y + 31, images[1].naturalWidth, images[1].naturalHeight);
-		}
-	};
+	}
 };
 
 angular.module('app')

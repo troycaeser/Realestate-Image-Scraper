@@ -3,8 +3,8 @@
 		{
 			// *** Class variables
 			private $image;
-		    private $width;
-		    private $height;
+			private $width;
+			private $height;
 			private $imageResized;
 
 			function __construct($fileName)
@@ -12,9 +12,9 @@
 				// *** Open up the file
 				$this->image = $this->openImage($fileName);
 
-			    // *** Get width and height
-			    $this->width  = imagesx($this->image);
-			    $this->height = imagesy($this->image);
+				// *** Get width and height
+				$this->width  = imagesx($this->image);
+				$this->height = imagesy($this->image);
 			}
 
 			## --------------------------------------------------------
@@ -72,11 +72,11 @@
 			}
 
 			## --------------------------------------------------------
-			
+
 			private function getDimensions($newWidth, $newHeight, $option)
 			{
 
-			   switch ($option)
+				switch ($option)
 				{
 					case 'exact':
 						$optimalWidth = $newWidth;
@@ -190,7 +190,7 @@
 			}
 
 			## --------------------------------------------------------
-			
+
 			public function mainImageManipulate(
 									$logo,
 									$bottom,
@@ -236,8 +236,8 @@
 				// $bottom_x = imagesx($stamp_bottom);
 				$bottom_y = imagesy($stamp_bottom);
 
-				// Copy the stamp image onto our photo using the margin offsets and the photo 
-				// width to calculate positioning of the stamp. 
+				//Copy the stamp image onto our photo using the margin offsets and the photo
+				//width to calculate positioning of the stamp.
 				//add logo
 				imagecopy(
 					$im,
@@ -392,8 +392,8 @@
 			public function saveImage($savePath, $imageQuality="100")
 			{
 				// *** Get extension
-        		$extension = strrchr($savePath, '.');
-       			$extension = strtolower($extension);
+				$extension = strrchr($savePath, '.');
+				$extension = strtolower($extension);
 
 				switch($extension)
 				{
@@ -418,7 +418,7 @@
 						$invertScaleQuality = 9 - $scaleQuality;
 
 						if (imagetypes() & IMG_PNG) {
-							 imagepng($this->imageResized, $savePath, $invertScaleQuality);
+							imagepng($this->imageResized, $savePath, $invertScaleQuality);
 						}
 						break;
 

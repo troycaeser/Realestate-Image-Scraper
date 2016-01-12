@@ -3,9 +3,9 @@
 	function makeTemplateDir ($propertyInfo, &$templateDir, &$templateDirWeb) {
 		// $propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/assets/agentAssets/";
 		$propertyDir = "{$_SERVER['DOCUMENT_ROOT']}/api/assets/agentAssets/";
-		
+
 		//$propertyDir = "../assets/agentAssets/";
-		
+
 		$propertyDir .= $propertyInfo['agency_localDir'];
 		$propertyDir .= '/';
 
@@ -21,9 +21,9 @@
 		);
 
 		$propertyDir = "/api/assets/agentAssets/";
-		
+
 		//$propertyDir = "../assets/agentAssets/";
-		
+
 		$propertyDir .= $propertyInfo['agency_localDir'];
 		$propertyDir .= '/';
 
