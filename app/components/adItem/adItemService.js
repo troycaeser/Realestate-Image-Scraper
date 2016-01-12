@@ -1,3 +1,4 @@
+/* @ngInject */
 var AdItemService = function($http, $q){
 	this.$http = $http;
 	this.$q = $q;
@@ -58,4 +59,4 @@ AdItemService.prototype.Crawl = function(){
 }
 
 angular.module('app')
-	.service('adItemService', ['$http', '$q', AdItemService]);
+	.service('adItemService', AdItemService);

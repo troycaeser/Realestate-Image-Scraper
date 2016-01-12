@@ -1,3 +1,4 @@
+/* @ngInject */
 var AdItemDirective = function(adItemService){
 	var adItemDirective = {
 		restrict: 'AE',
@@ -22,6 +23,7 @@ var AdItemDirective = function(adItemService){
 
 	return adItemDirective;
 
+	/* @ngInject */
 	function Controls($scope, $element){
 		var _this = this;
 		var data = adItemService.Crawl().getData();
@@ -33,7 +35,7 @@ var AdItemDirective = function(adItemService){
 
 		var auctionHour = propertyInfo.auction_hour;
 		var auctionDay = propertyInfo.auction_day;
-		//console.log(data);
+		console.log(data);
 
 		//full array of values
 		_this.values = [];
@@ -229,4 +231,4 @@ var AdItemDirective = function(adItemService){
 };
 
 angular.module('app')
-	.directive('adItem', ['adItemService', AdItemDirective]);
+	.directive('adItem', AdItemDirective);

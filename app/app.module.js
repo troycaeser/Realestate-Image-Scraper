@@ -1,6 +1,7 @@
-var app = angular.module('app', ['angular-loading-bar', 'ui.router', 'ui.bootstrap', 'ui.sortable']);
+/* @ngInject */
+angular.module('app', ['angular-loading-bar', 'ui.router', 'ui.bootstrap', 'ui.sortable']);
 
-app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
+angular.module('app').config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/adItem');
 
 	$stateProvider

@@ -1,3 +1,4 @@
+/* @ngInject */
 var AdItemController = function(adItemService){
 	this.adItemService = adItemService;
 };
@@ -53,4 +54,4 @@ AdItemController.prototype.display = function(url){
 }
 
 angular.module('app')
-	.controller('adItemController', ['adItemService', AdItemController]);
+	.controller('adItemController', AdItemController);

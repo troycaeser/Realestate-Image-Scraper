@@ -26,6 +26,8 @@
 		$auction_day = get_day ($auction_date);
 		$auction_hour = get_auction_hour ($m_html);
 		$auction_inspect_hour = get_auction_inspect_hour ($m_html);
+		$auction_string = get_auction_string ($auction_date, $auction_hour, $auction_inspect_hour);
+		$justlisted_string = get_justlisted_string ($inspect_time);
 
 		$arr = array (
 			'url' => $m_url,
@@ -46,7 +48,9 @@
 			'auction_date' => $auction_date,
 			'auction_day' => $auction_day,
 			'auction_hour' => $auction_hour,
-			'auction_inspect_hour' => $auction_inspect_hour
+			'auction_inspect_hour' => $auction_inspect_hour,
+			'auction_string' => $auction_string,
+			'justlisted_string' => $justlisted_string
 		);
 
 		//print_r ($arr);
@@ -267,6 +271,65 @@
 		}
 
 		return $auction_inspect_hour;
+	}
+
+	function get_auction_string ($date, $hour, $inspect_hour) {
+		if ($date == "N/A")
+			return "N/A";
+
+		$IV = "Auction this ";
+		$IV .= $date;
+		$IV .= " ";
+		$IV .= $hour;
+		$IV .= " (";
+		$IV .= "inspect from ";
+		$IV .= $inspect_hour;
+		$IV .= ").";
+
+		return $IV;
+	}
+
+	function get_justlisted_string ($time) {
+		if (empty ($time))
+			return "N/A";
+
+		$IV = "Inspect this ";
+		$no_ins = count ($time);
+
+		$is_sat = false;
+		if ($no_ins > 1) {
+			$i=0;
+			
+			while ($i<$no_ins AND !stristr ($time[$i]['inspect_date'], "Sat")) {
+				if (stristr ($time[$i]['inspect_date'], "Sat"))
+					$is_sat = true;
+				$i++;
+			}
+			if ($is_sat == true) {	
+				$IV .= $time[$i]['inspect_date'];
+				$IV .= " ";
+				$IV .= $time[$i]['inspect_hour'];
+
+				if ($i+1 < $no_ins) {
+				$i++;
+					if (!stristr ($time[$i]['inspect_date'], "Sat")) {
+						$IV .= ", ";
+						$IV .= $time[$i]['inspect_date'];
+						$IV .= " ";
+						$IV .= $time[$i]['inspect_hour'];
+					}
+				}
+			}
+		}
+		if ($no_ins == 1 || $is_sat == false) {
+			$IV .= $time[0]['inspect_date'];
+			$IV .= " ";
+			$IV .= $time[0]['inspect_hour'];
+		}
+
+		$IV .= ".";
+
+		return $IV;
 	}
 
 	function day_of_the_week ($day) {
