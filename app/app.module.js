@@ -1,6 +1,6 @@
 /* @ngInject */
-angular.module('dropzone', []);
-angular.module('adItem', []);
+angular.module('fileUpload', []);
+angular.module('adItem', ['fileUpload']);
 angular.module('app', ['angular-loading-bar', 'ui.router', 'ui.bootstrap', 'ui.sortable', 'adItem']);
 
 angular.module('app').config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
