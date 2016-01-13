@@ -16,14 +16,13 @@
 			</div>
 		</div>
 
-		<div ng-controller="fileUploadController as fileCtrl">
-			<div class="well">
-				<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig"  dropzone-directive=id="dropzone">
+		<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
+			<div ng-controller="fileUploadController as fileCtrl">
+				<div class="well">
+					<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig"  dropzone-directive=id="dropzone">
+					</div>
 				</div>
 			</div>
-		</div>
-
-		<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
 			<form ng-submit="adItemCtrl.submit()">
 				<input type="text" class="form-control" name="address"
 				value="{{adItemCtrl.address}}">
