@@ -58,5 +58,5 @@ AdItemService.prototype.Crawl = function(){
 	return crawl;
 }
 
-angular.module('app')
+angular.module('adItem')
 	.service('adItemService', AdItemService);

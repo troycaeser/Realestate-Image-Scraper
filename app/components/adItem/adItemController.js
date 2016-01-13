@@ -53,5 +53,5 @@ AdItemController.prototype.display = function(url){
 	}
 }
 
-angular.module('app')
+angular.module('adItem')
 	.controller('adItemController', AdItemController);

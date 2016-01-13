@@ -10,7 +10,8 @@
 
 		<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage col-md-8">
 			<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
-				<div model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item>
+				<div model="src" remove="adItemCtrl.links.splice($index, 1)"
+					index="{{$index}}" ad-item-directive>
 				</div>
 			</div>
 		</div>

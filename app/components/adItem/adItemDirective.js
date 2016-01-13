@@ -230,5 +230,5 @@ var AdItemDirective = function(adItemService){
 	}
 };
 
-angular.module('app')
-	.directive('adItem', AdItemDirective);
+angular.module('adItem')
+	.directive('adItemDirective', AdItemDirective);
