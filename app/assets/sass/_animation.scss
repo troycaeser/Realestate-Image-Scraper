@@ -1,0 +1,27 @@
+.adItemRow {
+	box-sizing:border-box;
+}
+
+.adItemRow.ng-move,
+.adItemRow.ng-enter {
+	/*transition:all linear 0.5s;*/
+	animation: fadeIn .2s ease-in;
+}
+
+.adItemRow.ng-leave {
+	animation: slideOutLeft .2s;
+	transition: max-height .2s ease-out, opacity .2s ease-out;
+} 
+
+.adItemRow.ng-leave.ng-leave-active,
+.adItemRow.ng-enter {
+	opacity: 0;
+	max-height: 0px;
+}
+
+.adItemRow.ng-leave,
+.adItemRow.ng-move.ng-move-active,
+.adItemRow.ng-enter.ng-enter-active {
+	opacity:1;
+	max-height:300px;
+}

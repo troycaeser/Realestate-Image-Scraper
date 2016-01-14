@@ -1,16 +1,18 @@
 /* @ngInject */
 angular.module('fileUpload', []);
-angular.module('adItem', ['fileUpload']);
-angular.module('app', ['angular-loading-bar', 'ui.router', 'ui.bootstrap', 'ui.sortable', 'adItem']);
+angular.module('adItem', [
+	'fileUpload',
+	'ngAnimate'
+]);
 
-angular.module('app').config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
-	$urlRouterProvider.otherwise('/adItem');
+angular.module('core', [
+	'angular-loading-bar',
+	'ui.router',
+	'ui.bootstrap',
+	'ui.sortable'
+]);
 
-	$stateProvider
-		.state('adItem', {
-			url: '/adItem',
-			templateUrl : 'app/components/adItem/adItem.html',
-			controller: 'adItemController',
-			controllerAs: 'adItemCtrl'
-		});
-}]);
+angular.module('app', [
+	'core',
+	'adItem'
+]);
