@@ -2,14 +2,20 @@
 angular.module('fileUpload', []);
 angular.module('adItem', [
 	'fileUpload',
-	'ngAnimate'
 ]);
 
+/* @ngInject */
+angular.module('loading-bar', ['angular-loading-bar'])
+.config(function(cfpLoadingBarProvider){
+	cfpLoadingBarProvider.includeSpinner = false;
+});
+
 angular.module('core', [
-	'angular-loading-bar',
+	'loading-bar',
 	'ui.router',
 	'ui.bootstrap',
-	'ui.sortable'
+	'ui.sortable',
+	'ngAnimate'
 ]);
 
 angular.module('app', [
