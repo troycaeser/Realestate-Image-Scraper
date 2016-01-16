@@ -3,35 +3,38 @@
 	<div class="searchContainer">
 		<form ng-submit="adItemCtrl.display(url)">
 			<input type="text" ng-model="url">
-			<button ng-click="adItemCtrl.display(url)">Crawl</button>
+			<!--<button ng-click="adItemCtrl.display(url)">Crawl</button>-->
 		</form>
 	</div>
 	<div class="adItemContainer container">
 
-		<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage col-md-8">
-			<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
-				<div model="src" remove="adItemCtrl.links.splice($index, 1)"
-					index="{{$index}}" ad-item-directive>
-				</div>
-			</div>
-		</div>
-
-		<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
-			<div ng-controller="fileUploadController as fileCtrl">
-				<div class="well">
-					<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig"  dropzone-directive=id="dropzone">
+		<uib-tabset>
+			<uib-tab ng-repeat="tab in adItemCtrl.listingType" heading="{{tab.title}}">
+				<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage col-md-8">
+					<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
+						<div model="src" remove="adItemCtrl.links.splice($index,
+						1)" index="{{$index}}" listing="tab" ad-item-directive>
+						</div>
 					</div>
 				</div>
-			</div>
-			<form ng-submit="adItemCtrl.submit()">
-				<input type="text" class="form-control" name="address"
-				value="{{adItemCtrl.address}}">
-				<input type="text" ng-model="adItemCtrl.bedRoom" class="form-control" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
-				<input type="text" ng-model="adItemCtrl.bathRoom" class="form-control" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
-				<input type="text" ng-model="adItemCtrl.carport" class="form-control" name="carport" value="{{adItemCtrl.carport}}">
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
-		</div>
+
+				<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
+					<div ng-controller="fileUploadController as fileCtrl">
+						<div class="well">
+							<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig"  dropzone-directive="dropzone">
+							</div>
+						</div>
+					</div>
+					<form ng-submit="adItemCtrl.submit()">
+						<input type="text" class="form-control" name="address"
+						value="{{adItemCtrl.address}}">
+						<input type="text" ng-model="adItemCtrl.bedRoom" class="form-control" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
+						<input type="text" ng-model="adItemCtrl.bathRoom" class="form-control" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
+						<input type="text" ng-model="adItemCtrl.carport" class="form-control" name="carport" value="{{adItemCtrl.carport}}">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</uib-tab>
+		</uib-tabset>
 	</div>
 </div>

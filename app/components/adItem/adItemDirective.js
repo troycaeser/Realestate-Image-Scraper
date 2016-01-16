@@ -15,6 +15,7 @@ var AdItemDirective = function(adItemService){
 		//binds "model" with current scope
 		//binds "remove" as a method
 		scope:{
+			listing: "=",
 			index: "@",
 			model: "=",
 			remove: "&",
@@ -90,41 +91,91 @@ var AdItemDirective = function(adItemService){
 			}
 		};
 
-		_this.bannerText = {
-			'firstLine': {
-				text: 'Auction this'
-			},
-			'secondLine': {
-				text: propertyInfo.auction_day + " " + propertyInfo.auction_hour
-			}
-		};
+		//_this.bannerText = {
+			//'firstLine': {
+				//text: $scope.listing.firstLine
+			//},
+			//'secondLine': {
+				//text: $scope.listing.secondLine
+			//}
+		//}
+
+		if($scope.listing.code == 'AC'){
+			_this.bannerText = {
+				'firstLine': {
+					text: 'Auction this'
+				},
+				'secondLine': {
+					text: propertyInfo.auction_day + " " + propertyInfo.auction_hour
+				}
+			};
+		}else{
+			_this.bannerText = {
+				'firstLine': {
+					text: 'JUST'
+				},
+				'secondLine': {
+					text: 'LISTED'
+				}
+			};
+		}
 
 		//add in other elements
 		if($scope.index == 0){
-			//add in positioning
-			_this.bannerText.firstLine.style = {
-				'font-family': propertyInfo.agency_localDir,
-				'font-size': templateInfo.main.Banner.A.top.font_size + "pt",
-				'left': templateInfo.main.Banner.A.top.t_pos_x,
-				'top': templateInfo.main.Banner.A.top.t_pos_y,
-				'margin-left': -templateInfo.main.Banner.A.top.font_size,
-				'margin-top': -templateInfo.main.Banner.A.top.font_size,
-				'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
-				'webkit-transform-origin': 'left top',
-				'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
-			};
+			if($scope.listing.code == 'AC'){
+				//add in positioning
+				_this.bannerText.firstLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.A.top.font_size + "pt",
+					'left': templateInfo.main.Banner.A.top.t_pos_x,
+					'top': templateInfo.main.Banner.A.top.t_pos_y,
+					'margin-left': -templateInfo.main.Banner.A.top.font_size,
+					'margin-top': -templateInfo.main.Banner.A.top.font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
 
-			_this.bannerText.secondLine.style = {
-				'font-family': propertyInfo.agency_localDir,
-				'font-size': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size + "pt",
-				'left': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_x,
-				'top': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_y,
-				'margin-left': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
-				'margin-top': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
-				'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
-				'webkit-transform-origin': 'left top',
-				'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
-			};
+				_this.bannerText.secondLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size + "pt",
+					'left': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_x,
+					'top': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_y,
+					'margin-left': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
+					'margin-top': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+			}else{
+				_this.banner.style = {
+					'left': templateInfo.main.Banner.pos_x_jl,
+					'top': templateInfo.main.Banner.pos_y_jl
+				};
+				_this.bannerText.firstLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.J.font_size + "pt",
+					'left': templateInfo.main.Banner.J.top.t_pos_x,
+					'top': templateInfo.main.Banner.J.top.t_pos_y,
+					'margin-left': -templateInfo.main.Banner.J.font_size,
+					'margin-top': -templateInfo.main.Banner.J.font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+
+				_this.bannerText.secondLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.J.font_size + "pt",
+					'left': templateInfo.main.Banner.J.bottom.t_pos_x,
+					'top': templateInfo.main.Banner.J.bottom.t_pos_y,
+					'margin-left': -templateInfo.main.Banner.J.font_size,
+					'margin-top': -templateInfo.main.Banner.J.font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+			}
 
 			_this.logo.style = {
 				'left': templateInfo.main.Logo.pos_x,
@@ -223,7 +274,7 @@ var AdItemDirective = function(adItemService){
 
 	function postLink(scope, elem, attrs){
 		//postlinks functions here
-		elem.find('img.adItemLogo').css({'background-color': 'red'});
+		//elem.find('img.adItemLogo').css({'background-color': 'red'});
 	}
 
 	function preLink(scope, elem, attrs){

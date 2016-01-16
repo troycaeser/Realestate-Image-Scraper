@@ -6,6 +6,20 @@ var AdItemController = function(adItemService){
 AdItemController.prototype.display = function(url){
 	var _this = this;
 
+	_this.listingType = [
+		{
+			code: 'JL',
+			title: 'Just Listed',
+			firstLine: 'JUST',
+			secondLine: 'LISTED'
+		},
+		{
+			code: 'AC',
+			title: 'Auction',
+			firstLine: 'Auction this'
+		}
+	];
+
 	//get data from Service
 	_this.adItemService.Crawl().sendData(url)
 		.then(function(response){
@@ -16,6 +30,7 @@ AdItemController.prototype.display = function(url){
 			_this.bathRoom = response.propertyInfo.no_bath;
 			_this.carport = response.propertyInfo.no_car;
 		});
+	console.log('first time send for Crawl');
 
 	//track ui.sortable object
 	_this.sortableOptions = {
