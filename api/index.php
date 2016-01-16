@@ -1,5 +1,8 @@
 <?php
 	require 'vendor/autoload.php';
+	require 'config/database.php';
+	
+	use Illuminate\Database\Capsule\Manager as Capsule;
 
 	$app = new \Slim\Slim(array(
 		'mode' => 'development'
@@ -35,6 +38,10 @@
 
 		return $dbh;
 	}
+
+	$app->get('/eloquent', function() {
+		print_r (Agency::first()->toArray());
+	});
 
 /*
 	include "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/getHTMLContents.php";

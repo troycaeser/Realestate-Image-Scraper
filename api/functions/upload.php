@@ -4,6 +4,7 @@ $ds = DIRECTORY_SEPARATOR;
 		$tempFile = $_FILES['file']['tmp_name'];
 		$targetPath = '{$_SERVER['DOCUMENT_ROOT']}/api/assets/testUpload/';
 		$targetFile = $targetPath.$_FILES['file']['name'];
+		// $targetFile = "priority number"
 		move_uploaded_file ($tempFile, $targetFile);
 	}
 ?>
