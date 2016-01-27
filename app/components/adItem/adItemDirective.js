@@ -15,7 +15,7 @@ var AdItemDirective = function(adItemService){
 		//binds "model" with current scope
 		//binds "remove" as a method
 		scope:{
-			listing: "=",
+			listingType: "=",
 			index: "@",
 			model: "=",
 			remove: "&",
@@ -36,20 +36,39 @@ var AdItemDirective = function(adItemService){
 
 		var auctionHour = propertyInfo.auction_hour;
 		var auctionDay = propertyInfo.auction_day;
-		console.log(data);
+		//console.log(data);
 
 		//full array of values
 		_this.values = [];
+		_this.photo = {};
 
 		//draw images
 		//_this.source = links[$scope.index];
-		_this.photo = {
-			"src": links[$scope.index],
-			"class": 'adItemPhotos'
-		};
+		if(typeof links[$scope.index] === "string"){
+			_this.photo = {
+				"src": links[$scope.index],
+				"class": 'adItemPhotos'
+			};
+			console.log(_this.photo);
+			_this.values.push(_this.photo);
+		}else{
+			var file = links[$scope.index];
+			//need to convert file into dataurl
+			reader = new FileReader();
+			reader.onload = function(){
+				$scope.$apply(function(){
+					_this.photo = {
+						"src": reader.result,
+						"class": 'adItemPhotos'
+					};
+					_this.values.push(_this.photo);
+				});
+			}
+
+			reader.readAsDataURL(file);
+		}
 
 		//add in the sources
-		_this.values.push(_this.photo);
 
 		//add in templates
 		_this.banner = {
@@ -100,7 +119,7 @@ var AdItemDirective = function(adItemService){
 			//}
 		//}
 
-		if($scope.listing.code == 'AC'){
+		if($scope.listingType.code == 'AC'){
 			_this.bannerText = {
 				'firstLine': {
 					text: 'Auction this'
@@ -122,7 +141,7 @@ var AdItemDirective = function(adItemService){
 
 		//add in other elements
 		if($scope.index == 0){
-			if($scope.listing.code == 'AC'){
+			if($scope.listingType.code == 'AC'){
 				//add in positioning
 				_this.bannerText.firstLine.style = {
 					'font-family': propertyInfo.agency_localDir,
@@ -212,7 +231,7 @@ var AdItemDirective = function(adItemService){
 					'left': templateInfo.main.Bed.t_pos_x,
 					'top': templateInfo.main.Bed.t_pos_y - templateInfo.main.Text.font_size+"px",
 					'line-height': templateInfo.main.Text.font_size + "px",
-					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 
 				_this.bath.text.style = {
@@ -221,7 +240,7 @@ var AdItemDirective = function(adItemService){
 					'left': templateInfo.main.Bath.t_pos_x,
 					'top': templateInfo.main.Bath.t_pos_y - templateInfo.main.Text.font_size+"px",
 					'line-height': templateInfo.main.Text.font_size + "px",
-					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 
 				_this.car.text.style = {
@@ -230,7 +249,7 @@ var AdItemDirective = function(adItemService){
 					'left': templateInfo.main.Car.t_pos_x,
 					'top': templateInfo.main.Car.t_pos_y - templateInfo.main.Text.font_size+"px",
 					'line-height': templateInfo.main.Text.font_size + "px",
-					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 				_this.values.push(_this.car);
 			}else if(propertyInfo.no_car == "N/A"){
@@ -240,7 +259,7 @@ var AdItemDirective = function(adItemService){
 					'left': templateInfo.main.Bed.t_pos_x_2,
 					'top': templateInfo.main.Bed.t_pos_y_2 - templateInfo.main.Text.font_size+"px",
 					'line-height': templateInfo.main.Text.font_size + "px",
-					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 
 				_this.bath.text.style = {
@@ -249,7 +268,7 @@ var AdItemDirective = function(adItemService){
 					'left': templateInfo.main.Bath.t_pos_x_2,
 					'top': templateInfo.main.Bath.t_pos_y_2 - templateInfo.main.Text.font_size+"px",
 					'line-height': templateInfo.main.Text.font_size + "px",
-					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 
 				_this.car.text.style = {
@@ -258,7 +277,7 @@ var AdItemDirective = function(adItemService){
 					'left': templateInfo.main.Car.t_pos_x_2,
 					'top': templateInfo.main.Car.t_pos_y_2 - templateInfo.main.Text.font_size+"px",
 					'line-height': templateInfo.main.Text.font_size + "px",
-					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 			}
 		}else{

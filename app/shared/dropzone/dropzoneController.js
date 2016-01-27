@@ -1,5 +1,5 @@
 /* @ngInject */
-var FileUploadController = function(){
+var FileUploadController = function(adItemService){
 	_this = this;
 
 	_this.dropzoneConfig = {
@@ -12,8 +12,13 @@ var FileUploadController = function(){
 			autoProcessQueue: false
 		},
 		'eventHandlers': {
+			//listen if dropzone has something dropped in
+			'addedfile': function(file){
+				adItemService.Crawl().addLinks(file);
+			},
 			'sending': function(file, xhr, formData){
 				//sending code here
+				console.log('sending?');
 			},
 			'success': function(file, response){
 				//success code here
@@ -21,7 +26,7 @@ var FileUploadController = function(){
 			}
 		}
 	};
-	
+
 };
 //var eventHandlers = {
 	//'addedFile': function(file){

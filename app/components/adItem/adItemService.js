@@ -1,7 +1,8 @@
 /* @ngInject */
-var AdItemService = function($http, $q){
+var AdItemService = function($http, $q, $rootScope){
 	this.$http = $http;
 	this.$q = $q;
+	this.$rootScope = $rootScope;
 };
 
 AdItemService.prototype.Crawl = function(){
@@ -22,6 +23,7 @@ AdItemService.prototype.Crawl = function(){
 					_this.propertyInfo = response.propertyInfo;
 					_this.templateDirWeb = response.templateDirWeb;
 					_this.templateInfo = response.templateInfo;
+                    console.log(response);
 
 					//defer returned values
 					deferred.resolve({
@@ -46,6 +48,13 @@ AdItemService.prototype.Crawl = function(){
 		sendLinks: function(input){
 			_this.newlinks = input;
 			return _this.newLinks;
+		},
+		addLinks: function(input){
+			_this.newlinks.push(input);
+			console.log('added: ' + input.name + "into list");
+			_this.$rootScope.$broadcast('dropzoned');
+            //console.log(_this.newlinks);
+			return _this.newlinks;
 		},
 		getLinks: function(){
 			var newlinks = _this.newlinks;

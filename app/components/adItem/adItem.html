@@ -8,12 +8,12 @@
 	</div>
 	<div class="adItemContainer container">
 
-		<uib-tabset>
-			<uib-tab ng-repeat="tab in adItemCtrl.listingType" heading="{{tab.title}}">
+		<!--<uib-tabset>
+			<uib-tab ng-repeat="tab in adItemCtrl.listingType" heading="{{tab.title}}">-->
 				<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage col-md-8">
 					<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
-						<div model="src" remove="adItemCtrl.links.splice($index,
-						1)" index="{{$index}}" listing="tab" ad-item-directive>
+						<div listing-type="adItemCtrl.listingType" model="src" remove="adItemCtrl.links.splice($index,
+						1)" index="{{$index}}" ad-item-directive>
 						</div>
 					</div>
 				</div>
@@ -21,7 +21,7 @@
 				<div ng-show="adItemCtrl.show" class="col-md-4 adItemInputs">
 					<div ng-controller="fileUploadController as fileCtrl">
 						<div class="well">
-							<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig"  dropzone-directive="dropzone">
+							<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig" dropzone-directive="dropzone">
 							</div>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
-			</uib-tab>
-		</uib-tabset>
+			<!--</uib-tab>
+		</uib-tabset>-->
 	</div>
 </div>

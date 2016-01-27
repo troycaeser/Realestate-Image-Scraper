@@ -26,13 +26,13 @@ var Dropzone = function(){
 			dropzone.on(event, handler);
 		});
 
-		scope.processDropzone = function() {
+		/*scope.processDropzone = function() {
 			dropzone.processQueue();
 		};
 
 		scope.resetDropzone = function() {
 			dropzone.removeAllFiles();
-		}
+		}*/
 	};
 };
 
