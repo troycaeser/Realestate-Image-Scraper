@@ -1,8 +1,0 @@
-{
-    "require": {
-        "slim/slim": "^2.6"
-    },
-    "autoload": {
-    	"classmap": ["api/models"]
-    }
-}
