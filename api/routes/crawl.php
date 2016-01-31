@@ -86,8 +86,8 @@
 		// $url = "http://www.realestate.com.au/property-house-vic-mount+waverley-121481678";
 		// $url = "http://www.realestate.com.au/property-house-vic-chadstone-121600894";
 		 //$url = "http://www.realestate.com.au/property-townhouse-vic-ascot+vale-121583178";
-		//$url = "http://www.realestate.com.au/property-townhouse-vic-safety+beach-121600318";
-		$url = "http://www.realestate.com.au/property-house-vic-elwood-121627862";
+		$url = "http://www.realestate.com.au/property-townhouse-vic-safety+beach-121600318";
+		// $url = "http://www.realestate.com.au/property-house-vic-elwood-121627862";
 		// $url = "http://www.realestate.com.au/property-other-vic-safety+beach-7794642";
 		//$url = "http://www.realestate.com.au/property-house-vic-sorrento-121574710";
 
@@ -97,13 +97,13 @@
 
 		print_arr($propertyInfo);
 
-		// get img links
-		$imgs = array();
-		finaliseLinks ($url, $imgs);
+		// // get img links
+		// $imgs = array();
+		// finaliseLinks ($url, $imgs);
 
-		/*---------------------------------*/
-		$finalised = array();
-		createAd ($propertyInfo, $imgs, $finalised);
+		// /*---------------------------------*/
+		// $finalised = array();
+		// createAd ($propertyInfo, $imgs, $finalised);
 	});
 
 	function createAd ($propertyInfo, $imgs, &$finalised) {

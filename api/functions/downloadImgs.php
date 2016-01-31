@@ -4,6 +4,8 @@
 		foreach ($imgs as $img) {
 			downloadSingle ($img, $id, $dir);
 
+			
+			
 			$imgUrls[$id] = $dir.$id.".jpg";
 			$id ++;
 		}

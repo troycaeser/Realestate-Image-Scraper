@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Agency' => $baseDir . '/models/agency.php',
+    'Agency' => $baseDir . '/api/models/agency.php',
 );

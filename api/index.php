@@ -1,9 +1,6 @@
 <?php
 	require 'vendor/autoload.php';
-	require 'config/database.php';
 	
-	use Illuminate\Database\Capsule\Manager as Capsule;
-
 	$app = new \Slim\Slim(array(
 		'mode' => 'development'
 	));
@@ -18,16 +15,6 @@
 		echo 'You have reached the API home route for Linkubi MMS App';
 	});
 
-	$app->get('/agency', function(){
-		$dbh = getConnection();
-
-		$sql = "SELECT * FROM agency";
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
-		$rows = $stmt->fetchALL(PDO::FETCH_OBJ);
-
-		echo json_encode($rows);
-	});
 
 	function getConnection(){
 		$hostname = 'localhost';
@@ -39,9 +26,6 @@
 		return $dbh;
 	}
 
-	$app->get('/eloquent', function() {
-		print_r (Agency::first()->toArray());
-	});
 
 /*
 	include "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/getHTMLContents.php";
