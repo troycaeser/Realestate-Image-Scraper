@@ -1,0 +1,21 @@
+@mixin border-radius($radius: 0px){
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin blur($length: 0px){
+	-webkit-filter: blur($length);
+	-moz-filter: blur($length);
+	-o-filter: blur($length);
+	-ms-filter: blur($length);
+	filter: blur($length);
+}
+
+@mixin transition($transition...) {
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	-webkit-transition: $transition;
+	transition: $transition;
+}

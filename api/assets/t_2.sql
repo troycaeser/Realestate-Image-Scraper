@@ -10,7 +10,7 @@ create table t_user(
 	mobile			varchar(30),
 	fax				varchar(30),
 	email			varchar(100),
-	status			tinyint, --0 normal ,1 disable
+	status			tinyint, -- 0 normal ,1 disable
 	create_time		DATETIME
 );
 
