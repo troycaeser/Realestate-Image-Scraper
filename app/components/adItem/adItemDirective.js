@@ -25,8 +25,9 @@ var AdItemDirective = function(adItemService){
 	return adItemDirective;
 
 	/* @ngInject */
-	function Controls($scope, $element){
+	function Controls($scope, $element, $rootScope){
 		var _this = this;
+		this.$rootScope = $rootScope;
 		var data = adItemService.Crawl().getData();
 
 		var links = data.links;
@@ -36,7 +37,6 @@ var AdItemDirective = function(adItemService){
 
 		var auctionHour = propertyInfo.auction_hour;
 		var auctionDay = propertyInfo.auction_day;
-		//console.log(data);
 
 		//full array of values
 		_this.values = [];
@@ -53,18 +53,40 @@ var AdItemDirective = function(adItemService){
 			_this.values.push(_this.photo);
 		}else{
 			var file = links[$scope.index];
-			//need to convert file into dataurl
 			reader = new FileReader();
-			reader.onload = function(){
+			create_glob(file, reader, function(result){
 				$scope.$apply(function(){
 					_this.photo = {
-						"src": reader.result,
+						"src": result,
 						"class": 'adItemPhotos'
 					};
+					console.log(_this.photo);
 					_this.values.push(_this.photo);
-				});
-			}
+				})
+			})
+			//need to convert file into dataurl
+			//reader = new FileReader();
+			//reader.onload = function(){
+				//callback(reader.result)
+				//$scope.$apply(function(){
+					//_this.photo = {
+						//"src": reader.result,
+						//"class": 'adItemPhotos'
+					//};
+					//console.log(links[$scope.index]);
+					//console.log(reader.result);
+					//console.log(_this.photo);
+					//_this.values.push(_this.photo);
+				//});
+			//}
 
+			//reader.readAsDataURL(links[$scope.index]);
+		}
+
+		function create_glob(file, reader, callback){
+			reader.onload = function(){
+				callback(reader.result);
+			};
 			reader.readAsDataURL(file);
 		}
 

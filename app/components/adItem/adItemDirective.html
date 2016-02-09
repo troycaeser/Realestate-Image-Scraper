@@ -1,6 +1,6 @@
-<div class="adItemImageContainer">
-	<button ng-click="remove()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<button ng-click="remove()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
+<div class="adItemImageContainer">
 	<div class="adItemImages" ng-repeat="val in adItem.values">
 		<img ng-style="{{val.style}}" ng-if="val.src.length" class="{{val.class}}" ng-src="{{val.src}}">
 		<p ng-style="{{val.firstLine.style}}"

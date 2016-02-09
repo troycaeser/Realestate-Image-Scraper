@@ -1,5 +1,6 @@
 /* @ngInject */
 angular.module('fileUpload', []);
+angular.module('sidebar', []);
 angular.module('adItem', [
 	'fileUpload',
 ]);
@@ -20,5 +21,6 @@ angular.module('core', [
 
 angular.module('app', [
 	'core',
-	'adItem'
+	'adItem',
+	'sidebar'
 ]);

@@ -25,6 +25,7 @@ var Dropzone = function(){
 		angular.forEach(config.eventHandlers, function(handler, event) {
 			dropzone.on(event, handler);
 		});
+		console.log(dropzone.getQueuedFiles().length);
 
 		/*scope.processDropzone = function() {
 			dropzone.processQueue();

@@ -13,9 +13,77 @@
 	filter: blur($length);
 }
 
-@mixin transition($transition...) {
+/*@mixin transition($transition...) {
 	-moz-transition: $transition;
 	-o-transition: $transition;
 	-webkit-transition: $transition;
 	transition: $transition;
+}*/
+@mixin transform($transforms) {
+	-moz-transform: $transforms;
+	-o-transform: $transforms;
+	-ms-transform: $transforms;
+	-webkit-transform: $transforms;
+	transform: $transforms;
+}
+
+@mixin transform-origin ($origin) {
+	moz-transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+	transform-origin: $origin;
+}
+
+// loops through all arguments and prefixes the ones that need it (in this case only transform)
+@function vendor-args($arg, $vendor) {
+	$result: ();
+	@each $i in $arg {
+		@if $i == transform { $result: append($result, #{$vendor}$i);  }
+		@else { $result: append($result, $i);  }
+	}
+	@return $result;
+}
+
+// general vendor mixin
+@mixin vendor($property, $args...){
+	@each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+		$out: null;
+		@each $arg in nth($args,1) {
+			$out: ($out, vendor-args($arg, $vendor));
+		}
+		#{$vendor}#{$property}: $out;
+	}
+}
+
+// general transition mixin
+@mixin transition($args...) {
+	@include vendor(transition, $args);
+}
+
+@mixin linearGradient($top, $bottom){
+	background: $top; /* Old browsers */
+	background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0  ); /* IE6-9 */
+
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+	@if $inset {
+		-webkit-box-shadow:inset $top $left $blur $color;
+		-moz-box-shadow:inset $top $left $blur $color;
+		box-shadow:inset $top $left $blur $color;
+
+	} @else {
+		-webkit-box-shadow: $top $left $blur $color;
+		-moz-box-shadow: $top $left $blur $color;
+		box-shadow: $top $left $blur $color;
+
+	}
+
 }

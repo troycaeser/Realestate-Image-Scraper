@@ -8,7 +8,8 @@ var FileUploadController = function(adItemService){
 			maxFileSize: 100,
 			paramName: 'uploadFile',
 			maxThumbnailFilesize: 10,
-			parallelUploads: 1,
+			uploadMultiple: true,
+			parallelUploads: 5,
 			autoProcessQueue: false
 		},
 		'eventHandlers': {
@@ -16,11 +17,16 @@ var FileUploadController = function(adItemService){
 			'addedfile': function(file){
 				adItemService.Crawl().addLinks(file);
 			},
+			'complete': function(evt){
+				//console.log('drag ended bitch');
+				console.log(this.getQueuedFiles().length);
+			},
 			'sending': function(file, xhr, formData){
 				//sending code here
 				console.log('sending?');
 			},
 			'success': function(file, response){
+				console.log(this.getQueuedFiles().length);
 				//success code here
 				console.log(response);
 			}
@@ -28,21 +34,6 @@ var FileUploadController = function(adItemService){
 	};
 
 };
-//var eventHandlers = {
-	//'addedFile': function(file){
-		//scope.file = file;
-		//if(this.files[1] != null){
-			//this.removeFile(this.files[0]);
-		//}
-		//scope.$apply(function(){
-			//scope.fileAdded = true;
-		//});
-	//},
-	//'success': function(file, response){
-		//response code here!
-		//console.log(response);
-	//}
-//};
 
 angular.module('fileUpload')
 	.controller('fileUploadController', FileUploadController);

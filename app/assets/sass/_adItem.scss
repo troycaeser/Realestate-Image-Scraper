@@ -1,0 +1,143 @@
+.adItemIndex{
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	left: 0;
+	width: 48px;
+	text-align: center;
+	line-height: 24px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: -12px;
+}
+
+.adItemImageContainer{
+	position: relative;
+	display: block;
+	clear: both;
+	width: 400px;
+	min-height: 269px;
+	max-height: 300px;
+	z-index: 1;
+	@include transform-origin(top left);
+	@include transform(scale(.2, .2));
+}
+
+.adItemImages{
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	margin-left: 12px;
+	top: 50%;
+	margin-top: -30px;
+}
+
+.adItemPhotos{
+	position: absolute;
+	z-index: 1;
+	width: 400px;
+	height: 269px;
+}
+
+.adItemBanner,
+.adItemBottom,
+.adItemLogo{
+	position: absolute;
+	z-index: 2;
+}
+
+.adItemBed,
+.adItemBath,
+.adItemCar{
+	position: absolute;
+	bottom: 0;
+	z-index: 3;
+}
+
+.adItemImage,
+.adItemInputs{
+	margin-bottom: 20px;
+}
+
+.adItemInputs{
+	background-color: $mainbg;
+	@include box-shadow(-2px, 2px, 2px, $mainDropShadow);
+}
+
+.adItemInputs{
+	display: block;
+	position: relative;
+	padding: 10px;
+}
+
+.adItemImage p{
+	position: absolute;
+	z-index: 4;
+}
+
+.adItemBottom{
+	bottom: 0;
+}
+
+.adItemRow{
+	position: relative;
+	display: block;
+	height: 100px;
+	margin: 0;
+	border-bottom: .5px solid darken(#d5d8da, 12.5%);
+	/*border-top: .5px solid darken(#d5d8da, 12.5%);*/
+	border-left: 1px solid darken(#d5d8da, 12.5%);
+	border-right: 1px solid darken(#d5d8da, 12.5%);
+	background-color: $mainbg;
+}
+
+.ui-sortable-helper{
+	border-top: .5px solid darken(#d5d8da, 12.5%);
+}
+
+.adItemRow:first-child{
+	border-top: 1px solid darken(#d5d8da, 12.5%);
+}
+
+.adItemRow:last-child{
+	border-bottom: 1px solid darken(#d5d8da, 12.5%);
+}
+
+.adItemWrapper{
+	position: relative;
+	display: block;
+	height: 100%;
+	width: 100%;
+	clear: both;
+	padding-left: 48px;
+	.close{
+		z-index: 4;
+		padding: 0;
+		margin: 0;
+		line-height: 35px;
+		right: 8px;
+		font-size: 35px;
+		opacity: 1;
+		position: absolute;
+	}
+	.close:hover{
+		opacity: .5;
+	}
+}
+
+//STYLE hover enlarge
+/*.adItemWrapper:hover .adItemImageContainer{
+	@include transform(none);
+	@include transition(transform .1s ease-out .1s);
+	@include transform-origin(center center);
+	z-index: 99;
+	top: -142.5px;
+	left: -200px;
+}
+
+.adItemImageContainer{
+	@include transform-origin(top left);
+	@include transform(scale(.2, .2));
+}*/

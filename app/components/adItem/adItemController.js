@@ -8,8 +8,10 @@ AdItemController.prototype.display = function(url){
 	var _this = this;
 
 	_this.$scope.$on('dropzoned', function(evt){
+		console.log("loaded");
 		_this.$scope.$apply(function() {
 			_this.links = _this.adItemService.Crawl().getData().links;
+			console.log(_this.links);
 			_this.address = "word";
 		});
 	});

@@ -1,0 +1,401 @@
+@font-face {
+  font-family: 'Jellis';
+  src: url("http://localhost:3000/api/assets/agentAssets/Jellis/font.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Chisholm';
+  src: url("http://localhost:3000/api/assets/agentAssets/Chisholm/font.ttf") format("truetype");
+}
+/* line 1, ../sass/_animation.scss */
+.adItemRow {
+  box-sizing: border-box;
+}
+
+/* line 5, ../sass/_animation.scss */
+.adItemRow.ng-move,
+.adItemRow.ng-enter {
+  /*transition:all linear 0.5s;*/
+  animation: fadeIn .2s ease-in;
+}
+
+/* line 11, ../sass/_animation.scss */
+.adItemRow.ng-leave {
+  animation: slideOutLeft .2s;
+  transition: max-height .2s ease-out, opacity .2s ease-out;
+}
+
+/* line 16, ../sass/_animation.scss */
+.adItemRow.ng-leave.ng-leave-active,
+.adItemRow.ng-enter {
+  opacity: 0;
+  max-height: 0px;
+}
+
+/* line 22, ../sass/_animation.scss */
+.adItemRow.ng-leave,
+.adItemRow.ng-move.ng-move-active,
+.adItemRow.ng-enter.ng-enter-active {
+  opacity: 1;
+  max-height: 300px;
+}
+
+/*@mixin transition($transition...) {
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	-webkit-transition: $transition;
+	transition: $transition;
+}*/
+/* line 1, ../sass/_dropzone.scss */
+.dropzone {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  text-align: center;
+  border: 2px #000 dashed;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  background: #fff;
+  margin: 20px auto;
+}
+
+/* line 14, ../sass/_dropzone.scss */
+.dropzone .dz-message {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -50%;
+}
+
+/* line 25, ../sass/_dropzone.scss */
+.dz-drag-hover {
+  border: 2px #000 solid;
+}
+/* line 27, ../sass/_dropzone.scss */
+.dz-drag-hover span {
+  color: gray;
+}
+
+/* line 32, ../sass/_dropzone.scss */
+.dz-started {
+  min-height: 200px;
+  height: auto;
+}
+/* line 35, ../sass/_dropzone.scss */
+.dz-started .dz-message {
+  display: none;
+}
+
+/* line 40, ../sass/_dropzone.scss */
+.dz-preview {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: inline-block;
+  position: relative;
+}
+
+/* line 49, ../sass/_dropzone.scss */
+.dz-preview:hover .dz-filename,
+.dz-preview:hover .dz-size {
+  opacity: 100;
+}
+
+/* line 55, ../sass/_dropzone.scss */
+.dz-details {
+  min-width: 100%;
+  min-height: 100%;
+  text-align: left;
+  float: left;
+}
+/* line 60, ../sass/_dropzone.scss */
+.dz-details img {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
+}
+/* line 69, ../sass/_dropzone.scss */
+.dz-details img:hover {
+  opacity: 0.7;
+}
+
+/* line 74, ../sass/_dropzone.scss */
+.dz-filename,
+.dz-size {
+  position: absolute;
+  width: 70px;
+  overflow: hidden;
+  z-index: 50;
+  left: 50%;
+  background: #fff;
+  margin-left: -35px;
+  text-align: center;
+  opacity: 0;
+  -webkit-transition: opacity 0.1s ease-out;
+  -moz-transition: opacity 0.1s ease-out;
+  -ms-transition: opacity 0.1s ease-out;
+  -o-transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
+}
+
+/* line 88, ../sass/_dropzone.scss */
+.dz-filename {
+  top: 35%;
+}
+
+/* line 92, ../sass/_dropzone.scss */
+.dz-filename:hover {
+  overflow: visible;
+  width: 100%;
+}
+
+/* line 97, ../sass/_dropzone.scss */
+.dz-size {
+  top: 60%;
+}
+
+/* line 101, ../sass/_dropzone.scss */
+.dz-success-mark,
+.dz-error-mark {
+  display: none;
+}
+
+/* line 1, ../sass/_adItem.scss */
+.adItemIndex {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 0;
+  width: 48px;
+  text-align: center;
+  line-height: 24px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: -12px;
+}
+
+/* line 14, ../sass/_adItem.scss */
+.adItemImageContainer {
+  position: relative;
+  display: block;
+  clear: both;
+  width: 400px;
+  min-height: 269px;
+  max-height: 300px;
+  z-index: 1;
+  moz-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: scale(0.2, 0.2);
+  -o-transform: scale(0.2, 0.2);
+  -ms-transform: scale(0.2, 0.2);
+  -webkit-transform: scale(0.2, 0.2);
+  transform: scale(0.2, 0.2);
+}
+
+/* line 26, ../sass/_adItem.scss */
+.adItemImages {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  margin-left: 12px;
+  top: 50%;
+  margin-top: -30px;
+}
+
+/* line 37, ../sass/_adItem.scss */
+.adItemPhotos {
+  position: absolute;
+  z-index: 1;
+  width: 400px;
+  height: 269px;
+}
+
+/* line 44, ../sass/_adItem.scss */
+.adItemBanner,
+.adItemBottom,
+.adItemLogo {
+  position: absolute;
+  z-index: 2;
+}
+
+/* line 51, ../sass/_adItem.scss */
+.adItemBed,
+.adItemBath,
+.adItemCar {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+}
+
+/* line 59, ../sass/_adItem.scss */
+.adItemImage,
+.adItemInputs {
+  margin-bottom: 20px;
+}
+
+/* line 64, ../sass/_adItem.scss */
+.adItemInputs {
+  background-color: #fff;
+  -webkit-box-shadow: -2px 2px 2px #dddee2;
+  -moz-box-shadow: -2px 2px 2px #dddee2;
+  box-shadow: -2px 2px 2px #dddee2;
+}
+
+/* line 69, ../sass/_adItem.scss */
+.adItemInputs {
+  display: block;
+  position: relative;
+  padding: 10px;
+}
+
+/* line 75, ../sass/_adItem.scss */
+.adItemImage p {
+  position: absolute;
+  z-index: 4;
+}
+
+/* line 80, ../sass/_adItem.scss */
+.adItemBottom {
+  bottom: 0;
+}
+
+/* line 84, ../sass/_adItem.scss */
+.adItemRow {
+  position: relative;
+  display: block;
+  height: 100px;
+  margin: 0;
+  border-bottom: 0.5px solid #b3b9bc;
+  /*border-top: .5px solid darken(#d5d8da, 12.5%);*/
+  border-left: 1px solid #b3b9bc;
+  border-right: 1px solid #b3b9bc;
+  background-color: #fff;
+}
+
+/* line 96, ../sass/_adItem.scss */
+.ui-sortable-helper {
+  border-top: 0.5px solid #b3b9bc;
+}
+
+/* line 100, ../sass/_adItem.scss */
+.adItemRow:first-child {
+  border-top: 1px solid #b3b9bc;
+}
+
+/* line 104, ../sass/_adItem.scss */
+.adItemRow:last-child {
+  border-bottom: 1px solid #b3b9bc;
+}
+
+/* line 108, ../sass/_adItem.scss */
+.adItemWrapper {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  clear: both;
+  padding-left: 48px;
+}
+/* line 115, ../sass/_adItem.scss */
+.adItemWrapper .close {
+  z-index: 4;
+  padding: 0;
+  margin: 0;
+  line-height: 35px;
+  right: 8px;
+  font-size: 35px;
+  opacity: 1;
+  position: absolute;
+}
+/* line 125, ../sass/_adItem.scss */
+.adItemWrapper .close:hover {
+  opacity: .5;
+}
+
+/*.adItemWrapper:hover .adItemImageContainer{
+	@include transform(none);
+	@include transition(transform .1s ease-out .1s);
+	@include transform-origin(center center);
+	z-index: 99;
+	top: -142.5px;
+	left: -200px;
+}
+
+.adItemImageContainer{
+	@include transform-origin(top left);
+	@include transform(scale(.2, .2));
+}*/
+@font-face {
+  font-family: 'Jellis';
+  src: url("http://localhost:3000/api/assets/agentAssets/Jellis/font.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Chisholm';
+  src: url("http://localhost:3000/api/assets/agentAssets/Chisholm/font.ttf") format("truetype");
+}
+/* line 22, ../sass/main.scss */
+body {
+  margin: 0;
+  background-color: #edeef2;
+  /*background-color: black;*/
+}
+
+/* line 28, ../sass/main.scss */
+.searchContainer {
+  text-align: center;
+  display: block;
+  margin: 30px 0 30px 0;
+}
+
+/* line 34, ../sass/main.scss */
+.searchContainer button {
+  display: inline-block;
+  width: 100px;
+  height: 35px;
+  background-color: #3a9dc6;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+
+/* line 44, ../sass/main.scss */
+.searchContainer button:selected {
+  background-color: #376280;
+}
+
+/* line 48, ../sass/main.scss */
+.searchContainer input {
+  font-size: 20px;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  width: 70%;
+  padding: 15px;
+  border-radius: 35px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+}

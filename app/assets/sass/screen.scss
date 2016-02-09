@@ -1,0 +1,57 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass/css3";
+@import "colors";
+@import "fonts";
+@import "animation";
+@import "mixins";
+
+@import "dropzone";
+
+@import "adItem";
+@import "sidebar";
+
+body{
+	font-family: 'Open Sans', san-serif;
+	background-color: $bg;
+}
+
+.main{
+	margin-left: 204px;
+}
+
+.content{
+	min-height: 100%;
+	padding: 90px 40px 40px;
+}
+
+.searchContainer{
+	position: absolute;
+	display: block;
+	height: 50px;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: $menubg;
+	margin-left: 204px;
+	.navbar-form{
+		width: 500px;
+		.form-group{
+			width: 85%;
+		}
+		input{
+			width: 100%;
+			outline: none;
+			border: none;
+			box-shadow: none;
+			@include transition(background, .3s, ease-out);
+		}
+		input:focus{
+			background: darken($menubg, 8%);
+		}
+	}
+}
