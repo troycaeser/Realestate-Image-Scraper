@@ -48,11 +48,13 @@ AdItemService.prototype.Crawl = function(){
 		},
 		sendLinks: function(input){
 			_this.newlinks = input;
+			console.log(_this.newlinks);
 			return _this.newLinks;
 		},
 		addLinks: function(input){
 			_this.newlinks.push(input);
 			console.log('added: ' + input.name + "into list");
+			console.log(_this.newlinks);
 
 			_this.$rootScope.$broadcast('dropzoned');
 			//console.log(_this.newlinks);

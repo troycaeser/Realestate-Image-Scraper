@@ -1,34 +1,29 @@
 /* @ngInject */
-var AdItemController = function(adItemService, $scope){
+var AdItemController = function(adItemService, $scope, $rootScope){
 	this.adItemService = adItemService;
 	this.$scope = $scope;
+	this.$rootScope = $rootScope;
 };
 
 AdItemController.prototype.display = function(url){
 	var _this = this;
 
+	//if dropzoned is broadcasted, reload _this.links
 	_this.$scope.$on('dropzoned', function(evt){
 		console.log("loaded");
 		_this.$scope.$apply(function() {
 			_this.links = _this.adItemService.Crawl().getData().links;
-			console.log(_this.links);
-			_this.address = "word";
 		});
 	});
 
-    _this.listingType = [
-        {
-            code: 'JL',
-            title: 'Just Listed',
-            firstLine: 'JUST',
-            secondLine: 'LISTED'
-        }
-        /*{
-            code: 'AC',
-            title: 'Auction',
-            firstLine: 'Auction this'
-        }*/
-    ];
+	this.setType = function(typeCode){
+		_this.$rootScope.$broadcast(typeCode);
+	}
+
+	_this.listingType = {
+		code: 'JL',
+		title: 'Just Listed'
+	}
 
 	//get data from Service
 	_this.adItemService.Crawl().sendData(url)
@@ -52,8 +47,9 @@ AdItemController.prototype.display = function(url){
 			var logEntry = _this.links.map(function(i){
 				return i;
 			});
+
 			//set the list of links through service if dragged
-			_this.adItemService.Crawl().sendLinks(logEntry);
+			//_this.adItemService.Crawl().sendLinks(logEntry);
 		},
 		items: ".adItemRow:not(.not-sortable)"
 	}
@@ -75,7 +71,7 @@ AdItemController.prototype.display = function(url){
 
 		//send all values to backend
 		//_this.adItemService.Crawl().sendFinal(data);
-        console.log(_this.links);
+		console.log(_this.links);
 		console.info('final data sent:\n');
 		console.info(data);
 	}

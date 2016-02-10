@@ -42,6 +42,14 @@ var AdItemDirective = function(adItemService){
 		_this.values = [];
 		_this.photo = {};
 
+		var type;
+
+		if($scope.listingType.code == 'JL')
+			type = 'JL';
+		else if($scope.listingType.code == 'AC')
+			type = 'AC';
+
+
 		//draw images
 		//_this.source = links[$scope.index];
 		if(typeof links[$scope.index] === "string"){
@@ -64,23 +72,6 @@ var AdItemDirective = function(adItemService){
 					_this.values.push(_this.photo);
 				})
 			})
-			//need to convert file into dataurl
-			//reader = new FileReader();
-			//reader.onload = function(){
-				//callback(reader.result)
-				//$scope.$apply(function(){
-					//_this.photo = {
-						//"src": reader.result,
-						//"class": 'adItemPhotos'
-					//};
-					//console.log(links[$scope.index]);
-					//console.log(reader.result);
-					//console.log(_this.photo);
-					//_this.values.push(_this.photo);
-				//});
-			//}
-
-			//reader.readAsDataURL(links[$scope.index]);
 		}
 
 		function create_glob(file, reader, callback){
@@ -132,16 +123,9 @@ var AdItemDirective = function(adItemService){
 			}
 		};
 
-		//_this.bannerText = {
-			//'firstLine': {
-				//text: $scope.listing.firstLine
-			//},
-			//'secondLine': {
-				//text: $scope.listing.secondLine
-			//}
-		//}
-
-		if($scope.listingType.code == 'AC'){
+		//if($scope.listingType.code == 'AC'){
+		if(type == 'AC'){
+			console.log('I track you');
 			_this.bannerText = {
 				'firstLine': {
 					text: 'Auction this'
@@ -163,8 +147,13 @@ var AdItemDirective = function(adItemService){
 
 		//add in other elements
 		if($scope.index == 0){
-			if($scope.listingType.code == 'AC'){
+			//if($scope.listingType.code == 'AC'){
+			if(type == 'AC'){
 				//add in positioning
+				_this.banner.style = {
+					'left': templateInfo.main.Banner.pos_x,
+					'top': templateInfo.main.Banner.pos_y
+				}
 				_this.bannerText.firstLine.style = {
 					'font-family': propertyInfo.agency_localDir,
 					'font-size': templateInfo.main.Banner.A.top.font_size + "pt",
@@ -242,6 +231,8 @@ var AdItemDirective = function(adItemService){
 			_this.values.push(_this.banner);
 			_this.values.push(_this.bottom);
 			_this.values.push(_this.logo);
+
+
 			_this.values.push(_this.bannerText);
 			_this.values.push(_this.bed);
 			_this.values.push(_this.bath);
@@ -302,6 +293,104 @@ var AdItemDirective = function(adItemService){
 					'color': 'rgb('+templateInfo.main.Text.colour_r+','+templateInfo.main.Text.colour_g+','+templateInfo.main.Text.colour_b+')'
 				};
 			}
+
+			$scope.$on('AC', function(evt){
+				_this.banner = {
+					'src': templateDirWeb.Banner,
+					'class': 'adItemBanner'
+				};
+
+				_this.banner.style = {
+					"left": templateInfo.main.Banner.pos_x,
+					'top': templateInfo.main.Banner.pos_y
+				};
+
+				_this.bannerText = {
+					'firstLine': {
+						text: 'Auction this'
+					},
+					'secondLine': {
+						text: propertyInfo.auction_day + " " + propertyInfo.auction_hour
+					}
+				}
+
+				_this.bannerText.firstLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.A.top.font_size + "pt",
+					'left': templateInfo.main.Banner.A.top.t_pos_x,
+					'top': templateInfo.main.Banner.A.top.t_pos_y,
+					'margin-left': -templateInfo.main.Banner.A.top.font_size,
+					'margin-top': -templateInfo.main.Banner.A.top.font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+
+				_this.bannerText.secondLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size + "pt",
+					'left': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_x,
+					'top': templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].t_pos_y,
+					'margin-left': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
+					'margin-top': -templateInfo.main.Banner.A.bottom[auctionDay][auctionHour.length].font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+				//console.log(_this.bannerText);
+				_this.values[1] = _this.banner;
+				_this.values[4] = _this.bannerText;
+				console.log(_this.values);
+			});
+
+			$scope.$on('JL', function(evt){
+				_this.banner = {
+					'src': templateDirWeb.Banner,
+					'class': 'adItemBanner'
+				};
+
+
+				_this.bannerText = {
+					'firstLine': {
+						text: 'JUST'
+					},
+					'secondLine': {
+						text: 'LISTED'
+					}
+				};
+
+				_this.bannerText.firstLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.J.font_size + "pt",
+					'left': templateInfo.main.Banner.J.top.t_pos_x,
+					'top': templateInfo.main.Banner.J.top.t_pos_y,
+					'margin-left': -templateInfo.main.Banner.J.font_size,
+					'margin-top': -templateInfo.main.Banner.J.font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+
+				_this.bannerText.secondLine.style = {
+					'font-family': propertyInfo.agency_localDir,
+					'font-size': templateInfo.main.Banner.J.font_size + "pt",
+					'left': templateInfo.main.Banner.J.bottom.t_pos_x,
+					'top': templateInfo.main.Banner.J.bottom.t_pos_y,
+					'margin-left': -templateInfo.main.Banner.J.font_size,
+					'margin-top': -templateInfo.main.Banner.J.font_size,
+					'color': 'rgb('+templateInfo.main.Text.colour_banner_r+','+templateInfo.main.Text.colour_banner_g+','+templateInfo.main.Text.colour_banner_b+')',
+					'webkit-transform-origin': 'left top',
+					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
+				};
+
+				_this.banner.style = {
+					'left': templateInfo.main.Banner.pos_x_jl,
+					'top': templateInfo.main.Banner.pos_y_jl
+				};
+
+				_this.values[1] = _this.banner;
+				_this.values[4] = _this.bannerText;
+			});
 		}else{
 			//add in positioning
 			_this.logo.style = {
@@ -311,11 +400,26 @@ var AdItemDirective = function(adItemService){
 
 			_this.values.push(_this.logo);
 		}
+			console.log(_this.values);
+
 	}
 
-	function postLink(scope, elem, attrs){
+	function postLink(scope, elem, attrs,$rootScope){
+		scope.$on('listTypeUpdated', function(evt){
+			scope.stuff = 'AC';
+		});
+
 		//postlinks functions here
 		//elem.find('img.adItemLogo').css({'background-color': 'red'});
+		/*if(scope.listingType.code == 'AC'){
+			console.log(scope.listingType.code);
+			scope.stuff = "PEWPEW";
+		}
+		else if(scope.listingType.code == 'JL'){
+			console.log(scope.listingType.code);
+			scope.stuff = "MEOWMEOW";
+		}
+		scope.piece = "ASDFASDFSADF";*/
 	}
 
 	function preLink(scope, elem, attrs){

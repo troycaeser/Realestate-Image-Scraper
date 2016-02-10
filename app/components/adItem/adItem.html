@@ -13,17 +13,26 @@
 	<div class="content">
 		<div class="adItemContainer container">
 			<div class="row">
-				<!--<uib-tabset>
-		<uib-tab ng-repeat="tab in adItemCtrl.listingType" heading="{{tab.title}}">-->
-			<div class="col-md-8">
-				<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage">
-					<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
-						<div class="adItemIndex">{{$index + 1}}</div>
-						<div class="adItemWrapper" listing-type="adItemCtrl.listingType" model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item-directive>
-						</div>
-					</div>
+				<div class="listingType">
+					<button ng-click="adItemCtrl.setType('JL');">Just Listed</button>
+					<button ng-click="adItemCtrl.setType('AC')">Auction</button>
+					<button>Manual</button>
 				</div>
-			</div>
+				<!--<uib-tabset>-->
+					<!--<uib-tab ng-repeat="tab in adItemCtrl.listingType" heading="{{tab.title}}">-->
+						<div class="col-md-8">
+							<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage">
+								<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
+									<div class="adItemIndex">{{$index + 1}}</div>
+									<!-- use this to cycle through listingType -->
+									<!--<div class="adItemWrapper" listing-type="tab" model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item-directive>-->
+									<div class="adItemWrapper" listing-type="adItemCtrl.listingType" model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item-directive>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!--</uib-tab>-->
+			   <!--</uib-tabset>-->
 
 			<div class="col-md-4">
 				<div ng-show="adItemCtrl.show" class="adItemInputs">
@@ -40,8 +49,6 @@
 					</form>
 				</div>
 			</div>
-			<!--</uib-tab>
-	   </uib-tabset>-->
 			</div>
 		</div>
 	</div>
