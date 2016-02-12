@@ -1,6 +1,10 @@
 <?php
 	require 'vendor/autoload.php';
-	
+	include 'tempM/databaseAccess.php';
+	include 'models/content.php';
+	include 'models/mmscontent.php';
+
+
 	$app = new \Slim\Slim(array(
 		'mode' => 'development'
 	));
@@ -15,6 +19,26 @@
 		echo 'You have reached the API home route for Linkubi MMS App';
 	});
 
+	$app->get('/content', function(){
+		$content = new Content();
+		$result = $content->getContent();
+		header("Content-Type: application/json");
+		echo json_encode($result);
+	});
+
+	$app->get('/content/:id', function($id){
+		$content = new Content();
+		$result = $content->getContentById($id);
+		header("Content-Type: application/json");
+		echo json_encode($result);
+	});
+
+	$app->get('/mms_content/:id', function($id){
+		$content = new MmsContent();
+		$result = $content->getMmsContentById($id);
+		header("Content-Type: application/json");
+		echo json_encode($result);
+	});
 
 	function getConnection(){
 		$hostname = 'localhost';
@@ -25,7 +49,6 @@
 
 		return $dbh;
 	}
-
 
 /*
 	include "{$_SERVER['DOCUMENT_ROOT']}/myApp/api/lib/getHTMLContents.php";

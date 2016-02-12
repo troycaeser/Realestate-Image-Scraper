@@ -9,7 +9,6 @@
 
 			$dbo = DatabaseObject::getInstance()
 			$this->dbOject = $dbo->getDBO();
-		}		
 
 		public static function getPropertyById ($id) {
 			// build the query and return

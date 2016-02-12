@@ -28,6 +28,7 @@ var AdItemDirective = function(adItemService){
 	function Controls($scope, $element, $rootScope){
 		var _this = this;
 		this.$rootScope = $rootScope;
+
 		var data = adItemService.Crawl().getData();
 
 		var links = data.links;
@@ -35,23 +36,30 @@ var AdItemDirective = function(adItemService){
 		var templateDirWeb = data.templateDirWeb;
 		var templateInfo = data.templateInfo;
 
-		var auctionHour = propertyInfo.auction_hour;
-		var auctionDay = propertyInfo.auction_day;
-
 		//full array of values
 		_this.values = [];
 		_this.photo = {};
 
 		var type;
 
-		if($scope.listingType.code == 'JL')
+		if($scope.listingType.code == 'JL'){
 			type = 'JL';
-		else if($scope.listingType.code == 'AC')
+			var auctionHour = propertyInfo.auction_hour;
+			var auctionDay = propertyInfo.auction_day;
+		}
+		else if($scope.listingType.code == 'AC'){
 			type = 'AC';
-
+			var auctionHour = propertyInfo.auction_hour;
+			var auctionDay = propertyInfo.auction_day;
+		}
+		else if($scope.listingType.code == 'M'){
+			type = 'M';
+			auctionHour = 0;
+			auctionDay = 0;
+		}
 
 		//draw images
-		//_this.source = links[$scope.index];
+		//check if links is a file or string
 		if(typeof links[$scope.index] === "string"){
 			_this.photo = {
 				"src": links[$scope.index],
@@ -134,7 +142,8 @@ var AdItemDirective = function(adItemService){
 					text: propertyInfo.auction_day + " " + propertyInfo.auction_hour
 				}
 			};
-		}else{
+		}
+		else if(type == 'JL'){
 			_this.bannerText = {
 				'firstLine': {
 					text: 'JUST'
@@ -295,11 +304,6 @@ var AdItemDirective = function(adItemService){
 			}
 
 			$scope.$on('AC', function(evt){
-				_this.banner = {
-					'src': templateDirWeb.Banner,
-					'class': 'adItemBanner'
-				};
-
 				_this.banner.style = {
 					"left": templateInfo.main.Banner.pos_x,
 					'top': templateInfo.main.Banner.pos_y
@@ -337,18 +341,14 @@ var AdItemDirective = function(adItemService){
 					'webkit-transform-origin': 'left top',
 					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
 				};
-				//console.log(_this.bannerText);
-				_this.values[1] = _this.banner;
 				_this.values[4] = _this.bannerText;
-				console.log(_this.values);
 			});
 
 			$scope.$on('JL', function(evt){
-				_this.banner = {
-					'src': templateDirWeb.Banner,
-					'class': 'adItemBanner'
+				_this.banner.style = {
+					'left': templateInfo.main.Banner.pos_x_jl,
+					'top': templateInfo.main.Banner.pos_y_jl
 				};
-
 
 				_this.bannerText = {
 					'firstLine': {
@@ -383,12 +383,6 @@ var AdItemDirective = function(adItemService){
 					'-webkit-transform': "rotate(-" + templateInfo.main.Banner.angle + "deg)"
 				};
 
-				_this.banner.style = {
-					'left': templateInfo.main.Banner.pos_x_jl,
-					'top': templateInfo.main.Banner.pos_y_jl
-				};
-
-				_this.values[1] = _this.banner;
 				_this.values[4] = _this.bannerText;
 			});
 		}else{

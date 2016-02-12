@@ -1,0 +1,42 @@
+<nav class="searchContainer">
+	<!--<form class="navbar-form" ng-submit="adItemCtrl.display(url)">
+		<div class="form-group">
+			<input class="form-control" placeholder="Enter URL here &#38; press enter" type="text" ng-model="url">
+		</div>
+		<button type="submit" class="btn btn-default" value="Crawl">Crawl</button>
+	</form>-->
+</nav> <!-- end of .searchContainer  -->
+
+<div class="row">
+	<!--<div class="listingType">
+		<button ng-click="adItemCtrl.setType('JL');">Just Listed</button>
+		<button ng-click="adItemCtrl.setType('AC')">Auction</button>
+	</div>-->
+
+	<!--<div ng-controller="fileUploadController as fileCtrl">
+		<div class="dropzone" configuration="fileCtrl.dropzoneConfig" dropzone-directive="dropzone"></div>
+	</div>-->
+
+	<div class="col-md-8" ng-init="adItemCtrl.init()">
+		<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage">
+			<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
+				<div class="adItemIndex">{{$index + 1}}</div>
+				<!-- use this to cycle through listingType -->
+				<div class="adItemWrapper" listing-type="adItemCtrl.listingType" model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item-directive>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div ng-show="adItemCtrl.show" class="adItemInputs">
+			<form ng-submit="adItemCtrl.submit()">
+				<input type="text" class="form-control" name="address" value="{{adItemCtrl.address}}">
+				<!--<input type="text" ng-model="adItemCtrl.bedRoom" class="form-control" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
+				  <input type="text" ng-model="adItemCtrl.bathRoom" class="form-control" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
+				  <input type="text" ng-model="adItemCtrl.carport" class="form-control" name="carport" value="{{adItemCtrl.carport}}">-->
+				  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>

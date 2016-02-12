@@ -52,12 +52,12 @@
 		$result = json_decode($body);
 		$propertyInfo = json_decode(json_encode($result->propertyInfo), true);
 		$imgs = $result->links;
-		print_arr($propertyInfo);
+		//print_arr($propertyInfo);
 
 		/*---------------------------------*/
 		$finalised = array();
 		createAd ($propertyInfo, $imgs, $finalised);
-		print_arr($finalised);
+		//print_arr($finalised);
 	});
 
 	$app->get('/test', function() use ($app){

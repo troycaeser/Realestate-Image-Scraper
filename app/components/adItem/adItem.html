@@ -1,55 +1,11 @@
 <nav class="sidebar" sidebar-directive></nav>
 
 <!-- image blocks -->
-<div class="main" ng-controller="adItemController as adItemCtrl">
-	<nav class="searchContainer">
-		<form class="navbar-form" ng-submit="adItemCtrl.display(url)">
-			<div class="form-group">
-				<input class="form-control" placeholder="Enter URL here &#38; press enter" type="text" ng-model="url">
-			</div>
-			<button class="btn btn-default" ng-click="adItemCtrl.display(url)">Crawl</button>
-		</form>
-	</nav>
+<div class="main">
 	<div class="content">
 		<div class="adItemContainer container">
-			<div class="row">
-				<div class="listingType">
-					<button ng-click="adItemCtrl.setType('JL');">Just Listed</button>
-					<button ng-click="adItemCtrl.setType('AC')">Auction</button>
-					<button>Manual</button>
-				</div>
-				<!--<uib-tabset>-->
-					<!--<uib-tab ng-repeat="tab in adItemCtrl.listingType" heading="{{tab.title}}">-->
-						<div class="col-md-8">
-							<div ui-sortable="adItemCtrl.sortableOptions" ng-model="adItemCtrl.links" class="adItemImage">
-								<div class="adItemRow" ng-class="{'not-sortable' : $index == 0}" ng-repeat="src in adItemCtrl.links">
-									<div class="adItemIndex">{{$index + 1}}</div>
-									<!-- use this to cycle through listingType -->
-									<!--<div class="adItemWrapper" listing-type="tab" model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item-directive>-->
-									<div class="adItemWrapper" listing-type="adItemCtrl.listingType" model="src" remove="adItemCtrl.links.splice($index, 1)" index="{{$index}}" ad-item-directive>
-									</div>
-								</div>
-							</div>
-						</div>
-					<!--</uib-tab>-->
-			   <!--</uib-tabset>-->
-
-			<div class="col-md-4">
-				<div ng-show="adItemCtrl.show" class="adItemInputs">
-					<div ng-controller="fileUploadController as fileCtrl">
-						<div action="" class="dropzone" configuration="fileCtrl.dropzoneConfig" dropzone-directive="dropzone"></div>
-					</div>
-					<form ng-submit="adItemCtrl.submit()">
-						<input type="text" class="form-control" name="address"
-						value="{{adItemCtrl.address}}">
-						<!--<input type="text" ng-model="adItemCtrl.bedRoom" class="form-control" name="bedRoom" value="{{adItemCtrl.bedRoom}}">
-		  <input type="text" ng-model="adItemCtrl.bathRoom" class="form-control" name="bathRoom" value="{{adItemCtrl.bathRoom}}">
-		  <input type="text" ng-model="adItemCtrl.carport" class="form-control" name="carport" value="{{adItemCtrl.carport}}">-->
-		  <button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</div>
-			</div>
+			<div ui-view="normal"></div>
+			<div ui-view="crawl"></div>
 		</div>
 	</div>
 </div>
