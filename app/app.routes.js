@@ -1,7 +1,23 @@
 /* @ngInject */
-angular.module('adItem').config(function($stateProvider, $urlRouterProvider){
+angular.module('app').config(function($stateProvider, $urlRouterProvider){
 	//temporary home
-	$urlRouterProvider.otherwise('/adItem');
+	$urlRouterProvider.otherwise('/adList');
+
+	$stateProvider
+		.state('adList', {
+			url: '/adList',
+			templateUrl: 'app/components/adList/adList.html',
+			controller: 'adListController',
+			controllerAs: 'adListCtrl'
+		});
+
+	$stateProvider
+		.state('adDetail',{
+			url: '/adDetail/:contentID',
+			templateUrl: 'app/components/adDetail/adDetail.html',
+			controller: 'adDetailController',
+			controllerAs: 'adDetailCtrl'
+		});
 
 	$stateProvider
 		.state('adItem', {
@@ -20,14 +36,16 @@ angular.module('adItem').config(function($stateProvider, $urlRouterProvider){
 			}
 		})
 
-		.state('adItem.normal', {
-			url: '/normal',
+		.state('adItem.list', {
+			url: '/list/:contentID',
 			views:{
-				'normal': {
+				'list': {
 					templateUrl: 'app/components/adItem/adItemNormal.html',
 					controller: 'adItemControllerNormal',
 					controllerAs: 'adItemCtrl'
 				}
 			},
 		});
+
+		//build a new "content" section for each listItem
 });

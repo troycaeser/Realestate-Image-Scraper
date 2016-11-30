@@ -4,6 +4,8 @@ angular.module('sidebar', []);
 angular.module('adItem', [
 	'fileUpload',
 ]);
+angular.module('adList', []);
+angular.module('adDetail', []);
 
 /* @ngInject */
 angular.module('loading-bar', ['angular-loading-bar'])
@@ -21,6 +23,8 @@ angular.module('core', [
 
 angular.module('app', [
 	'core',
-	'adItem',
+    'adItem',
+	'adList',
+	'adDetail',
 	'sidebar'
 ]);

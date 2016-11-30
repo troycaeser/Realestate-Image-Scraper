@@ -4,7 +4,6 @@
 	include 'models/content.php';
 	include 'models/mmscontent.php';
 
-
 	$app = new \Slim\Slim(array(
 		'mode' => 'development'
 	));
@@ -36,8 +35,11 @@
 	$app->get('/mms_content/:id', function($id){
 		$content = new MmsContent();
 		$result = $content->getMmsContentById($id);
-		header("Content-Type: application/json");
-		echo json_encode($result);
+			/*echo "<pre>";
+				print_r($result);
+			echo "</pre>";*/
+        header("Content-Type: application/json");
+        echo json_encode($result);
 	});
 
 	function getConnection(){

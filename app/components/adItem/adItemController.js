@@ -35,12 +35,12 @@ AdItemController.prototype.display = function(url){
 	var _this = this;
 
 	//if dropzoned is broadcasted, reload _this.links
-	_this.$scope.$on('dropzoned', function(evt){
-		console.info("A file was droped");
-		_this.$scope.$apply(function() {
-			_this.links = _this.adItemService.Crawl().getData().links;
-		});
-	});
+	//_this.$scope.$on('dropzoned', function(evt){
+	//	console.info("A file was droped");
+	//	_this.$scope.$apply(function() {
+	//		_this.links = _this.adItemService.Crawl().getData().links;
+	//	});
+	//});
 
 	_this.listingType = { code: 'JL' }
 

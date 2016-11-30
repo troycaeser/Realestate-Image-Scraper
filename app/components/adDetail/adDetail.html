@@ -1,0 +1,25 @@
+<nav class="sidebar" sidebar-directive></nav>
+
+<!-- image blocks -->
+<div class="main">
+	<div class="content">
+		<div class="adItemContainer container">
+			<nav class="searchContainer"></nav>
+
+			<div class="row">
+				<div class="col-md-12" ng-init="adDetailCtrl.init()">
+					<div ui-sortable="adDetailCtrl.sortableOptions" ng-model="adDetailCtrl.mms">
+						<div class="adDetail" ng-repeat="mms in adDetailCtrl.mms">
+							<div>{{$index + 1}}</div>
+							<img ng-src="{{mms.img_file}}">
+							<form>
+								<textarea id="" name="" cols="30" rows="10"></textarea>
+								<input type="text" value="{{mms.txt_file}}">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

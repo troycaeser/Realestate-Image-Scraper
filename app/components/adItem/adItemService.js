@@ -5,26 +5,6 @@ var AdItemService = function($http, $q, $rootScope){
 	this.$rootScope = $rootScope;
 };
 
-AdItemService.prototype.Content = function(){
-	var _this = this;
-
-	var content = {
-		getData: function(){
-			var deferred = _this.$q.defer();
-			var promise = _this.$http.get('api/content');
-
-			promise.success(function(response){
-				_this.blah = response.links;
-
-				console.log(response);
-			});
-
-			return deferred.promise;
-		}
-	};
-	return content;
-};
-
 AdItemService.prototype.Crawl = function(){
 	var _this = this;
 
